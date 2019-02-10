@@ -1,25 +1,39 @@
-from __future__ import print_function # imports Python 3.x print method
-a=5 # assign variables
-b=2
+a=5 # assign variable a
+b=2 # assign variable b
+
 c=a+b #addition
-print (c)
+print ('a=5, b=2, c=a+b #addition = ' + str(c))
+
 c=a-b #subtraction
-print (c)
+print ('a=5, b=2, c=a-b #subtraction = ' + str(c))
+
 c=a*b #multiplication
-print (c)
+print ('a=5, b=2, c=a*b #multiplication = ' + str(c))
+
 c=a/b #division
-print (c)
-c=5**2 #exponentiation/power of
-print (c)
-c=5**(1.0/2) #square root
-print (c)
-c=5**(1.0/3) #cube root
-print (c)
+print ('a=5, b=2, c=a/b #division = ' + str(c))
+
+c=a**2 #exponentiation/powerof/cube etc
+print ('a=5, c=a**2 #exponentiation/powerof/square/cube etc = ' + str(c))
+
+c=a**3 #exponentiation/powerof/square etc
+print ('a=5, c=a**3 #exponentiation/powerof/square etc = ' + str(c))
+
+c=a**(1.0/2) #square root
+print ('a=5, c=a**(1.0/2) #square root = ' + str(c))
+
+c=a**(1.0/3) #cube root
+print ('a=5, c=a**(1.0/3) #cube root = ' + str(c))
+
 c= 2 + 5 * 5 - 3 # order of operation i.e 2 + 25 -3 = 27 -3 = 24
-print (c)
+
+print ('c= 2 + 5 * 5 - 3 # order of operation i.e 2 + 25 -3 = 27 -3 = 24 = ' + str(c))
+
 c= (2 + 5) * (5 - 3) # order of operation i.e 7 * 2 = 14
-print (c)
+print ('c= (2 + 5) * (5 - 3) # order of operation i.e 7 * 2 = 14 = ' + str(c))
+
 c= 2 + 5 * 5 - 3 # order of operation i.e 2 + 25 -3 = 27 -3 = 24
-print (c)
+print ('c= 2 + 5 * 5 - 3 # order of operation i.e 2 + 25 -3 = 27 -3 = 24 = ' + str(c))
+
 c= (2 + 5) * (5 - 3) # order of operation i.e 7 * 2 = 14
-print (c)
+print ('c= (2 + 5) * (5 - 3) # order of operation i.e 7 * 2 = 14 = ' + str(c))
