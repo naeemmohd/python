@@ -81,12 +81,13 @@
   * Login to your Host machine(in my case a CentOS 7 machine)
   * Make a directory "mypython" and go to the directory and type and enter "python" to open python prompt– 
     ```
-    mkdir 'Python 02' 
-    cd 'Python 02'
+    mkdir 'Python 01' 
+    cd 'Python 01'
     ```
-  * Create a file - 002-Basics.py - save and execute to check and verify the below basic operations:
+  * Create a file - 002-Basics-Numbers.py - save and execute to check and verify the below basic number operations:
+    * Python assigned variables dynamically. i.e. a=9 is integer whereas a=9.0 is float
     ```
-    nano 002-Basics.py # create the file
+    nano 002-Basics-Numbers.py # create the file
     
     # copy the content below and paste into the nano editor and save
     a=5 # assign variable a
@@ -130,11 +131,11 @@
     print ('c= (2 + 5) * (5 - 3) # order of operation i.e 7 * 2 = 14 = ' + str(c))
     
     # now execute the file using python 002-Basics.py
-    python 002-Basics.py
+    python 002-Basics-Numbers.py
     
     ```
   * Please see screen shot below
-        ![Python Basics](./images/001-04-Basics.png)
+        ![Python Basics](./images/001-04-Basics-Numbers.png)
         
   * True Division(Python 3.x) vs Basic Division(Python 2.x):
     ```
@@ -144,3 +145,35 @@
     from __future__ import division
     print 3/2     # 1.5
     ```
+ * Create a file - 002-Basics-Strings.py - save and execute to check and verify the below basic string operations:
+    * Python treats a string as a sequence. i.e. name = "Naeem". So you can access name[0] with value 'N' as "Naeem" is a sequence
+    ```
+    nano 003-Basics-Numbers.py # create the file
+    
+    # copy the content below and paste into the nano editor and save
+    name="Mohd Naeem" # assign variable name with value 'Naeem'
+    
+    # using string variable
+    print ('Your name is(using string variable):' +  name)
+    print ('Your name is(using sequence):' +  name[:])
+
+    # string variable is a sequence of characters
+    print ('First letter of your name is  = ' + name[0])
+    print ('Fifth letter of your name is  = ' + name[4])
+    print ('Last letter of your name is  = ' + name[:1])
+    print ('Last 4 letter of your name is  = ' + name[:4])
+    
+    print ('Your name without first character is  = ' + name[1:])
+    print ('Your reversed name is  = ' + name[:-1])
+    print ('Your reversed name by skiiping 2 charatcers is  = ' + name[:-2])
+    
+    # using len method and also string formatting
+    age="39"
+    print ('Your name has %s characters' %(len(name)) %(int(age)))
+     
+    # now execute the file using python 003-Basics-Numbers.py
+    python 003-Basics-Numbers.py
+    
+    ```
+  * Please see screen shot below
+        ![Python Basics](./images/001-05-Basics-Numbers.png)
