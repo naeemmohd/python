@@ -135,7 +135,7 @@
     
     ```
   * Please see screen shot below
-        ![Python Basics](./images/001-04-Basics-Numbers.png)
+        ![Python Basics Numbers](./images/001-04-Basics-Numbers.png)
         
   * True Division(Python 3.x) vs Basic Division(Python 2.x):
     ```
@@ -148,7 +148,7 @@
  * Create a file - 002-Basics-Strings.py - save and execute to check and verify the below basic string operations:
     * Python treats a string as a sequence. i.e. name = "Naeem". So you can access name[0] with value 'N' as "Naeem" is a sequence
     ```
-    nano 003-Basics-Numbers.py # create the file
+    nano 003-Basics-Strings.py # create the file
     
     # copy the content below and paste into the nano editor and save
     name="Mohd Naeem" # assign variable name with value 'Naeem'
@@ -171,9 +171,9 @@
     age="39"
     print ('Your name has %s characters' %(len(name)) %(int(age)))
      
-    # now execute the file using python 003-Basics-Numbers.py
-    python 003-Basics-Numbers.py
+    # now execute the file using python 003-Basics-Strings.py
+    python 003-Basics-Strings.py
     
     ```
   * Please see screen shot below
-        ![Python Basics](./images/001-05-Basics-Numbers.png)
+        ![Python Basics Strings](./images/001-05-Basics-String.png)
