@@ -59,4 +59,29 @@ print(lst.pop())
 print(lst.pop(3))
 
 #accessing non available index
-print(lst[100]) #  this line will give error IndexError
+#print(lst[100]) #  this line will give error IndexError
+
+# creating a nested list – a list inside the other – list can have any dynamic size
+matrixlist1=[10,20,30]
+matrixlist2=[40,50,60,70]
+matrixlist3=[80,90]
+
+# adding the lists in another list
+matrixlist = [matrixlist1,matrixlist2,matrixlist3]
+
+#accessing the list by their indices
+print(matrixlist) # [[10, 20, 30], [40, 50, 60, 70], [80, 90]]
+print(matrixlist[0]) # [10, 20, 30]
+print(matrixlist[0][0]) # 10 
+print(matrixlist[0][1]) # 20
+print(matrixlist[0][2]) # 30
+
+print(matrixlist[1]) # [40, 50, 60, 70]
+print(matrixlist[1][0]) # 40
+print(matrixlist[1][1]) # 50
+print(matrixlist[1][2]) # 60
+print(matrixlist[1][2]) # 70
+
+print(matrixlist[2]) # [80, 90]
+print(matrixlist[2][0]) # 80
+print(matrixlist[2][1]) # 90
