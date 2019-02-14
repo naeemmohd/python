@@ -145,8 +145,8 @@
     from __future__ import division
     print 3/2     # 1.5
     ```
- * Create a file - 002-Basics-Strings.py - save and execute to check and verify the below basic string operations:
-    * Python treats a string as a sequence. i.e. name = "Naeem". So you can access name[0] with value 'N' as "Naeem" is a sequence
+ * Create a file - 003-Basics-Strings.py - save and execute to check and verify the below basic string operations:
+    * Python treats a string as a sequence. i.e. name = "Mohd Naeem". So you can access name[0] with value 'M' as "Mohd Naeem" is a sequence but strings are immutable(cant be changes by index) i.e print name[0] will return 'M' but name[0]='N' will return error
     ```
     nano 003-Basics-Strings.py # create the file
     
