@@ -11,7 +11,7 @@
   * One more big thing about Python 2.x is that it can import the features of Python 3 by using ( **from __future__ import <import_module>** syntax, e.g **from __future__ import division** imports division from Python 3. 
     * In Python 2.x if you divide 3/2 you will get answer as 1 as Python 2 performs basic division. 
     * In Python 3, it performs true division , if you divide 3/2 you get 1.5).
-    
+
 ### Python Setup:
   * Since supported by multiple hardware and software platforms, it can be installed in multiples ways
   * Lets focus Installation on Linux - 
@@ -389,3 +389,42 @@
         ![Python Basics Dictionaries 01](./images/001-005-Basics-Dictionaries-01.png)
         ![Python Basics Dictionaries 02](./images/001-005-Basics-Dictionaries-01.png)
         ![Python Basics Dictionaries 03](./images/001-005-Basics-Dictionaries-01.png)
+        
+
+  * Create a file - 006-Basics-Tuples.py - Tuples are immutable lists:
+    * Once created can’t be updated
+    * We use tuples very extensivly to ensure where the number of elements should be fixed and should not change.
+    * E.g columns of a csv  pr psv file
+    
+    ```
+    nano 006-Basics-Tuples.py # create the file
+    
+    # Tuples are also like lists except that they are immutable
+    # Once created can’t be updated
+    # We use tuples very extensivly to ensure where the number of elements should be fixed and should not change.
+    # E.g columsn in a csv or psv file where you would expect fixed number of columns
+    # lets assume the a csv file with data like this 
+    # where fixed columns are InvoiceID,CustomerName,Balance,IsProcessed
+    # 1,'Kelly Bennett',551,0
+    testTuple = (1,'Kelly Bennett',551,0,1)
+    print(testTuple)
+    print(testTuple[0])
+    print(testTuple[0:2])
+
+    # Two methods supported - 
+    # index(returns the index of an item) and 
+    # count(returns how many times and items occured in the tuple)
+    print(testTuple.count(1))
+    print(testTuple.index(0))
+
+    # But Tuples are immutable i.e. can't be modified once created
+    testTuple[0]=2
+    print(testTuple)
+
+    
+    # now execute the file using python 006-Basics-Tuples.py
+    python 006-Basics-Tuples.py
+    
+    ```
+  * Please see screen shot below
+        ![Python Basics Numbers](./images/001-006-Basics-Tuples.png)
