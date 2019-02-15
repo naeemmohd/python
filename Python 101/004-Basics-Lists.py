@@ -58,6 +58,10 @@ print(lst.pop())
 # pop out item at nth index
 print(lst.pop(3))
 
+#distict list
+lst = [1, 2, 3, 3, 3, 1, 1,1, 3, 3, 1, 1]
+print(set(lst))
+
 #accessing non available index
 #print(lst[100]) #  this line will give error IndexError
 

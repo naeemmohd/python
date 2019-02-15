@@ -19,3 +19,7 @@ print(testTuple.index(0))
 # But Tuples are immutable i.e. can't be modified once created
 testTuple[0]=2
 print(testTuple)
+
+mytuple = (1, 2, 3, 3, 3, 1, 1,1, 3, 3, 1, 1)
+print(set(mytuple))
+
