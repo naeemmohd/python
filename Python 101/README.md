@@ -9,3 +9,8 @@ Topic | Link
 005-Handling Dictionaries | [005-Dictionaries](https://github.com/naeemmohd/python/tree/master/Python%20101/005-Dictionaries)
 006-Handling Tuples | [006-Tuples](https://github.com/naeemmohd/python/tree/master/Python%20101/006-Tuples)
 007-Handling Files | [007-Files](https://github.com/naeemmohd/python/tree/master/Python%20101/007-Files)
+008-Handling Control of Flow | [008-ControlOfFlow](https://github.com/naeemmohd/python/tree/master/Python%20101/008-ControlOfFlow)
+009-Handling Functions | [009-Functions](https://github.com/naeemmohd/python/tree/master/Python%20101/009-Functions)
+010-Handling Modules | [010-Modules](https://github.com/naeemmohd/python/tree/master/Python%20101/010-Modules)
+011-Handling DateTime | [011-DateTime](https://github.com/naeemmohd/python/tree/master/Python%20101/011-DateTime)
+
