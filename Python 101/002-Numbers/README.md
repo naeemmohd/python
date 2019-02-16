@@ -58,7 +58,7 @@
     
     ```
   * Please see screen shot below
-        ![Python Basics Numbers](./images/001-04-Basics-Numbers.png)
+        ![Python Basics Numbers](../images/001-04-Basics-Numbers.png)
         
   * True Division(Python 3.x) vs Basic Division(Python 2.x):
     ```

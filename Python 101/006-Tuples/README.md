@@ -38,5 +38,5 @@
     
     ```
   * Please see screen shot below
-        ![Python Basics Numbers](./images/001-006-Basics-Tuples.png)
+        ![Python Basics Numbers](../images/001-006-Basics-Tuples.png)
 

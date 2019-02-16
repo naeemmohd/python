@@ -27,7 +27,7 @@
         
         ```
         * Please see screen shot below
-        ![Python versions](./images/001-01-CheckVersion.png)
+        ![Python versions](../images/001-01-CheckVersion.png)
         
       * Setup an alias for Python3(open ~/.bashrc and update with line below) – 
         ```
@@ -43,7 +43,7 @@
         
         ```
       * Please see screen shot below
-        ![Python versions](./images/001-02-SetDefaultVersion.png)
+        ![Python versions](../images/001-02-SetDefaultVersion.png)
         
       * Create a python script file – 
         ```
@@ -59,7 +59,7 @@
         python -V
         ```  
       * Please see screen shot below
-        ![Python versions](./images/001-03-HelloWorld.png)
+        ![Python versions](../images/001-03-HelloWorld.png)
         
       * Execute some basic Python commands– 
         ```

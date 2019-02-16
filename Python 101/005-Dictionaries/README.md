@@ -77,7 +77,7 @@
     
     ```
   * Please see screen shot below
-        ![Python Basics Dictionaries 01](./images/001-005-Basics-Dictionaries-01.png)
-        ![Python Basics Dictionaries 02](./images/001-005-Basics-Dictionaries-01.png)
-        ![Python Basics Dictionaries 03](./images/001-005-Basics-Dictionaries-01.png)
+        ![Python Basics Dictionaries 01](../images/001-005-Basics-Dictionaries-01.png)
+        ![Python Basics Dictionaries 02](../images/001-005-Basics-Dictionaries-01.png)
+        ![Python Basics Dictionaries 03](../images/001-005-Basics-Dictionaries-01.png)
   

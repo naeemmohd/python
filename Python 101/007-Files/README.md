@@ -41,4 +41,4 @@
     
     ```
   * Please see screen shot below
-        ![Python Basics Numbers](./images/001-007-Basics-Files.png)
+        ![Python Basics Numbers](../images/001-007-Basics-Files.png)

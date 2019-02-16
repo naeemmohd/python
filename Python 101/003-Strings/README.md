@@ -64,5 +64,5 @@
     
     ```
   * Please see screen shot below
-        ![Python Basics Strings](./images/001-05-Basics-String.png)
+        ![Python Basics Strings](../images/001-05-Basics-String.png)
 

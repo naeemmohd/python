@@ -101,4 +101,4 @@
     
     ```
   * Please see screen shot below
-        ![Python Basics Lists](./images/001-004-Basics-Lists.png)
+        ![Python Basics Lists](../images/001-004-Basics-Lists.png)
