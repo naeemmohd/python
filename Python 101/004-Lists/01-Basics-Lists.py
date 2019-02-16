@@ -89,3 +89,7 @@ print(matrixlist[1][2]) # 70
 print(matrixlist[2]) # [80, 90]
 print(matrixlist[2][0]) # 80
 print(matrixlist[2][1]) # 90
+
+# deleting lists
+del lst[0]  # deletes nth key from list
+del lst    # deletes entire list

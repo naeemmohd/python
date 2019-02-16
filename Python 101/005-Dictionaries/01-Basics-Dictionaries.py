@@ -1,3 +1,4 @@
+
 # Dictionary: mutable mappings(made up of set of key value pairs) 
 # While String is an immutable sequences and lists are mutable sequences,
 # Dictionaries are actually mutable mappings,
@@ -64,3 +65,7 @@ print(dict['Address']['Address1'])
 print(dict['Address']['City'])
 print(dict['Address']['State'])
 print(dict['Address']['Zip'])
+
+# deleting dictionaries
+del dict["TX"]  # deletes nth key from dictionary
+del dict    # deletes entire dictionary

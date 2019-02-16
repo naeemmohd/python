@@ -17,9 +17,15 @@ print(testTuple.count(1))
 print(testTuple.index(0))
 
 # But Tuples are immutable i.e. can't be modified once created
-testTuple[0]=2
+testTuple[0]=2 # this will be an error as tuples are immutables
 print(testTuple)
 
+# make a distict set of the tuple
 mytuple = (1, 2, 3, 3, 3, 1, 1,1, 3, 3, 1, 1)
 print(set(mytuple))
+
+#delete a tuple item or whole tuple
+del mytuple[0] - deletes only nth member
+del mytuple - deletes entire tuple
+
 
