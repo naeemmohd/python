@@ -1,5 +1,5 @@
 ### Python - DateTime:
-  * Create a file - 01-Basics-DateTime.py - File Operations:
+  * Create a file - 01-Basics-DateTime.py - DateTime:
     
     ```
     nano 01-Basics-DateTime.py # create the file
@@ -26,4 +26,4 @@
     
     ```
   * Please see screen shot below
-        ![Python Basics Numbers](../images/001-011-Basics-DateTime.png)
+        ![Python Basics DateTime](../images/001-011-Basics-DateTime.png)

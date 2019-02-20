@@ -1,5 +1,5 @@
 ### Python - Functions:
-  * Create a file - 01-Basics-ControlOfFlow.py - File Operations:
+  * Create a file - 01-Basics-ControlOfFlow.py - Control Of Flow:
     
     ```
     nano 01-Basics-ControlOfFlow.py # create the file
@@ -43,5 +43,5 @@
     
     ```
   * Please see screen shot below
-        ![Python Basics Numbers](../images/001-009-Basics-ControlOfFlow-01.png)
-        ![Python Basics Numbers](../images/001-009-Basics-ControlOfFlow-02.png)
+        ![Python Basics Control Of Flow](../images/001-009-Basics-ControlOfFlow-01.png)
+        ![Python Basics Control Of Flow](../images/001-009-Basics-ControlOfFlow-02.png)

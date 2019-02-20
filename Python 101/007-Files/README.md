@@ -9,7 +9,7 @@
         - to read all lines - f.readlines()
         - to close a file - fl.close()
     
- * Create a file - 01-Basics-Files.py - File Operations:
+ * Create a file - 01-Basics-Files.py - Files:
     
     ```
     nano 01-Basics-Files.py # create the file
@@ -41,4 +41,4 @@
     
     ```
   * Please see screen shot below
-        ![Python Basics Numbers](../images/001-007-Basics-Files.png)
+        ![Python Basics Files](../images/001-007-Basics-Files.png)

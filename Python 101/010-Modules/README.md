@@ -17,7 +17,7 @@
     
     ```
     
- * Create a file - 01-Basics-Modules.py - File Operations:
+ * Create a file - 01-Basics-Modules.py - Modules:
     
     ```
     nano 01-Basics-Modules.py # create the file
@@ -48,4 +48,4 @@
     
     ```
   * Please see screen shot below
-        ![Python Basics Numbers](../images/001-010-Basics-Modules.png)
+        ![Python Basics Modules](../images/001-010-Basics-Modules.png)

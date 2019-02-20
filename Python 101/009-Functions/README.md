@@ -1,5 +1,5 @@
 ### Python - Functions:
-  * Create a file - 01-Basics-Functions.py - File Operations:
+  * Create a file - 01-Basics-Functions.py - Functions:
     
     ```
     nano 01-Basics-Functions.py # create the file
@@ -32,4 +32,4 @@
     
     ```
   * Please see screen shot below
-        ![Python Basics Numbers](../images/001-009-Basics-Functions.png)
+        ![Python Basics Functions](../images/001-009-Basics-Functions.png)
