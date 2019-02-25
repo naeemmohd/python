@@ -13,6 +13,7 @@ Topic | Link
 009-Handling Functions | [009-Functions](https://github.com/naeemmohd/python/tree/master/Python%20101/009-Functions)
 010-Handling Modules | [010-Modules](https://github.com/naeemmohd/python/tree/master/Python%20101/010-Modules)
 011-Handling DateTime | [011-DateTime](https://github.com/naeemmohd/python/tree/master/Python%20101/011-DateTime)
-011-Handling Exceptions | [011-Exception Handling](https://github.com/naeemmohd/python/tree/master/Python%20101/012-ExceptionHandling)
+012-Handling Exceptions | [012-Exception Handling](https://github.com/naeemmohd/python/tree/master/Python%20101/012-ExceptionHandling)
+013-Handling Classes and Objects | [013-Classes and Objects](https://github.com/naeemmohd/python/tree/master/Python%20101/013-ClassesandObjects)
 
 
