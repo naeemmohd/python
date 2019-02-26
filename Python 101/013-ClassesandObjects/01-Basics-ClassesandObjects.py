@@ -1,14 +1,3 @@
-### Python - Classes and Objects:
-  * Create a file - 01-Basics-ClassesandObjects.py:
-    * class is blue print of a behavior
-    * object is a instance of a class
-    * a class has attributes and methods.
-    * attributes are the characteristics of a class
-    * methods are the operations performed by the classs
-    
-    ```
-    nano 01-Basics-ClassesandObjects.py # create the file
-    
     # Example 1 - simplest class definition -, Product is an object of type object 
     #definition of class
     class Product(object):
@@ -44,10 +33,3 @@
     print(str(objStud1))
     print(len(objStud1))
     del objStud1
-    
-    # now execute the file 
-    python 01-Basics-ClassesandObjects.py
-    
-    ```
-  * Please see screen shot below
-        ![Python Basics Classes and Objects](../images/001-013-Basics-ClassesandObjects.png)
