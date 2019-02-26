@@ -50,4 +50,4 @@
     
     ```
   * Please see screen shot below
-        ![Python Basics Classes and Objects](../images/001-013-Basics-ClassesandObjects.png)
+        ![Python Basics Classes and Objects](../images/001-013-Basics-ClassesandObjects01.png)
