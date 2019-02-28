@@ -1,4 +1,5 @@
-nano 01-Basics-ClassesandObjects01.py # create the file
+nano 01-Basics-ClassesandObjects02.py # create the file
+
 # inheritance in classes - # the parent or base class it has a area method
 class Figure(object):    
     length=0

@@ -1,9 +1,9 @@
 ### Python - Classes and Objects:
-    * class is blue print of a behavior
-    * object is a instance of a class
-    * a class has attributes and methods.
-    * attributes are the characteristics of a class
-    * methods are the operations performed by the classs
+  * class is blue print of a behavior
+  * object is a instance of a class
+  * a class has attributes and methods.
+  * attributes are the characteristics of a class
+  * methods are the operations performed by the classs
 
     ```
     nano 01-Basics-ClassesandObjects01.py # create the file
@@ -52,7 +52,7 @@
         ![Python Basics Classes and Objects](../images/001-013-Basics-ClassesandObjects01.PNG)
 
     ```
-    nano 01-Basics-ClassesandObjects01.py # create the file
+    nano 01-Basics-ClassesandObjects02.py # create the file
     # inheritance in classes - # the parent or base class it has a area method
     class Figure(object):    
         length=0
