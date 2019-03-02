@@ -1,4 +1,4 @@
-nano 01-Basics-ClassesandObjects01.py # create the file
+# nano 01-Basics-ClassesandObjects01.py # create the file
 
 # Example 1 - simplest class definition -, Product is an object of type object 
 #definition of class
