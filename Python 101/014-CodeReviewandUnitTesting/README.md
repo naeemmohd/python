@@ -56,6 +56,6 @@
     
     ```
   * Please see screen shot below
-        ![Python Basics Classes and Objects](../images/001-013-Basics-CodeReviewandUnitTesting01.PNG)
-        ![Python Basics Classes and Objects](../images/001-013-Basics-CodeReviewandUnitTesting02.PNG)
+        ![Python Basics Code Review and Unit Testing 01](../images/001-013-Basics-CodeReviewandUnitTesting01.PNG)
+        ![Python Basics Code Review and Unit Testing 01](../images/001-013-Basics-CodeReviewandUnitTesting02.PNG)
     
