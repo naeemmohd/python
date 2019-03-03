@@ -88,7 +88,6 @@
     
     * Create a file - 01-Basics-MetaCharacters01.py:
 
-
         ```
         import re
         searchsource = 'Za?..pqrs..pppqqq...stttsttt...efef!...Xpxxxx baaaa 123'
@@ -123,4 +122,6 @@
 
         ```
       * Please see screen shot below
-            ![Python Basics Meta Characters](../images/001-016-Basics-MetaCharacters01.png)
+            ![Python Basics Meta Characters 01](../images/001-016-Basics-MetaCharacters01.png)
+            ![Python Basics Meta Characters 02](../images/001-016-Basics-MetaCharacters02.png)
+            
