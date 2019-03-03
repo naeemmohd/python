@@ -117,6 +117,16 @@
                 
         myfindall(searchpatterns, searchsource) 
         
+        # splitting using regular expressions
+        print(re.split(',',"name,age,gender"))
+        print(re.split(',',"naeem,21,M"))
+        print(re.split('\t',"name\tage\tgender"))
+        print(re.split('\t',"naeem\t21\tM"))
+        print(re.split(',',"name,age,gender"))
+        print(re.split(',',"naeem,21,M"))
+        print(re.split('\|',"name|age|gender"))
+        print(re.split('\|',"naeem|21|M"))
+        
         # now execute the file 
         python 01-Basics-MetaCharacters01.py
 
