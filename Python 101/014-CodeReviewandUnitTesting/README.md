@@ -16,8 +16,8 @@
     x = 10
     y = 20
     z = 30
-    print x
-    print y
+    print(x)
+    print(y)
 
     # Code review the file test.py
     ! pylint test.py
@@ -36,7 +36,7 @@
 
 
     # Now again create/overwrite test.py with code below
-    nano test.py
+    nano test1.py
     """
     script to add numbers
     """
@@ -53,7 +53,7 @@
     myadd()
 
     # Code review the file test.py
-    ! pylint test.py
+    ! pylint test1.py
     
     ```
     * Please see screen shot below
