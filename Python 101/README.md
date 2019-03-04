@@ -17,6 +17,8 @@ Topic | Link
 013-Handling Classes and Objects | [013-Classes and Objects](https://github.com/naeemmohd/python/tree/master/Python%20101/013-ClassesandObjects)
 014-Code Review and Unit Testing | [014-Code Review and Unit Testing](https://github.com/naeemmohd/python/tree/master/Python%20101/014-CodeReviewandUnitTesting)
 015-Debugging | [015-Debugging](https://github.com/naeemmohd/python/tree/master/Python%20101/015-Dubugging)
-016-RegularExpressions | [016-RegularExpressions](https://github.com/naeemmohd/python/tree/master/Python%20101/016-RegularExpressions)
+016-Regular Expressions | [016-Regular Expressions](https://github.com/naeemmohd/python/tree/master/Python%20101/016-RegularExpressions)
+017-Misc. Functions | [017-Misc. Functions](https://github.com/naeemmohd/python/tree/master/Python%20101/017-MiscFunctions)
 
 
+ 
