@@ -35,8 +35,22 @@
 
     # now execute the file using python 006-Basics-Tuples.py
     python 006-Basics-Tuples.py
+    #tuples are immutable list but can we trick it to change?
     
+    mytuple = (1,2,3,4)
+    print(mytuple)
+
+    #but see this trick, actually two tuples can be added like here tuple mytuple and tuple (5,)
+    mytuple = mytuple + (5,)
+    print(mytuple)
+    mytuple = mytuple + mytuple
+    print(mytuple)
+    
+    # but this will be error
+    mytuple[0]=11
+    print(mytuple)
+
     ```
   * Please see screen shot below
         ![Python Basics Tuples](../images/001-006-Basics-Tuples.png)
-
+        ![Python Basics Tuples](../images/001-006-Basics-Tuples-1.png)
