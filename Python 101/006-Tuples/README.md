@@ -53,4 +53,4 @@
     ```
   * Please see screen shot below
         ![Python Basics Tuples](../images/001-006-Basics-Tuples.png)
-        ![Python Basics Tuples](../images/001-006-Basics-Tuples-1.png)
+        ![Python Basics Tuples](../images/001-006-Basics-Tuples-1.PNG)
