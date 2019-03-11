@@ -92,13 +92,44 @@
     print(matrixlist[2][0]) # 80
     print(matrixlist[2][1]) # 90
 
-    # now execute the file using python 003-Basics-Strings.py
-    python 004-Basics-Lists.py
-    
     # deleting lists
     del lst[0]  # deletes nth key from list
     del lst    # deletes entire list
     
+    # List comperehensions - a precise way to create lists
+    # E.g without list comprehension
+    mySquaresList = []
+    for x in range(1,6):
+        mySquaresList.append(x**2)
+    print(mySquaresList)
+    
+    # E.g with lambda function - map function does some function repeatedly
+    mySquaresList = list(map(lambda x : x**2, range(1,6)))
+    print(mySquaresList)
+    
+    # E.g with List Comprehensions  - x**2 is wht processing you want to do with x - for x in range(1,6) is the loop
+    mySquaresList = [x**2 for x in range(1,6)]
+    print(mySquaresList)
+    
+    # list squared
+    mylist = [1,2,3,4,5]
+    mySquaresList = [x**2 for x in mylist]
+    print(mySquaresList)
+
+    # list squared only for even numbers
+    mylist = [1,2,3,4,5]
+    mySquaresList = [x**2 for x in mylist if x%2==0]
+    print(mySquaresList)
+
+    # create list of tuple
+    print([(x, x**2) for x in range(1,6)])
+    # create list of dictionary
+    print([{x:y} for x in range(1,5) for y in range(1,5) if x!=y])
+    
+    # now execute the file using python 003-Basics-Strings.py
+    python 004-Basics-Lists.py
+    
     ```
   * Please see screen shot below
         ![Python Basics Lists](../images/001-004-Basics-Lists.png)
+        ![Python Basics Lists](../images/001-004-Basics-Lists-1.png)
