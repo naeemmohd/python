@@ -110,3 +110,29 @@ while True:
         age=input('What is your age?')
         
 print('My name is %s and i am %2.2f years old' %(str(name),float(age)))
+
+# use of control of flow
+# create a function to get a comma seperated list of favorite fruits loved by your famnily
+# return the list of all fruits loved by the family
+# ask the user to enter a fruit name, if it is available in the list of favorite fruits then return that its his/her favorite fruit too else otherwise
+
+print("Welcome to fruits game.")
+def getFavFruits():
+        favfruits = input('Please enter a list of all favorite fruit names loved by the family: ')
+        return favfruits.split(',')
+def isMyFavFruit():
+        myFavFruit = input('Please enter your favorite fruit name: ')
+        if myFavFruit in allFavFruits:
+            print('Wow, %s is also your fav fruit like your family.' %(myFavFruit))
+        else:
+            print('Sorry, %s is not a fav fruit like your family.' %(myFavFruit))
+
+allFavFruits = getFavFruits()
+while True:
+    isMyFavFruit()
+    choice = input('Do you want to continue?(y/n): ')
+    if(choice.lower() == 'y'):
+        continue
+    else:
+        print("Thanks for playing fruits game.")
+        break
