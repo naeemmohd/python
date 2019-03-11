@@ -131,5 +131,8 @@
     
     ```
   * Please see screen shot below
-        ![Python Basics Lists](../images/001-004-Basics-Lists.png)
-        ![Python Basics Lists](../images/001-004-Basics-Lists-1.png)
+        ![Python Basics Lists](../images/001-004-Basics-Lists-01.png)
+        ![Python Basics Lists](../images/001-004-Basics-Lists-02.png)
+        ![Python Basics Lists](../images/001-004-Basics-Lists-03.png)
+        ![Python Basics Lists](../images/001-004-Basics-Lists-04.png)
+        ![Python Basics Lists](../images/001-004-Basics-Lists-05.png)
