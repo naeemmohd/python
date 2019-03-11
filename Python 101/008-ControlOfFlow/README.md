@@ -1,10 +1,10 @@
 ### Python - Functions:
   * Create a file - 01-Basics-ControlOfFlow.py - Control Of Flow:
+    * To create the file - nano 01-Basics-ControlOfFlow.py # create the file
+    * To execute the file - python 01-Basics-ControlOfFlow.py # execute the file
     
+    * If statement with elif, else. For loops with Lists and Dictionaries, Range funtion
     ```
-    nano 01-Basics-ControlOfFlow.py # create the file
-    
-    # if statement with elif, else
     num = int(input("Please enter an integer: "))
     if(num < 0):
         print(str(num) + ' is a negative number.')
@@ -28,8 +28,11 @@
         print(num)
     for num in range(1,3):
         print(num)
-
-    # use of continue and break in a for loop
+    ```
+    ![Python Basics Control Of Flow](../images/001-009-Basics-ControlOfFlow-01.png)
+    
+    * Use of continue and break in a for loop
+    ```
     for num in range(1,100):
         print(num)
         if num % 2 == 0:
@@ -37,11 +40,54 @@
         else:
             if num >= 10:
                 break;
-    
-    # now execute the file 
-    python 01-Basics-ControlOfFlow.py
-    
     ```
-  * Please see screen shot below
-        ![Python Basics Control Of Flow](../images/001-009-Basics-ControlOfFlow-01.png)
-        ![Python Basics Control Of Flow](../images/001-009-Basics-ControlOfFlow-02.png)
+    ![Python Basics Control Of Flow](../images/001-009-Basics-ControlOfFlow-02.png)
+    
+    * Use of while loop
+    ```
+    choice = 'y'
+    while choice.lower() == 'y':
+        print("Thanks for continuing to play with us. The game is on...")
+        choice = input('Do you want to continue?, y or n: ')
+    else:
+        print("Thanks for playing with us. Please come back soon...")    
+    ```
+    ![Python Basics Control Of Flow](../images/001-009-Basics-ControlOfFlow-03.png)
+    
+    * Use of while loop advanced
+    ```
+    def add(num1,num2):
+        return num1+num2
+    def subtract(num1,num2):
+        return num1-num2
+    def multiply(num1,num2):
+        return num1*num2
+    def divide(num1,num2):
+        return num1/num2
+
+    print("Welcome to play number games with us. The game is on...")
+    num1 = int(input('Please enter number 1: '))
+    num2 = 0 
+    while int(num2) == 0:
+        num2 = int(input('Please enter a non zero number 2: '))
+
+    choices = 'y'
+    while choices.lower() == 'y':
+        options = input('Do you want to add, subtract, multiply or divide?, a, s, m, d: ')
+        if options == 'a':
+            print('The sum of %d and %d is %d' %(int(num1), int(num2), int(add(num1,num2))))
+        elif options == 's':
+            print('The difference of %d and %d is %d' %(int(num1), int(num2), int(subtract(num1,num2))))
+        elif options == 'm':
+            print('The product of %d and %d is %d' %(int(num1), int(num2), int(multiply(num1,num2))))
+        elif options == 'd':
+            print('The division of %d and %d is %f' %(int(num1), int(num2), float(divide(num1,num2))))
+        else:
+            print( "Please select only these options -  'a' for add, 's' for subtract, 'm' for multiply and 'd' for divide")
+        choices = input('Do you want to continue?, y or n: ')
+    else:
+        print("Thanks for playing with us. Please come back soon...")
+
+    ```
+    ![Python Basics Control Of Flow](../images/001-009-Basics-ControlOfFlow-04.png)
+    ![Python Basics Control Of Flow](../images/001-009-Basics-ControlOfFlow-05.png)
