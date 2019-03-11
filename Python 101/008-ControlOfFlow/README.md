@@ -66,28 +66,67 @@
         return num1/num2
 
     print("Welcome to play number games with us. The game is on...")
-    num1 = int(input('Please enter number 1: '))
-    num2 = 0 
-    while int(num2) == 0:
-        num2 = int(input('Please enter a non zero number 2: '))
+    num1 = ''
+    while not num1.isnumeric():
+        try:
+            num1 = input('Please enter number 1: ')
+        except ValueError:
+            continue
+
+    num2 = ''
+    while not (num2.isnumeric() and float(num2) !=0):
+        try:
+            num2 = input('Please enter non-zero number 2: ')
+        except ValueError:
+            continue
 
     choices = 'y'
     while choices.lower() == 'y':
         options = input('Do you want to add, subtract, multiply or divide?, a, s, m, d: ')
         if options == 'a':
-            print('The sum of %d and %d is %d' %(int(num1), int(num2), int(add(num1,num2))))
+            print('The sum of %2.2f and %2.2f is %2.2f' %(float(num1), float(num2), float(add(float(num1),float(num2)))))
         elif options == 's':
-            print('The difference of %d and %d is %d' %(int(num1), int(num2), int(subtract(num1,num2))))
+            print('The difference of %2.2f and %2.2f is %2.2f' %(float(num1), float(num2), float(subtract(float(num1),float(num2)))))
         elif options == 'm':
-            print('The product of %d and %d is %d' %(int(num1), int(num2), int(multiply(num1,num2))))
+            print('The product of %2.2f and %2.2f is %2.2f' %(float(num1), float(num2), float(multiply(float(num1),float(num2)))))
         elif options == 'd':
-            print('The division of %d and %d is %f' %(int(num1), int(num2), float(divide(num1,num2))))
+            print('The division of %2.2f and %2.2f is %2.2f' %(float(num1), float(num2), float(divide(float(num1),float(num2)))))
         else:
             print( "Please select only these options -  'a' for add, 's' for subtract, 'm' for multiply and 'd' for divide")
-        choices = input('Do you want to continue?, y or n: ')
+
+        choices=''
+        while choices.lower() not in ('y','n'):
+            choices = input('Do you want to continue?, y or n: ')
     else:
         print("Thanks for playing with us. Please come back soon...")
 
     ```
     ![Python Basics Control Of Flow](../images/001-009-Basics-ControlOfFlow-04.png)
     ![Python Basics Control Of Flow](../images/001-009-Basics-ControlOfFlow-05.png)
+    
+    * Use of error handling in loops
+    ```
+    name='0'
+    while True:
+        try:
+            if (float(name)>=0.0 or int(name)>=0):
+                name=input('What is your name?')
+            else:
+                break
+        except ValueError:
+            break
+
+    age='0'
+    while True:
+        try:
+            if (float(age)>0.0 or int(age)>0):
+                break
+            else:
+                age=input('What is your age?')
+        except ValueError:
+            print('Please enter numeric age only')
+            age=input('What is your age?')
+
+    print('My name is %s and i am %2.2f years old' %(str(name),float(age)))
+    ```
+    ![Python Basics Control Of Flow](../images/001-009-Basics-ControlOfFlow-06.png)
