@@ -119,7 +119,7 @@ print('My name is %s and i am %2.2f years old' %(str(name),float(age)))
 print("Welcome to fruits game.")
 def getFavFruits():
         favfruits = input('Please enter a list of all favorite fruit names loved by the family: ')
-        return favfruits.split(',')
+        return [fruits.strip() for fruits in favfruits.split(',')] 
 def isMyFavFruit():
         myFavFruit = input('Please enter your favorite fruit name: ')
         if myFavFruit in allFavFruits:
