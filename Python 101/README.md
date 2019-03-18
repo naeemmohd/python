@@ -19,6 +19,7 @@ Topic | Link
 015-Debugging | [015-Debugging](https://github.com/naeemmohd/python/tree/master/Python%20101/015-Dubugging)
 016-Regular Expressions | [016-Regular Expressions](https://github.com/naeemmohd/python/tree/master/Python%20101/016-RegularExpressions)
 017-Misc. Functions | [017-Misc. Functions](https://github.com/naeemmohd/python/tree/master/Python%20101/017-MiscFunctions)
+018-Passing Varied Arguments to Functions (*args and **kwargs) | [018-Varied Arguments to Functions](https://github.com/naeemmohd/python/tree/master/Python%20101/018-VariedArgumentsToFunctions)
 
 
  
