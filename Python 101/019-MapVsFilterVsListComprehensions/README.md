@@ -47,4 +47,4 @@
     ```
   * Please see screen shot below
         ![Python Basics Misc. Functions 01](../images/001-019-Basics-MapVsFilterVsListComprehensions.png)
-        ![Python Basics Misc. Functions 01](../images/001-019-Basics-MapVsFilterVsListComprehensions.png)
+        ![Python Basics Misc. Functions 01](../images/001-019-Basics-MapVsFilterVsListComprehensions2.png)
