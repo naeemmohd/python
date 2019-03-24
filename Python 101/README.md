@@ -21,7 +21,7 @@ Topic | Link
 017-Misc. Functions | [017-Misc. Functions](https://github.com/naeemmohd/python/tree/master/Python%20101/017-MiscFunctions)
 018-Passing Varied Arguments to Functions (*args and **kwargs) | [018-Varied Arguments to Functions](https://github.com/naeemmohd/python/tree/master/Python%20101/018-VariedArgumentsToFunctions)
 019-Map Vs Filter Vs List Comprehensions | [019-Map Vs Filter Vs List Comprehensions](https://github.com/naeemmohd/python/tree/master/Python%20101/019-MapVsFilterVsListComprehensions)
-
+020-Decorators for extending functions | [020-Decorators for extending functions](https://github.com/naeemmohd/python/tree/master/Python%20101/020-Decorators)
 
 
 
