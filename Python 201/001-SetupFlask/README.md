@@ -56,9 +56,12 @@
     # and watch the output for the website endpoint
     ```
   * Please see screen shot below
-    ![Python versions](../images/002-01-FirstFlaskAppServer.png)
-    ![Python versions](../images/002-01-FirstFlaskAppOutput.png)
-    ![Python versions](../images/002-01-FirstFlaskBrowserOutput.png)
+    * The app.py server application:
+      ![Python versions](../images/002-01-FirstFlaskAppServer.png)
+    * The app.py server application executed:
+      ![Python versions](../images/002-01-FirstFlaskAppOutput.png)
+    * The browser output when application home page is requested
+      ![Python versions](../images/002-01-FirstFlaskBrowserOutput.png)
     
       
     
