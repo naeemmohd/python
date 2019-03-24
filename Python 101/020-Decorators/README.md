@@ -1,11 +1,11 @@
 ### Python - Decorators:
-  ### Decorators - functions which help extend a function without modifying the function
-  ### In Python  - Functions are first class objects i.e. we can 
-  ###              - call one function inside other
-  ###              - pass functions as arguments
-  ###              - define functions inside other etc
+  * Decorators - functions which help extend a function without modifying the function
+  * In Python  - Functions are first class objects i.e. we can 
+  *              - call one function inside other
+  *              - pass functions as arguments
+  *              - define functions inside other etc
 ###########################################################################################
-  ### Create a file - 01-Basics-Decorators01.py:
+  * Create a file - 01-Basics-Decorators01.py:
     
     ```
     # create file 01-Basics-Decorators01.py by using nano 01-Basics-Decorators01.py 
@@ -19,11 +19,11 @@
     # python 01-Basics-Decorators01.py
     
     ```
-  ### Please see screen shot below
+  * Please see screen shot below
         ![Python Basics Decorators 01](../images/001-020-Basics-Decorators01.png)
 
 ###########################################################################################
-  ### Create a file - 01-Basics-Decorators02.py:
+  * Create a file - 01-Basics-Decorators02.py:
     
     ```
     # create file 01-Basics-Decorators02.py by using nano 01-Basics-Decorators02.py 
@@ -44,11 +44,11 @@
     # python 01-Basics-Decorators02.py
     
     ```
-  ### Please see screen shot below
+  * Please see screen shot below
         ![Python Basics Decorators 02 ](../images/001-020-Basics-Decorators02.png)
         
 ###########################################################################################
-  ### Create a file - 01-Basics-Decorators03.py:
+  * Create a file - 01-Basics-Decorators03.py:
     
     ```
     # create file 01-Basics-Decorators03.py by using nano 01-Basics-Decorators03.py 
@@ -74,11 +74,11 @@
     # python 01-Basics-Decorators03.py
     
     ```
-  ### Please see screen shot below
+  * Please see screen shot below
         ![Python Basics Decorators 03](../images/001-020-Basics-Decorators03.png)
         
 ###########################################################################################
-  ### Create a file - 01-Basics-Decorators04.py:
+  * Create a file - 01-Basics-Decorators04.py:
     
     ```
     # create file 01-Basics-Decorators04.py by using nano 01-Basics-Decorators04.py 
@@ -107,11 +107,11 @@
     # python 01-Basics-Decorators04.py
     
     ```
-  ### Please see screen shot below
+  * Please see screen shot below
         ![Python Basics Decorators 04](../images/001-020-Basics-Decorators04.png)
         
 ###########################################################################################      
-  ### Create a file - 01-Basics-Decorators05.py:
+  * Create a file - 01-Basics-Decorators05.py:
     
     ```
     # create file 01-Basics-Decorators05.py by using nano 01-Basics-Decorators05.py 
@@ -143,11 +143,11 @@
     # python 01-Basics-Decorators05.py
     
     ```
-  ### Please see screen shot below
+  * Please see screen shot below
         ![Python Basics Decorators 05](../images/001-020-Basics-Decorators05.png)
         
 ###########################################################################################     
-  ### Create a file - 01-Basics-Decorators06.py:
+  * Create a file - 01-Basics-Decorators06.py:
     
     ```
     ## logic to let a user go to admin page if he was an admin user lets use decorators
@@ -177,11 +177,11 @@
     # python 01-Basics-Decorators06.py
     
     ```
-  ### Please see screen shot below
+  * Please see screen shot below
         ![Python Basics Decorators 06](../images/001-020-Basics-Decorators06.png)
         
 ###########################################################################################     
-  ### Create a file - 01-Basics-Decorators07.py:
+  * Create a file - 01-Basics-Decorators07.py:
     
     ```
     # create file 01-Basics-Decorators07.py by using nano 01-Basics-Decorators07.py 
@@ -225,6 +225,6 @@
     # python 01-Basics-Decorators07.py
     
     ```
-  ### Please see screen shot below
+  * Please see screen shot below
         ![Python Basics Decorators 07](../images/001-020-Basics-Decorators07a.png)
         ![Python Basics Decorators 07](../images/001-020-Basics-Decorators07b.png)
