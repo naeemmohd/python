@@ -1,9 +1,9 @@
 ### Python - Decorators:
   * Decorators - functions which help extend a function without modifying the function
   * In Python  - Functions are first class objects i.e. we can 
-  *              - call one function inside other
-  *              - pass functions as arguments
-  *              - define functions inside other etc
+                 - call one function inside other
+                 - pass functions as arguments
+                 - define functions inside other etc
 ###########################################################################################
   * Create a file - 01-Basics-Decorators01.py:
     
