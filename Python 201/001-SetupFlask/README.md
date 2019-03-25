@@ -10,14 +10,20 @@
     ```
     # checking Python version 
     python -V
+    which python
+    whereis python
     # checking if pip installed or not 
     pip3 -V
+    which pip
+    whereispip
     
     # install pip first in case it is not install
     sudo apt-get -y install python-pip
     
     # now install flask
     pip3 install flask
+    which flask
+    whereis flask
     
     # if needed upgrade pip
     pip3 install --upgrade pip
