@@ -9,7 +9,7 @@
     # checking if pip installed or not 
     pip3 -V
     which pip
-    whereispip
+    whereis pip
     
     # install pip first in case it is not install
     sudo apt-get -y install python-pip
