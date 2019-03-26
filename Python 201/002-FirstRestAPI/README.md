@@ -100,8 +100,10 @@
   * Please see screen shot below
     * The app_v1.py code:
     ![Python versions](../images/002-02-FirstRestAPI-ServerCode.png)
+    ---------------------------------------------------------------------------------
     * The browser output:
     ![Python versions](../images/002-02-FirstRestAPI-BrowserOutput.png)
+    ---------------------------------------------------------------------------------
 
 ### First REST API Version 2:
   * We will extend our previous app.py server application to add routes for adding categories and products.
@@ -199,22 +201,23 @@
     
     ```
   * Please see screen shot below:
-    * ---------------------------------------------------------------------------------
     * The app_v2.py code (for adding and getting category):
     ![Python versions](../images/002-02-FirstRestAPI-ServerCode01.png)
-    * ---------------------------------------------------------------------------------
+    ---------------------------------------------------------------------------------
     * The browser output:
     ![Python versions](../images/002-02-FirstRestAPI-BrowserOutput01a.png)
-    * ---------------------------------------------------------------------------------
+    ---------------------------------------------------------------------------------
     ![Python versions](../images/002-02-FirstRestAPI-BrowserOutput01b.png)
-    * ---------------------------------------------------------------------------------
+    ---------------------------------------------------------------------------------
     * The app_v2.py code (for adding and getting products inside a category):
     ![Python versions](../images/002-02-FirstRestAPI-ServerCode02.png)
-    * ---------------------------------------------------------------------------------
+    ---------------------------------------------------------------------------------
     * The browser output:
     ![Python versions](../images/002-02-FirstRestAPI-BrowserOutput02a.png)
-    * ---------------------------------------------------------------------------------
+    ---------------------------------------------------------------------------------
     ![Python versions](../images/002-02-FirstRestAPI-BrowserOutput02b.png)
+    ---------------------------------------------------------------------------------
     * The browser output(final output):
     ![Python versions](../images/002-02-FirstRestAPI-BrowserOutputFinal.png)
+    ---------------------------------------------------------------------------------
     
