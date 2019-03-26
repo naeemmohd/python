@@ -27,7 +27,7 @@ def GetHome():
 # the products resource - Resource: /products Method : GET - e.g http://127.0.0.1:5000/products
 @flaskApp.route('/products')
 def GetAllProducts():
-    return jsonify("products", products)
+    return jsonify({"products", products})
 
 # run the app on a specific port
 flaskApp.run(port=5000)
