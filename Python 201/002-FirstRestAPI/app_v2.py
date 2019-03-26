@@ -1,3 +1,13 @@
+# First of all we import class/module Flask and then jsonify method -  from flask import Flask, jsonify
+# Then we create a flask application with __name__ to give a dynamic name to the application - flaskApp = Flask(__name__)
+# Then we start writing decorators and their methods for '/'(home/root) GET request and '/products' GET request
+# For the root resource here are the details - Resource: / Method : GET - e.g http://127.0.0.1:5000/
+# For the products resource here are the details - Resource: /products Method : GET - e.g http://127.0.0.1:5000/products
+# For the category resource here are the details for GET - Resource: /category/<string:category> Method : GET - e.g http://127.0.0.1:5000/category/desktops
+# For the category resource here are the details for POST - Resource: /category Method : POST - e.g http://127.0.0.1:5000/category
+# For the product resource are the details for GET - Resource: /category/<string:category>/product Method : GET - e.g http://127.0.0.1:5000/category/desktops/product
+# For the product resource are the details for POST - Resource: /category/product Method : POST - e.g http://127.0.0.1:5000/category/desktops
+# Finally we run the server application on a specific port. The server is ready and listening for any requests
 # from package flask, import class/module Flask, jsonify method and request method
 from flask import Flask, jsonify, request
 flaskApp = Flask(__name__)

@@ -50,6 +50,13 @@
 
 ### First REST API Version 1:
   * We will extend our previous app.py server application to add routes for the above verbs.
+  * First of all we import class/module Flask and then jsonify method -  from flask import Flask, jsonify
+  * Then we create a flask application with __name__ to give a dynamic name to the application - flaskApp = Flask(__name__)
+  * Then we start writing decorators and their methods for '/'(home/root) GET request and '/products' GET request
+  * For the root resource here are the details - Resource: / Method : GET - e.g http://127.0.0.1:5000/
+  * For the products resource here are the details - Resource: /products Method : GET - e.g http://127.0.0.1:5000/products
+  * Finally we run the server application on a specific port. The server is ready and listening for any requests
+  
     ```
     # create a file app_v1.py using command in termimal window - nano app_v1.py
     # from package flask, import class/module Flask and jsonify
@@ -98,6 +105,16 @@
 
 ### First REST API Version 2:
   * We will extend our previous app.py server application to add routes for adding categories and products.
+  * First of all we import class/module Flask and then jsonify method -  from flask import Flask, jsonify
+  * Then we create a flask application with __name__ to give a dynamic name to the application - flaskApp = Flask(__name__)
+  * Then we start writing decorators and their methods for '/'(home/root) GET request and '/products' GET request
+  * For the root resource here are the details - Resource: / Method : GET - e.g http://127.0.0.1:5000/
+  * For the products resource here are the details - Resource: /products Method : GET - e.g http://127.0.0.1:5000/products
+  * For the category resource here are the details for GET - Resource: /category/<string:category> Method : GET - e.g http://127.0.0.1:5000/category/desktops
+  * For the category resource here are the details for POST - Resource: /category Method : POST - e.g http://127.0.0.1:5000/category
+  * For the product resource are the details for GET - Resource: /category/<string:category>/product Method : GET - e.g http://127.0.0.1:5000/category/desktops/product
+  * For the product resource are the details for POST - Resource: /category/product Method : POST - e.g http://127.0.0.1:5000/category/desktops
+  * Finally we run the server application on a specific port. The server is ready and listening for any requests
     ```
     # create a file app_v2.py using command in termimal window - nano app_v2.py
     # from package flask, import class/module Flask, jsonify method and request method
@@ -181,16 +198,22 @@
 
     
     ```
-  * Please see screen shot below
+  * Please see screen shot below:
+    * ---------------------------------------------------------------------------------
     * The app_v2.py code (for adding and getting category):
     ![Python versions](../images/002-02-FirstRestAPI-ServerCode01.png)
+    * ---------------------------------------------------------------------------------
     * The browser output:
     ![Python versions](../images/002-02-FirstRestAPI-BrowserOutput01a.png)
+    * ---------------------------------------------------------------------------------
     ![Python versions](../images/002-02-FirstRestAPI-BrowserOutput01b.png)
+    * ---------------------------------------------------------------------------------
     * The app_v2.py code (for adding and getting products inside a category):
     ![Python versions](../images/002-02-FirstRestAPI-ServerCode02.png)
+    * ---------------------------------------------------------------------------------
     * The browser output:
     ![Python versions](../images/002-02-FirstRestAPI-BrowserOutput02a.png)
+    * ---------------------------------------------------------------------------------
     ![Python versions](../images/002-02-FirstRestAPI-BrowserOutput02b.png)
     * The browser output(final output):
     ![Python versions](../images/002-02-FirstRestAPI-BrowserOutputFinal.png)
