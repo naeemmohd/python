@@ -48,7 +48,7 @@
     * E.g In http://127.0.0.1:5000/product/1 - GET will return product 1
     * E.g In http://127.0.0.1:5000/products - GET will return all products
 
-### First REST API Setup:
+### First REST API Version 1:
   * We will extend our previous app.py server application to add routes for the above verbs.
     ```
     # create a file app_v1.py using command in termimal window - nano app_v1.py
@@ -91,7 +91,107 @@
     
     ```
   * Please see screen shot below
-    * The app_v1.py codeL
+    * The app_v1.py code:
     ![Python versions](../images/002-02-FirstRestAPI-ServerCode.png)
     * The browser output:
     ![Python versions](../images/002-02-FirstRestAPI-BrowserOutput.png)
+
+### First REST API Version 2:
+  * We will extend our previous app.py server application to add routes for adding categories and products.
+    ```
+    # create a file app_v2.py using command in termimal window - nano app_v2.py
+    # from package flask, import class/module Flask, jsonify method and request method
+    from flask import Flask, jsonify, request
+    flaskApp = Flask(__name__)
+
+    # currently storing products in this dictionary(in actual scenario, you may save it to database)
+    products = [
+          {
+            "category" : "laptops",
+            "items" : [
+              {
+                "name" : "HP 360",
+                "price" : 599.99
+              },
+              {
+                "name" : "HP Pavilion",
+                "price" : 699.99
+              }
+            ]
+          }
+        ]
+
+    # the root resource - Resource: / Method : GET - e.g http://127.0.0.1:5000/
+    @flaskApp.route('/')
+    def GetHome():
+      return "Welcome to Products REST API Flask Home page"
+
+    # the products resource - Resource: /products Method : GET - e.g http://127.0.0.1:5000/products
+    @flaskApp.route('/products')
+    def GetProducts():
+      return jsonify("products", products)
+
+    # the category resource - Resource: /category Method : GET - e.g http://127.0.0.1:5000/category/desktops
+    @flaskApp.route('/category/<string:category>')
+    def GetCategory(category):
+      for categ in products:
+        if categ['category'] == category:
+          return jsonify(categ)
+      return jsonify({"message" : "category does not exist"})
+
+    # the category resource - Resource: /category Method : POST - e.g http://127.0.0.1:5000/category
+    @flaskApp.route('/category', methods=['POST'])
+    def CreateCategory():
+        data = request.get_json()
+        new_category = {
+          "category" : data["category"],
+          "items" : []
+        }
+        products.append(new_category)
+        return jsonify(new_category)
+
+    # the product resource - Resource: /category/product Method : GET - e.g http://127.0.0.1:5000/category/desktops/product
+    @flaskApp.route('/category/<string:category>/product')
+    def GetProductFromCategory(category):
+      for categ in products:
+        if categ['category'] == category:
+            return jsonify( {'items':categ['items'] } )
+      return jsonify ({'message':'category/product not found'})
+      
+    # the product resource - Resource: /category/product Method : POST - e.g http://127.0.0.1:5000/category/desktops
+    @flaskApp.route('/category/<string:category>' , methods=['POST'])
+    def CreateProductInCategory(category):
+      data = request.get_json()
+      for categ in products:
+        if categ['category'] == category:
+          new_item = {
+              'name': data['name'],
+              'price': data['price']
+          }
+          categ['items'].append(new_item)
+          return jsonify(new_item)
+      return jsonify ({'message' :'category/product not found'})
+
+    # run the app on a specific port
+    flaskApp.run(port=5000)
+
+
+    # Execute this file in the terminal window using command - python app_v2.py
+    # and watch the output for the website endpoint
+
+    
+    ```
+  * Please see screen shot below
+    * The app_v2.py code (for adding and getting category):
+    ![Python versions](../images/002-02-FirstRestAPI-ServerCode01.png)
+    * The browser output:
+    ![Python versions](../images/002-02-FirstRestAPI-BrowserOutput01a.png)
+    ![Python versions](../images/002-02-FirstRestAPI-BrowserOutput01b.png)
+    * The app_v2.py code (for adding and getting products inside a category):
+    ![Python versions](../images/002-02-FirstRestAPI-ServerCode02.png)
+    * The browser output:
+    ![Python versions](../images/002-02-FirstRestAPI-BrowserOutput02a.png)
+    ![Python versions](../images/002-02-FirstRestAPI-BrowserOutput02b.png)
+    * The browser output(final output):
+    ![Python versions](../images/002-02-FirstRestAPI-BrowserOutputFinal.png)
+    
