@@ -7,8 +7,11 @@
     ![To check what modules installed in python environment](../images/002-03-Pip-Freeze.png)
   * To create a new environment - 
     * To ***install*** Virtual Environment - ***pip install virtualenv***
+     * If you are installing on windows then use this command if you get SSL error - ***pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org virtualenv***
     * To ***create*** the new environment - ***virtualenv MyRESTfulEnv --python=python3.5***
-    * To ***activate*** an environment - source MyRESTfulEnv/bin/activate
+     * If  you are installing on windows then use this command - ***virtualenv MyRESTfulEnv***
+    * To ***activate*** an environment - ***source MyRESTfulEnv/bin/activate***
+     * If ypou are using windows then use this command - ***MyRESTfulEnv/Scripts/activate.ps1 (in PowerShell) or MyRESTfulEnv/Scripts/activate.bat (in Command Prompt) ***
     * Now move to the new folder MyRESTfulEnv and check version of python - ***cd MyRESTfulEnv && python -V***
   * To ***deactivate*** an environment(from the environment) - ***deactivate***
     ![Setting up new environment](../images/002-03-Setting-up-new-enviroment.png)
@@ -16,7 +19,8 @@
 ### How to setup Flask RESTful:
   * Flask-RESTful is extended and restricted version of Flask 
   * It helps creating RESTful API following the RESTful standards
-  * To install Flask RESTful(from the new virtual environment) - pip install Flask-RESTful
+  * To install Flask RESTful(from the new virtual environment) - pip install pip install Flask-RESTful
+   * If you are installing on windows then use this command if you get SSL error - pip install pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org Flask-RESTful
   * To check if Flask RESTful and related module been installed  - pip freeze
     ![Install Flask-RESTful](../images/002-03-Install-Flask-RESTful.png)
 
