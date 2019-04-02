@@ -5,11 +5,11 @@
   * Lets re-visit Products API- it should have following features:
   * Feature | HTTP Verb | Resource | Test Example 
     ------------ | ------------- | ------------- | -------------
-    * add new products | POST | /product/<productname>  | http://127.0.0.1:5000/product/HP360
-    * get a list of products | GET | /products | http://127.0.0.1:5000/products
-    * get a specific product by name | GET | /product/<productname> | http://127.0.0.1:5000/product/HP360
-    * update a product | PUT | /product/<productname> | http://127.0.0.1:5000/product/HP360
-    * delete a product | DELETE | /product/<productname> | http://127.0.0.1:5000/product/HP360
+    add new products | POST | /product/<productname>  | http://127.0.0.1:5000/product/HP360
+    get a list of products | GET | /products | http://127.0.0.1:5000/products
+    get a specific product by name | GET | /product/<productname> | http://127.0.0.1:5000/product/HP360
+    update a product | PUT | /product/<productname> | http://127.0.0.1:5000/product/HP360
+    delete a product | DELETE | /product/<productname> | http://127.0.0.1:5000/product/HP360
   * Lets create these endpoints in postman so that we can test the APIs as we develop
 
 ### First TDD based RESTful API Version 1:
