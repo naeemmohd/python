@@ -3,7 +3,7 @@
   * You develop code based on satisying a test case
   * A proper test case should handle good, bad and ugly data
   * Lets re-visit Products API- it should have following features:
-    Feature | HTTP Verb | Resource | Test Example 
+  * Feature | HTTP Verb | Resource | Test Example 
     ------------ | ------------- | ------------- | -------------
     * add new products | POST | /product/<productname>  | http://127.0.0.1:5000/product/HP360
     * get a list of products | GET | /products | http://127.0.0.1:5000/products
@@ -11,7 +11,6 @@
     * update a product | PUT | /product/<productname> | http://127.0.0.1:5000/product/HP360
     * delete a product | DELETE | /product/<productname> | http://127.0.0.1:5000/product/HP360
   * Lets create these endpoints in postman so that we can test the APIs as we develop
-  * ![Test Driven Development of RESTfulAPIs](../images/002-04-TDD-Based-RESTful-APIs.png)
 
 ### First TDD based RESTful API Version 1:
   * Here is the code for the TDD based RESTful API:
@@ -19,7 +18,7 @@
     * See this statement : ***return {'product': None}, 404***
     * We are not only retuning a valid JSON but also a 404 status code when a product is not found
     * Similarly -
-    * See this statement : ***eturn product, 201***  
+    * See this statement : ***return product, 201***  
     * Also
     * See this statement : ***data = request.get_json()***  
     * See how we are using the request object to retrive data from request body
