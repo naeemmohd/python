@@ -17,23 +17,28 @@ products = []
 class Product(Resource):
     #define get method
     def get(self, name):
-        for product in products:
-            if product['name'] == name:
-                return product
-        # See this statement : ***return {'product': None}, 404***
+        # the loop replaced by filter function to filter the list
+        # also use either list to rerurn mone, one oor many items in the list
+        # or return exactly one or none item
+        # product = list(filter(lambda x: x['name'] == name, products), None) # this is also okay
+        product = next(filter(lambda x: x['name'] == name, products), None)
+        # See this statement : ***return {'product': product}, 200 if product else 404***
         # We are not only retuning a valid JSON but also a 404 status code when a product is not found
-        return {'product': None}, 404
+        # return {'product': product}, 200 if product is not None else 404 # this line also okay
+        return {'product': product}, 200 if product else 404
     #define post method
     def post(self, name):
         # See this statement : ***data = request.get_json()***  
         # See how we are using the request object to retrive data from request body
+        # if next(filter(lambda x: x['name'] == name, products), None) is  not None: # this line also okay
+        if next(filter(lambda x: x['name'] == name, products), None):
+            return {'maessage' : 'Item with {} name already exists.'.format(name)}, 400 # 400 for bad request
         data = request.get_json()
         product = {'name' : name, 'price' : data['price']}
         products.append(product)
         # See this statement : ***return product, 201***  
         # We are not only retuning a valid JSON but also a 201 status code when a product is created
         return product, 201
-
 # add resource to Api
 restApi.add_resource(Product,'/product/<string:name>')
 
@@ -42,7 +47,6 @@ class Products(Resource):
     #define get method
     def get(self):
         return products
-
 # add resource to Api
 restApi.add_resource(Products,'/products')
 
