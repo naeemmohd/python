@@ -42,7 +42,7 @@
     pip3 install virtualenv
     virtualenv python3env --python=python36
     source python3env/bin/activate
-    pip install flask Flask-RESTful
+    pip install flask Flask-RESTful Flask-JWT
     pip freeze
 
     # windows PowerShell
@@ -51,6 +51,6 @@
     pip3 install virtualenv
     virtualenv python3env --python=python36
     python3env/Scripts/activate.ps1
-    pip install flask Flask-RESTful
+    pip install flask Flask-RESTful Flask-JWT
     pip freeze
     ############################################

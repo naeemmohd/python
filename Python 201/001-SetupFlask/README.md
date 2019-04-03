@@ -30,7 +30,7 @@
     pip3 install --upgrade pip
     
     
-    # ***In case installing flask, Flask-RESTful***
+    # ***In case installing flask, Flask-RESTful Flask-JWT***
     ############################################
     # ***python environment installation*** 
     # for CentOS based - install python first - yum -y install python3x python3x-pip = x is version like 3.6 or 36 - 
@@ -48,7 +48,7 @@
     pip3 install virtualenv
     virtualenv python3env --python=python36
     source python3env/bin/activate
-    pip install flask Flask-RESTful
+    pip install flask Flask-RESTful Flask-JWT
     pip freeze
 
     # windows PowerShell
@@ -57,7 +57,7 @@
     pip3 install virtualenv
     virtualenv python3env --python=python36
     python3env/Scripts/activate.ps1
-    pip install flask Flask-RESTful
+    pip install flask Flask-RESTful Flask-JWT
     pip freeze
     ############################################
     ```
