@@ -1,4 +1,4 @@
-### Test Driven Development of RESTfulAPIs:
+### Test Driven Development of RESTful APIs:
   * Test Driven Development sia development depending on test cases
   * You develop code based on satisying a test case
   * A proper test case should handle good, bad and ugly data
@@ -102,31 +102,31 @@
     
     * The server running for first TDD based RESTful Api:
     * Please see different status codes when an API resource is requested
-    ![First TDD based RESTful Api code](../images/002-03-FirstTTDBasedRestfulAPI-ServerRunning.png)
+    ![First TDD based RESTful Server running](../images/002-03-FirstTTDBasedRestfulAPI-ServerRunning.png)
     ---------------------------------------------------------------------------------
     
     * The Post(Creating a new product) output for first TDD based RESTful Api:
-    ![First TDD based RESTful Api code](../images/002-03-FirstTTDBasedRestfulAPI-ServerOuput-Post.png)
+    ![First TDD based RESTful Post Output](../images/002-03-FirstTTDBasedRestfulAPI-ServerOuput-Post.png)
        ---------------------------------------------------------------------------------
     
     * The Post(Creating a new product but its exists) output for first TDD based RESTful Api:
-    ![First TDD based RESTful Api code](../images/002-03-FirstTTDBasedRestfulAPI-ServerOuput-AlreadyExists.png)
+    ![First TDD based RESTful Already exists](../images/002-03-FirstTTDBasedRestfulAPI-ServerOuput-AlreadyExists.png)
        ---------------------------------------------------------------------------------
     
     * The Get(Get a Single product) output for first TDD based RESTful Api:
-    ![First TDD based RESTful Api code](../images/002-03-FirstTTDBasedRestfulAPI-ServerOuput-Get.png)
+    ![First TDD based RESTful Get Output](../images/002-03-FirstTTDBasedRestfulAPI-ServerOuput-Get.png)
        ---------------------------------------------------------------------------------
     
     * The Get All(get all  products) output for first TDD based RESTful Api:
-    ![First TDD based RESTful Api code](../images/002-03-FirstTTDBasedRestfulAPI-ServerOuput-GetAll.png)
+    ![First TDD based RESTful Get All Output](../images/002-03-FirstTTDBasedRestfulAPI-ServerOuput-GetAll.png)
        ---------------------------------------------------------------------------------
     
     * The Not Found 404 - (if a product is not found) output for first TDD based RESTful Api:
-    ![First TDD based RESTful Api code](../images/002-03-FirstTTDBasedRestfulAPI-ServerOuput-NotFound.png)
+    ![First TDD based RESTful Not Found Output](../images/002-03-FirstTTDBasedRestfulAPI-ServerOuput-NotFound.png)
        ---------------------------------------------------------------------------------
     
     * The No End Point(if an API endpoint does not exist) output for first TDD based RESTful Api:
-    ![First TDD based RESTful Api code](../images/002-03-FirstTTDBasedRestfulAPI-ServerOuput-NoEndPoint.png)
+    ![First TDD based RESTful No end point output](../images/002-03-FirstTTDBasedRestfulAPI-ServerOuput-NoEndPoint.png)
     ---------------------------------------------------------------------------------
     
     
