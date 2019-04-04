@@ -151,7 +151,7 @@
     ---------------------------------------------------------------------------------
     
     * Please see ***how to call the auth end point first to get the JWT***
-    ![Security based RESTful calling auth endpoint(../images/002-05-SecurityBasedRestfulAPI-callingauthendpoint.png)
+    ![Security based RESTful calling auth endpoint](../images/002-05-SecurityBasedRestfulAPI-callingauthendpoint.png)
     ---------------------------------------------------------------------------------
     
     * The Post(Creating a new product) output for Security based RESTful Api: ( No JWT needed)
