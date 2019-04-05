@@ -198,4 +198,172 @@
     ![Security based RESTful No end point output](../images/002-05-SecurityBasedRestfulAPI-ServerOuput-NoEndPoint.png)
     ---------------------------------------------------------------------------------
     
+
+
+### Security based RESTful API Version 2:
+  * Here is the code for the security based RESTful API:
+  * Please see the JWT configuration code below:
+    * ***flaskApp.config['PROPAGATE_EXCEPTIONS'] = True *** # to enforce propagate an exception even if debug is set to false
+    * ***flaskApp.config['JWT_AUTH_URL_RULE'] = '/login'*** # to enforce /login as the auth page rather then /auth
+    * ***flaskApp.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800) *** # to enforce JSON web token expiration to a custom value in seconds. Defaults to 300 seconds(5 minutes)
+    * ***flaskApp.config['JWT_AUTH_USERNAME_KEY'] = 'email' *** # to enforce AUTH key as email rather than default username
+
+  
+    ```
+    from flask import Flask, request, jsonify
+    from flask_restful import Resource, Api, reqparse
+    from flask_jwt  import JWT, jwt_required, current_identity
+    from securityfunctions_v2 import checkIdentity, checkAuthenticity
+    from datetime import timedelta
+
+    flaskApp = Flask(__name__)
+
+    #################################################################################################################################
+    # add a secret key 
+    flaskApp.config['PROPAGATE_EXCEPTIONS'] = True # to enforce propagate an exception even if debug is set to false
+    flaskApp.config['JWT_AUTH_URL_RULE'] = '/login'  # to enforce /login as the auth page rather then /auth
+    flaskApp.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800) # to enforce JSON web token expiration to a custom value in seconds. Defaults to 300 seconds(5 minutes)
+    flaskApp.config['JWT_AUTH_USERNAME_KEY'] = 'email' # to enforce AUTH key as email rather than default username
+    #################################################################################################################################
+
+    flaskApp.secret_key = "%!!#@#^*&^%$^#%@"
+    restApi = Api(flaskApp)
+
+    # create a JWT 
+    jwt = JWT(flaskApp, checkAuthenticity, checkIdentity)
+
+    # to return custom resposne in addition to just tje token( here user id also)
+    @jwt.auth_response_handler
+    def custom_response_handler(access_token, identity):
+        return jsonify({
+                            'access_token': access_token.decode('utf-8'),
+                            'user_id': identity.id
+                       })
+
+
+    products = []
+
+    class Product(Resource):
+        # add a parser
+        parser = reqparse.RequestParser()
+        # add argument to the parser by defining the type, if required and any help messages
+        parser.add_argument('price', type=float, required=True, help= "Price can not be blank." )
+
+        @jwt_required() # means JWT is required for this method
+        def get(self, name):
+            product = next(filter(lambda x: x['name'] == name, products), None)
+            return {'product': product}, 200 if product else 404
+
+        def post(self, name):
+            if next(filter(lambda x: x['name'] == name, products), None):
+                return {'maessage' : 'Item with {} name already exists.'.format(name)}, 400 # 400 for bad request
+
+            # request.get_json() is replaced by Product.parser.parse_args()
+            # data = request.get_json()
+            data = Product.parser.parse_args()
+            product = {'name' : name, 'price' : data['price']}
+            products.append(product)
+            return product, 201 
+
+        @jwt_required() 
+        def delete(self, name):
+            global products
+            products = list(filter(lambda x: x['name'] != name, products))
+            return {'message': 'Item {} deleted'.format(name)}, 203
+
+        @jwt_required()
+        def put(self, name):
+            data = Product.parser.parse_args()
+            product = next(filter(lambda x: x['name']==name, products), None)
+            if product:
+                product.update(data)
+                return product, 200
+            else:
+                product = {'name' : name, 'price' : data['price']}
+                products.append(product)
+                return product, 201 
+
+    # add resource to Api
+    restApi.add_resource(Product,'/product/<string:name>')
+
+    # for getting list of products
+    class Products(Resource):
+        #define get method
+        def get(self):
+            return products
+    # add resource to Api
+    restApi.add_resource(Products,'/products')
+
+    flaskApp.run(port=5000, debug=True)
+
+    ```
+    * The app_v1.py app code screenshot
+    ![Security based RESTful Server app code](../images/002-05-SecurityBasedRestfulAPI-ServerAppcodev21.png)
+
+  * Here is the code for the security functions for JWT:
+    * The below code imports the User class from usermodel and safe_str_cmp method from werkzeug.security modele/package
+    * a couple of users are added in memory rather then saving in a databases( we will do it in an upcoming session)
+    * the identity of user is verified using checkIdentity method to return a user id based on the user id from the payload
+    * The email and password of the user is validated by method checkAuthenticity
+    ```
+    # code for securityfunctions_v2.py
+    # import custom module to use the User model to create users
+    from usermodel_v2 import User
+
+    # import safe_str_cmp to safe compare ascii or unicode based strings
+    from werkzeug.security import safe_str_cmp
+
+    # create users
+    users = [
+        User(1,"Naeemm@futurecloud.com", "PassNaeem"),
+        User(2, "Test02@futurecloud.com", "PassTest02"),
+        User(3, "Test03@futurecloud.com", "PassTest03")
+    ]
+
+    # a dictionary for user names
+    userEmails = {user.email : user for user in users}
+    # a dictionary for user ids
+    userIds = {user.id : user for user in users}
+
+    # check identity based on payload
+    def checkIdentity(payload):
+        userid= payload['identity']
+        return userIds.get(userid, None)
+
+    # check/authenticate user 
+    def checkAuthenticity(email, password):
+        user = userEmails.get(email, None)
+        if user and safe_str_cmp(user.password, password):
+            return user
+    ```
+    * The securityfunctions.py app code screenshot
+    ![Security based RESTful Security functions](../images/002-05-SecurityBasedRestfulAPI-Securityfunctions_v2.png)
+  * Here is the code for user Model:
+    * The code is simple with a User class defined reperesent a User
+    ```
+    # code for usermodel_v2.py
+    #create a User model class to represent a user and its credentials
+    class User(object):
+        def __init__(self, _id, email, password):
+            self.id= _id
+            self.email= email
+            self.password= password
+    ```
+    * The usermodel.py app code screenshot
+      ![Security based RESTful User model](../images/002-05-SecurityBasedRestfulAPI-Usermodel_v2.png)
+    ---------------------------------------------------------------------------------
+
+  * Please see screen shot below
+    * The server running for Security based RESTful Api:
+    * Please see different status codes when an API resource is requested
+    ![Security based RESTful Server running](../images/002-05-SecurityBasedRestfulAPI-ServerRunning_v2.png)
+    ---------------------------------------------------------------------------------
+    
+    * Please see ***how to call the auth end point first to get the JWT***
+    ![Security based RESTful calling auth endpoint](../images/002-05-SecurityBasedRestfulAPI-callingauthendpoint_v2.png)
+    ---------------------------------------------------------------------------------
+    
+    * Please see ***how to call the auth end point first to get the JWT(with issues)***
+    ![Security based RESTful calling auth endpoint](../images/002-05-SecurityBasedRestfulAPI-issueswithendpoint_v2.png)
+    ---------------------------------------------------------------------------------
     
