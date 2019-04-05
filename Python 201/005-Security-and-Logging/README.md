@@ -203,10 +203,10 @@
 ### Security based RESTful API Version 2:
   * Here is the code for the security based RESTful API:
   * Please see the JWT configuration code below:
-    * ***flaskApp.config['PROPAGATE_EXCEPTIONS'] = True *** # to enforce propagate an exception even if debug is set to false
+    * ***flaskApp.config['PROPAGATE_EXCEPTIONS'] = True*** # to enforce propagate an exception even if debug is set to false
     * ***flaskApp.config['JWT_AUTH_URL_RULE'] = '/login'*** # to enforce /login as the auth page rather then /auth
-    * ***flaskApp.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800) *** # to enforce JSON web token expiration to a custom value in seconds. Defaults to 300 seconds(5 minutes)
-    * ***flaskApp.config['JWT_AUTH_USERNAME_KEY'] = 'email' *** # to enforce AUTH key as email rather than default username
+    * ***flaskApp.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800)*** # to enforce JSON web token expiration to a custom value in seconds. Defaults to 300 seconds(5 minutes)
+    * ***flaskApp.config['JWT_AUTH_USERNAME_KEY'] = 'email'*** # to enforce AUTH key as email rather than default username
 
   
     ```
