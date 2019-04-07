@@ -15,39 +15,39 @@ class Product(Resource):
 
     @classmethod
     def getProductByName(cls, name):
-        conn = sqlite3.connect(cls.dbName)
-        curs = conn.cursor()
+        dbConnection = sqlite3.connect(cls.dbName)
+        dbCursor = dbConnection.cursor()
         selectQuery = "SELECT * FROM {tableName} WHERE name=?".format(tableName=cls.tblName)
-        retValue = curs.execute(selectQuery, (name,))
+        retValue = dbCursor.execute(selectQuery, (name,))
         oneRow = retValue.fetchone()
         if oneRow:
             return {"product" : {'name': oneRow[0], 'desc': oneRow[1], 'price': oneRow[2], 'qty': oneRow[3]}}
-        conn.close()
+        dbConnection.close()
 
     @classmethod
     def AddProduct(cls, product):
-        conn = sqlite3.connect(cls.dbName)
-        curs = conn.cursor()
+        dbConnection = sqlite3.connect(cls.dbName)
+        dbCursor = dbConnection.cursor()
 
         insertQuery = "INSERT INTO {tableName} VALUES(?,?,?,?)".format(tableName=cls.tblName)
         
-        curs.execute(insertQuery, (product['name'], product['desc'], product['price'], product['qty']))
+        dbCursor.execute(insertQuery, (product['name'], product['desc'], product['price'], product['qty']))
 
-        conn.commit()
-        conn.close()
+        dbConnection.commit()
+        dbConnection.close()
 
 
     @classmethod
     def UpdateProduct(cls, product):
-        conn = sqlite3.connect(cls.dbName)
-        curs = conn.cursor()
+        dbConnection = sqlite3.connect(cls.dbName)
+        dbCursor = dbConnection.cursor()
 
         updateQuery = "UPDATE {tableName} SET desc=?, price=?, qty=? WHERE name=?".format(tableName=cls.tblName)
         
-        curs.execute(updateQuery, (product['desc'], product['price'], product['qty'], product['name']))
+        dbCursor.execute(updateQuery, (product['desc'], product['price'], product['qty'], product['name']))
 
-        conn.commit()
-        conn.close()
+        dbConnection.commit()
+        dbConnection.close()
 
 
     @jwt_required()
@@ -106,13 +106,13 @@ class Product(Resource):
         
     @jwt_required()
     def delete(self, name):
-        conn = sqlite3.connect(self.dbName)
-        curs = conn.cursor()
+        dbConnection = sqlite3.connect(self.dbName)
+        dbCursor = dbConnection.cursor()
         deleteQuery = "DELETE FROM {tableName} WHERE name=?".format(tableName=self.tblName)
-        curs.execute(deleteQuery, (name,))
+        dbCursor.execute(deleteQuery, (name,))
         
-        conn.commit()
-        conn.close()
+        dbConnection.commit()
+        dbConnection.close()
         return {"message" : "Product by the name {pname} DELETED!!!".format(pname=name)}
 
 #create a Products model class to represent list of Products and its operations
@@ -122,16 +122,16 @@ class Products(Resource):
     
     @jwt_required()
     def get(self):
-        conn = sqlite3.connect(self.dbName)
-        curs = conn.cursor()
+        dbConnection = sqlite3.connect(self.dbName)
+        dbCursor = dbConnection.cursor()
         selectQuery = "SELECT * FROM {tableName}".format(tableName=self.tblName)
-        retValue = curs.execute(selectQuery)
+        retValue = dbCursor.execute(selectQuery)
 
         products=[]
         for product in retValue:
             products.append({'name': product[0], 'desc': product[1], 'price': product[2], 'qty': product[3]})
         
-        conn.close()
+        dbConnection.close()
 
         return {"products" : products}, 200
 

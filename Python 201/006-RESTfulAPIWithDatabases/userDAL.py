@@ -14,44 +14,30 @@ class User(Resource):
         
     @classmethod
     def getUserById(cls, _id):
-        conn = sqlite3.connect(cls.dbName)
-        curs = conn.cursor()
+        dbConnection = sqlite3.connect(cls.dbName)
+        dbCursor = dbConnection.cursor()
         selectQuery = "SELECT * FROM {tableName} WHERE id=?".format(tableName=cls.tblName)
-        retValue = curs.execute(selectQuery, (_id,))
+        retValue = dbCursor.execute(selectQuery, (_id,))
         oneRow = retValue.fetchone()
         if oneRow:
             user = cls(*oneRow)
         else:
             user = None
-        conn.close()
+        dbConnection.close()
         return user
 
     @classmethod
     def getUserByEmail(cls, email):
-        conn = sqlite3.connect(cls.dbName)
-        curs = conn.cursor()
+        dbConnection = sqlite3.connect(cls.dbName)
+        dbCursor = dbConnection.cursor()
         selectQuery = "SELECT * FROM {tableName} WHERE email=?".format(tableName=cls.tblName)
-        retValue = curs.execute(selectQuery, (email,))
+        retValue = dbCursor.execute(selectQuery, (email,))
         oneRow = retValue.fetchone()
         if oneRow:
             user = cls(*oneRow)
         else:
             user = None
-        conn.close()
-        return user
-    
-    @classmethod
-    def getUserByName(cls, name):
-        conn = sqlite3.connect(cls.dbName)
-        curs = conn.cursor()
-        selectQuery = "SELECT * FROM {tableName} WHERE username=?".format(tableName=cls.tblName)
-        retValue = curs.execute(selectQuery, (name,))
-        oneRow = retValue.fetchone()
-        if oneRow:
-            user = cls(*oneRow)
-        else:
-            user = None
-        conn.close()
+        dbConnection.close()
         return user
 
 class UserSignOn(Resource):
@@ -74,16 +60,16 @@ class UserSignOn(Resource):
             return {"message" : returnMessage }, 400
         
         # otherwise sign on the new user
-        conn = sqlite3.connect(self.dbName)
-        curs = conn.cursor()
+        dbConnection = sqlite3.connect(self.dbName)
+        dbCursor = dbConnection.cursor()
 
         insertQuery = "INSERT INTO {tableName} VALUES(NULL,?,?,?)".format(tableName=self.tblName)
         userName = data['username']
         passWord = data['password']
-        retValue = curs.execute(insertQuery, (emailId, userName, passWord))
+        retValue = dbCursor.execute(insertQuery, (emailId, userName, passWord))
 
-        conn.commit()
-        conn.close()
+        dbConnection.commit()
+        dbConnection.close()
 
         returnMessage = "Congrats {usernm} !!!, Your have been successful registerted with email: {email}.".format(usernm=userName, email=emailId)
         return {"message" : returnMessage }, 201
