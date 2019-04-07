@@ -29,7 +29,6 @@ def custom_response_handler(access_token, identity):
                         'user_id': identity.id
                    })
 
-
 # add resource to Api
 restApi.add_resource(Product,'/product/<string:name>')
 restApi.add_resource(Products,'/products')

@@ -36,7 +36,6 @@ class Product(Resource):
         dbConnection.commit()
         dbConnection.close()
 
-
     @classmethod
     def UpdateProduct(cls, product):
         dbConnection = sqlite3.connect(cls.dbName)
