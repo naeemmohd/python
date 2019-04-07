@@ -617,13 +617,15 @@
         * ***flaskApp.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800)*** # to enforce JSON web token expiration to a custom value in seconds. Defaults to 300 seconds(5 minutes)
         * ***flaskApp.config['JWT_AUTH_USERNAME_KEY'] = 'email'*** # to enforce AUTH key as email rather than default username
       * Setting custom response handler
-        # to return custom resposne in addition to just the token(here user id also)
+        * to return custom resposne in addition to just the token(here user id also)
         @jwt.auth_response_handler
+        ```
         def custom_response_handler(access_token, identity):
             return jsonify({
                                 'access_token': access_token.decode('utf-8'),
                                 'user_id': identity.id
                           })
+        ```
       * adding resources to API
         * ***restApi.add_resource(Product,'/product/<string:name>')*** - handles the Product resource
         * ***restApi.add_resource(Products,'/products')*** - handles the Products resource
