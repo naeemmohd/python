@@ -74,7 +74,7 @@ class Product(Resource):
             returnMessage = "Congrats, Product by the name : {pname} has been ADDED.".format(pname=name)
             return {"message" : returnMessage }
         except:
-            return {"message" : "Sorry!!!, The product by the name {pname} could not be sucessfully ADDED!!!".format(pname=name)}, 400 
+            return {"message" : "Sorry!!!, The product by the name {pname} could not be sucessfully ADDED!!!".format(pname=name)}, 500 
         # return new_product
 
     @jwt_required()
@@ -93,14 +93,14 @@ class Product(Resource):
                 returnMessage = "Congrats, Product by the name : {pname} has been UPDATED.".format(pname=name)
                 return {"message" : returnMessage }
             except:
-                return {"message" : "Sorry!!!, The product by the name {pname} could not be sucessfully UPDATED!!!".format(pname=name)}, 400 
+                return {"message" : "Sorry!!!, The product by the name {pname} could not be sucessfully UPDATED!!!".format(pname=name)}, 500 
         else:
             try:
                 Product.AddProduct(updated_product) 
                 returnMessage = "Congrats, Product by the name : {pname} has been ADDED.".format(pname=name)
                 return {"message" : returnMessage }
             except:
-                return {"message" : "Sorry!!!, The product by the name {pname} could not be sucessfully ADDED!!!".format(pname=name)}, 400 
+                return {"message" : "Sorry!!!, The product by the name {pname} could not be sucessfully ADDED!!!".format(pname=name)}, 500 
         # return updated_product
         
     @jwt_required()
