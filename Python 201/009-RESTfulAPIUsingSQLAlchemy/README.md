@@ -398,6 +398,7 @@
     * Since we did not change the existing functionality and just injected the ORM functionality to the app, it should work.
     * The screenshot for register user below:
     ![Register user](../images/002-09-registeruser.png)
+    ![Register user](../images/002-09-registeruser.png)
     ---------------------------------------------------------------------------------
     * The screenshot for login user below:
     ![Login user](../images/002-09-loginuser.png)
