@@ -237,8 +237,8 @@
               db.session.delete(self)
               db.session.commit()
      ```
-     * The screenshot of the appcode below:
-     ![Product Model](../images/002-09-productmodel.png)
+    * The screenshot of the appcode below:
+    ![Product Model](../images/002-09-productmodel.png)
     ---------------------------------------------------------------------------------
   * Step 4 : Create/Update the Resource classes - 
     * Please see code below - for UserSignOn class in file users.py
