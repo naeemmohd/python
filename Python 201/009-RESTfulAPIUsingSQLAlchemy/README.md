@@ -393,28 +393,28 @@
       ![Productand Products Resources](../images/002-09-productsresources01.png)
       ![Productand Products Resources](../images/002-09-productsresources02.png)
     ---------------------------------------------------------------------------------
-    
-  ### Testing the project:
-    * Now the project is ready for testing, you can repeat all the operations you tested in previous exercise like register, login, add a product, update a product, delete a product, get one product, get all products. 
-    * Since we did not change the existing functionality and just injected the ORM functionality to the app, it should work.
-    * The screenshot for register user below:
-    ![Register user](../images/002-09-registeruser.png)
-    ---------------------------------------------------------------------------------
-    * The screenshot for login user below:
-    ![Login user](../images/002-09-loginuser.png)
-    ---------------------------------------------------------------------------------
-    * The screenshot for POST product below:
-    ![POST Product](../images/002-09-postproduct.png)
-    ---------------------------------------------------------------------------------
-    * The screenshot for PUT Product below:
-    ![PUT Product](../images/002-09-putproduct.png)
-    ---------------------------------------------------------------------------------
-    * The screenshot for DELETE Product below:
-    ![DELETE Product](../images/002-09-deleteproduct.png)
-    ---------------------------------------------------------------------------------
-    * The screenshot for GETProduct below:
-    ![GET Product](../images/002-09-getproduct.png)
-    ---------------------------------------------------------------------------------
-    * The screenshot for GET All Products below:
-    ![GET All Products](../images/002-09-getallproducts.png)
-    ---------------------------------------------------------------------------------
+
+### Testing the project:
+  * Now the project is ready for testing, you can repeat all the operations you tested in previous exercise like register, login, add a product, update a product, delete a product, get one product, get all products. 
+  * Since we did not change the existing functionality and just injected the ORM functionality to the app, it should work.
+  * The screenshot for register user below:
+  ![Register user](../images/002-09-registeruser.png)
+  ---------------------------------------------------------------------------------
+  * The screenshot for login user below:
+  ![Login user](../images/002-09-loginuser.png)
+  ---------------------------------------------------------------------------------
+  * The screenshot for POST product below:
+  ![POST Product](../images/002-09-postproduct.png)
+  ---------------------------------------------------------------------------------
+  * The screenshot for PUT Product below:
+  ![PUT Product](../images/002-09-putproduct.png)
+  ---------------------------------------------------------------------------------
+  * The screenshot for DELETE Product below:
+  ![DELETE Product](../images/002-09-deleteproduct.png)
+  ---------------------------------------------------------------------------------
+  * The screenshot for GETProduct below:
+  ![GET Product](../images/002-09-getproduct.png)
+  ---------------------------------------------------------------------------------
+  * The screenshot for GET All Products below:
+  ![GET All Products](../images/002-09-getallproducts.png)
+  ---------------------------------------------------------------------------------
