@@ -1,17 +1,17 @@
 ### Using SQLAlchemy in RESTful APIs:
-  * Python supports connecting to all renowned databases through ir ORM based library/module called as Flask-SQLAlchemy
-  * SQLAlchemy is used a Object Relation Mapper tool which eases the way objects can directly be saved in the database
+  * Python supports connecting to all renowned databases through ir ORM based library/module called as ***Flask-SQLAlchemy***
+  * SQLAlchemy is used a ***Object Relation Mapper(ORM)*** tool which eases the way objects can directly be saved in the database
   * How to install Flask-SQLAlchemy 
     * If you are using a virtual environment, then activate is by using command 
       * <virtualenvnamefolder>/bin/activate (in Linux)
       * <virtualenvnamefolder>/Scripts/activate.ps1 (in Windows PowerShell)
       * <virtualenvnamefolder>/Scripts/activate.bat (in Windows Command Prompt)
     * If you are not using a virtual environment then no need to activate it. YOu can directly execute the below command   
-    * Command to install Flask SQLAlchemy in Linux - pip install pip install Flask-SQLAlchemy
-      * If you are installing on windows then use this command if you get SSL error - pip install pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org Flask-SQLAlchemy
+    * Command to install Flask SQLAlchemy in Linux - ***pip install pip install Flask-SQLAlchemy***
+      * If you are installing on windows then use this command if you get SSL error - ***pip install pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org Flask-SQLAlchemy***
 
 ### How does SQLAlchemy works
-  * Step 1 : Create a 'SQLAlchemy' object - 
+  * Step 1 : ***Create a 'SQLAlchemy' object*** - 
     * Please see code below - in file SQLAlchemyDB.py
       ```
       # import SQLAlchemy from flask_sqlalchemy
@@ -21,7 +21,7 @@
       db = SQLAlchemy()
       ```
 
-  * Step 2 : In the main app import the db SQLAlchemy object - 
+  * Step 2 : ***In the main app import the db SQLAlchemy object*** - 
     * and initialize it using init_app(flaskApp) and configure the SQLAlchemy 
     * Please see code below - in file app_v1.py
       ```
@@ -98,7 +98,7 @@
       * The screenshot of the appcode for main app:
       ![mainapp](../images/002-09-mainapp.png)
     ---------------------------------------------------------------------------------
-  * Step 3 : Create/Update the Model classes - 
+  * Step 3 : ***Create/Update the Model classes*** - 
     * Please see code below - for UserModel class in file user.py
     * Code line - from SQLAlchemyDB import db - imports the db SQLAlchemy object 
     * Code line - class UserModel(db.Model) - UserModel extends db.Model 
@@ -240,7 +240,7 @@
       * The screenshot of the appcode below:
       ![Product Model](../images/002-09-productmodel.png)
     ---------------------------------------------------------------------------------
-  * Step 4 : Create/Update the Resource classes - 
+  * Step 4 : ***Create/Update the Resource classes*** - 
     * Please see code below - for UserSignOn class in file users.py
     * Simple code to save User Object to database
       * user = UserModel(emailId, userName, passWord)
