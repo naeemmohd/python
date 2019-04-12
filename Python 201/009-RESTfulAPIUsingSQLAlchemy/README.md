@@ -236,9 +236,9 @@
           def Delete(self):
               db.session.delete(self)
               db.session.commit()
-     ```
-    * The screenshot of the appcode below:
-    ![Product Model](../images/002-09-productmodel.png)
+      ```
+      * The screenshot of the appcode below:
+      ![Product Model](../images/002-09-productmodel.png)
     ---------------------------------------------------------------------------------
   * Step 4 : Create/Update the Resource classes - 
     * Please see code below - for UserSignOn class in file users.py
@@ -393,6 +393,7 @@
       ![Productand Products Resources](../images/002-09-productsresources01.png)
       ![Productand Products Resources](../images/002-09-productsresources02.png)
     ---------------------------------------------------------------------------------
+    
   ### Testing the project:
     * Now the project is ready for testing, you can repeat all the operations you tested in previous exercise like register, login, add a product, update a product, delete a product, get one product, get all products. 
     * Since we did not change the existing functionality and just injected the ORM functionality to the app, it should work.
