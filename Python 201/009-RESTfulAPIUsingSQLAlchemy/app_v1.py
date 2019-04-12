@@ -24,7 +24,7 @@ restApi = Api(flaskApp)
 
 @flaskApp.before_first_request
 def setupDatabase():
-    sqlAlchemyDb.create_all()
+    db.create_all()
 
 
 # create a JWT 
@@ -44,6 +44,7 @@ restApi.add_resource(Products,'/products')
 restApi.add_resource(UserSignOn,'/register')
 
 if __name__ == '__main__':
-    from SQLAlchemyDB import sqlAlchemyDb
-    sqlAlchemyDb.init_app(flaskApp)
+    # in the main app import the db SQLAlchemy object and initialize it using init_app(flaskApp)
+    from SQLAlchemyDB import db
+    db.init_app(flaskApp)
     flaskApp.run(port=5000, debug=True)

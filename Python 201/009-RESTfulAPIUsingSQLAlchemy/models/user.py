@@ -1,13 +1,17 @@
-from SQLAlchemyDB import sqlAlchemyDb
+# import the db SQLAlchemy object
+from SQLAlchemyDB import db
 
-class UserModel(sqlAlchemyDb.Model):
+# UserModel class will extend/inherit from db.Model class
+class UserModel(db.Model):
 
+    # define the table name for OR mapping
     __tablename__= 'tblUsers'
 
-    id = sqlAlchemyDb.Column(sqlAlchemyDb.Integer, primary_key=True)
-    email = sqlAlchemyDb.Column(sqlAlchemyDb.String(100))
-    username = sqlAlchemyDb.Column(sqlAlchemyDb.String(100))
-    password = sqlAlchemyDb.Column(sqlAlchemyDb.String(100))
+    # define the table schema for the OR mapping
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.String(100))
+    username = db.Column(db.String(100))
+    password = db.Column(db.String(100))
 
     def __init__(self, email, username, password):
         self.email= email
@@ -16,6 +20,9 @@ class UserModel(sqlAlchemyDb.Model):
         
     @classmethod
     def getUserById(cls, _id):
+        # cls.query returns all rows like Select * from tblUsers
+        # cls.query.filter_by(id=_id) retuns the filtered rows like Select * from tblUsers where id = _id
+        # cls.query.filter_by(id=_id).first() returns the top 1 row like Select * from tblUsers where id = _id LIMIT 1
         return cls.query.filter_by(id=_id).first()
 
     @classmethod
@@ -23,9 +30,9 @@ class UserModel(sqlAlchemyDb.Model):
         return cls.query.filter_by(email=email).first()
 
     def Save(self):
-        sqlAlchemyDb.session.add(self)
-        sqlAlchemyDb.session.commit()
+        db.session.add(self)
+        db.session.commit()
     
     def Delete(self):
-        sqlAlchemyDb.session.delete(self)
-        sqlAlchemyDb.session.commit()
+        db.session.delete(self)
+        db.session.commit()

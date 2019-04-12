@@ -19,8 +19,8 @@
 ### How to setup Flask RESTful:
   * Flask-RESTful is extended and restricted version of Flask 
   * It helps creating RESTful API following the RESTful standards
-  * To install Flask RESTful(from the new virtual environment) - pip install pip install Flask-RESTful
-   * If you are installing on windows then use this command if you get SSL error - pip install pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org Flask-RESTful
+  * To install Flask RESTful(from the new virtual environment) - pip install pip install Flask-RESTful Flask-JWT Flask-SQLAlchemy
+   * If you are installing on windows then use this command if you get SSL error - pip install pip install --trusted-host pypi.org --trusted-host files.pythonhosted.org Flask-RESTful  Flask-JWT Flask-SQLAlchemy
   * To check if Flask RESTful and related module been installed  - pip freeze
     ![Install Flask-RESTful](../images/002-03-Install-Flask-RESTful.png)
 

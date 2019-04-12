@@ -1,14 +1,14 @@
-from SQLAlchemyDB import sqlAlchemyDb
+from SQLAlchemyDB import db
 
-class ProductModel(sqlAlchemyDb.Model):
+class ProductModel(db.Model):
 
     __tablename__= 'tblProducts'
 
-    id = sqlAlchemyDb.Column(sqlAlchemyDb.Integer, primary_key=True)
-    name = sqlAlchemyDb.Column(sqlAlchemyDb.String(100))
-    desc = sqlAlchemyDb.Column(sqlAlchemyDb.String(100))
-    price = sqlAlchemyDb.Column(sqlAlchemyDb.Float(precision=2))
-    qty = sqlAlchemyDb.Column(sqlAlchemyDb.Integer)
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(100))
+    desc = db.Column(db.String(100))
+    price = db.Column(db.Float(precision=2))
+    qty = db.Column(db.Integer)
 
     def __init__(self, name, desc, price, qty):
         self.name= name
@@ -24,9 +24,9 @@ class ProductModel(sqlAlchemyDb.Model):
         return cls.query.filter_by(name=name).first()
 
     def Save(self):
-        sqlAlchemyDb.session.add(self)
-        sqlAlchemyDb.session.commit()
+        db.session.add(self)
+        db.session.commit()
 
     def Delete(self):
-        sqlAlchemyDb.session.delete(self)
-        sqlAlchemyDb.session.commit()
+        db.session.delete(self)
+        db.session.commit()
