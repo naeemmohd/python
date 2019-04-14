@@ -1,4 +1,4 @@
-### Using SQLAlchemy with relationships in RESTful APIs:
+### Using SQLAlchemy with relationships in RESTful APIs: 
   * SQLAlchemy allows us to define relationships between tables
   * Relationsship can be - one to one, one to many or many to many
   * In One to One relationship - one row of parent table has one matching row in child
