@@ -302,7 +302,7 @@
   ![GET Product](../images/002-10-getproduct.png)
   ---------------------------------------------------------------------------------
   * The screenshot for GET All Categorys below:
-  ![GET All Categorys](../images/002-10-getallcategorys.png)
+  ![GET All Categorys](../images/002-10-getallcategory.png)
   ---------------------------------------------------------------------------------
   * The screenshot for GET All Products below:
   ![GET All Products](../images/002-10-getallproducts.png)
