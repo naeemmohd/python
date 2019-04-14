@@ -1,0 +1,390 @@
+{
+	"variables": [],
+	"info": {
+		"name": "TDD Based RESTful APIs",
+		"_postman_id": "ff77f165-d321-a7b2-8fa1-d1e444593f11",
+		"description": "",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Iteration 1",
+			"description": "",
+			"item": [
+				{
+					"name": "/product/productname",
+					"request": {
+						"url": "{{ServerURL}}/product/HP351",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{Access_Token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"desc\": \"Sample Product\",\n\t\"price\" : 19.50,\n\t\"qty\" : 151,\n\t\"category_id\" : 1\n}"
+						},
+						"description": "adds a new product"
+					},
+					"response": []
+				},
+				{
+					"name": "/category/categoryname",
+					"request": {
+						"url": "{{ServerURL}}/category/laptops",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{Access_Token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "adds a new category"
+					},
+					"response": []
+				},
+				{
+					"name": "/product/productname",
+					"request": {
+						"url": "{{ServerURL}}/product/HP351",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{Access_Token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "price",
+									"value": "10.00",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": "gets a single product"
+					},
+					"response": []
+				},
+				{
+					"name": "/category/categoryname",
+					"request": {
+						"url": "{{ServerURL}}/category/laptops",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{Access_Token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "price",
+									"value": "10.00",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": "gets a single category"
+					},
+					"response": []
+				},
+				{
+					"name": "/products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");",
+									"",
+									"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Successful GET request\"] = responseCode.code === 200"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{ServerURL}}/products",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{Access_Token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "price",
+									"value": "10.00",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": "gets all products"
+					},
+					"response": []
+				},
+				{
+					"name": "/categories",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Content-Type is present\"] = postman.getResponseHeader(\"Content-Type\");",
+									"",
+									"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+									"",
+									"tests[\"Status code is 200\"] = responseCode.code === 200;",
+									"",
+									"tests[\"Successful GET request\"] = responseCode.code === 200"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{ServerURL}}/categories",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{Access_Token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "price",
+									"value": "10.00",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": "gets all categories"
+					},
+					"response": []
+				},
+				{
+					"name": "/login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									"tests[\"Response time is less than 200ms\"] = responseTime < 200;",
+									"",
+									"// code for setting up a global variable \"Access_Token\" ",
+									"// we can then use {{Access_Token}} in place of harcoded JWR token",
+									"//first retrieve the JSON parsed response",
+									"var jsonData = JSON.parse(responseBody);",
+									"//test if acess token is not empty",
+									"tests[\"If access token is not blank\"] = jsonData.access_token !== undefined;",
+									"//assign the global variable - Access_Token with the value from response",
+									"postman.setGlobalVariable(\"Access_Token\", jsonData.access_token);",
+									"//See below for test results passed or failed"
+								]
+							}
+						}
+					],
+					"request": {
+						"url": "{{ServerURL}}/login",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"Naeemm@futurecloud.com\",\n\t\"password\": \"PassNaeem\"\n}"
+						},
+						"description": "authenticates the user and generates a JSON Web Token (JCT)"
+					},
+					"response": []
+				},
+				{
+					"name": "/register",
+					"request": {
+						"url": "{{ServerURL}}/register",
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"email\": \"Naeemm@futurecloud.com\",\n\t\"username\": \"Mohd Naeem\",\n\t\"password\": \"PassNaeem\"\n}"
+						},
+						"description": "registers a new user"
+					},
+					"response": []
+				},
+				{
+					"name": "/product/productname",
+					"request": {
+						"url": "{{ServerURL}}/product/HP352",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{Access_Token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"desc\": \"Sample Product\",\n\t\"price\" : 19.50,\n\t\"qty\" : 151,\n\t\"category_id\" : 1\n}"
+						},
+						"description": "updates an existing or add a new product"
+					},
+					"response": []
+				},
+				{
+					"name": "/category/categoryname",
+					"request": {
+						"url": "{{ServerURL}}/category/laptops",
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{Access_Token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "updates an existing or add a new category"
+					},
+					"response": []
+				},
+				{
+					"name": "/product/productname",
+					"request": {
+						"url": "{{ServerURL}}/product/HP353",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{Access_Token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "deletes a product"
+					},
+					"response": []
+				},
+				{
+					"name": "/category/categoryname",
+					"request": {
+						"url": "{{ServerURL}}/category/laptops",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "JWT {{Access_Token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"description": "deletes a category"
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

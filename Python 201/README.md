@@ -11,3 +11,4 @@ Topic | Link
 007-How to use models and resources in RESTful APIs | [007-Use models and resources in RESTful APIs](https://github.com/naeemmohd/python/tree/master/Python%20201/007-RESTfulAPIUsingModelsNResources)
 008-How to use advanced Postman features for RESTful APIs | [008-Use advanced Postman features for RESTful APIs](https://github.com/naeemmohd/python/tree/master/Python%20201/008-AdvancedPostman)
 009-How to use SQLAlchemy in RESTful APIs | [009-Use SQLAlchemy in RESTful APIs](https://github.com/naeemmohd/python/tree/master/Python%20201/009-RESTfulAPIUsingSQLAlchemy)
+010-How to use SQLAlchemy with Relationships in RESTful APIs | [010-Use SQLAlchemy with Relationships in RESTful APIs](https://github.com/naeemmohd/python/tree/master/Python%20201/010-RESTfulAPIUsingSQLAlchemywithRelationships)
