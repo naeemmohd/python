@@ -106,8 +106,18 @@
   * Step 6 : ***Deploy the app now***  
     * You will have option to manually or auto deploy the app
       * For now choose "manual" and start deploying 
-      ![Depoy the app in Heroku ](../images/002-011-deploytheappinheroku.png)
+      ![Deploy the app in Heroku ](../images/002-011-deploytheappinheroku.png)
     
+### Install Heroku CLI to check logs and other features locally:
+  * Please execute the follwing command - 
+    * ***sudo snap install --classic heroku***
+  * Then login to Heroku using command - 
+    * ***heroku login***
+  * Then access the logs using command - 
+    * ***heroku logs --app=heroku logs --app=restfulapiinheroku***  
+  * Please see the screenshot below -
+    ![Install and access Heroku CLI and logs](../images/002-011-installherokucliandaccesslogs.png)
+    ![Install and access Heroku CLI and logs](../images/002-011-installherokucliandaccesslogs02.png)
 
 ### Testing the project (The Heroku End Point - https://restfulapiinheroku.herokuapp.com/):
   * Now the project is ready for testing, you can repeat all the operations you tested in previous exercise like register, login, add a product, update a product, delete a product, get one product, get all products. 
@@ -147,5 +157,4 @@
   ---------------------------------------------------------------------------------
   * The screenshot for DELETE Category below:
   ![DELETE Category](../images/002-11-deletecategory.png)
-  ![DELETE Category Cascade](../images/002-11-deletecategoryimpact.png)
   ---------------------------------------------------------------------------------
