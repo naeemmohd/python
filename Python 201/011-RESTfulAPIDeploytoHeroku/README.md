@@ -22,10 +22,10 @@
     * We will use it as our app to deploy to Heroku
     * Go to the folder 011-RESTfulAPIDeploytoHeroku in command line and execute - ***git init*** (commands git that current folder is version controlled)
     * ***Prepare*** required files for deployment purpose - follwing 4 additional files are needed 
-      * ***runtime.txt*** - holds the value of the runtime application - in our case - ***python-3.5.2**
+      * ***runtime.txt*** - holds the value of the runtime application - in our case - ***python-3.7.3**
       * The code for runtime.txt:
         ```
-        python-3.5.2
+        python-3.7.3
         ```
       * ***requirements.txt*** - holds the values for the packages needed by the  application
       * The code for requirements.txt:
@@ -64,34 +64,52 @@
         .DS_Store
         *.pyc
         ```
-    * Once your flask aspp files and these above 4 files are ready then execute - ***git add --a*** - you are instructing git to add all the files to the staging areas of the git on yr local machine
+    * Once your flask aspp files and these above 4 files are ready then execute - ***git init*** - you are instructing Git to initialize the folder as a git repository
+    * Then, execute - ***git add --a*** - you are instructing git to add all the files to the staging areas of the git on yr local machine
+    * Please see the screenshot below:
+      ![Git Initialize and Add all changes to git staging area ](../images/002-011-gitinitandadd.png)
     * Now commit your changes with a nice commit message - ***git commit -m "Initial commit for Flask app and required files for Heroku deployment"***
-    * Now push your changes to GitHub respository( in my case ***https://github.com/naeemmohd/python.git***)
-    * if you have not created a repository then from the logged in GitHbb Dashboard 0 use "New Repository" option to create a respository 
+    * Please see the screenshot below:
+      ![Git commit ](../images/002-011-gitcommit.png)
+    * Now push your changes to GitHub respository( in my case ***git@github.com:naeemmohd/RESTfulAPIDeploytoHeroku.git***)
+    * if you have not created a repository then from the logged in GitHbb Dashboard 0 use "New Repository" option to create a respository - 
+    * Please see snapshot -
+      ![Create a new repository](../images/002-11-createrepository.png)
     * Once the GitHub repository is created, execute the command
-      * ***git push origin add https://github.com/naeemmohd/python.git*** - you are instructing Git to add a remote GitHub repository for your local repository 
+      * ***git remote add origin "git@github.com:naeemmohd/RESTfulAPIDeploytoHeroku.git"*** - you are instructing Git to add a remote GitHub repository for your local repository 
       * ***git push -u orgin master*** - you are instructing Git to now finally push your changes in the local master branch to the upstream origin branch
+    * Please see snapshot -
+      ![Push the changes to GitHub](../images/002-11-pushchangestogit.png)
+    * Once the GitHub repository is created, execute the command
     * Finally check if all your lacal changes are now pushed to GitHub repository
     * This respository is public and other developers can see and collaborate with you.
-      
-
+    * Please see snapshot -
+      ![GitHub repository snapshot](../images/002-11-reposnapshot.png)
+      t
   * Step 2 : ***Create an account in Heroku Cloud*** - 
     * Use the following link to sign on and then login to the Heroku Dashboard
       * ***https://signup.heroku.com/*** - to sign on and login to Heroku Dashboard
+  * Step 3 : ***Create a new app in Heroku Dashboard***
+    * Click "Create New App" and select a name e..g. "***restfulapiinheroku***"  and region as "United States" if the users of API are closer to US else Europe.
     * The screenshot below:
-      ![Create ](../images/002-011-herokusignonandlogin.png)
-      ---------------------------------------------------------------------------------
+      ![Create an app in Heroku ](../images/002-011-createappinheroku.png)
+  * Step 4 : ***Connect to the GitHub repository***  
+    * The app looks like below - click "Connect to GitHub"
+      ![The app in Heroku ](../images/002-011-theappinheroku.png)
+    * Once you click connect to GitHub, it will prompt for authorization and let you search your repository by name and select and connect it.
+      ![The app in Heroku ](../images/002-011-theappinheroku02.png)
+  * Step 5 : ***Add Python to buildpack***  
+    * Go to the ***settings*** --> ***Buildpacks***
+    * Click "***Add BuildPack***" and select python
+    * For now choose "manual" and start deploying 
+      ![add build pack ](../images/002-011-addbuildpack.png)
+  * Step 6 : ***Deploy the app now***  
+    * You will have option to manually or auto deploy the app
+      * For now choose "manual" and start deploying 
+      ![Depoy the app in Heroku ](../images/002-011-deploytheappinheroku.png)
+    
 
-  * Step 3 : ***Create *** - 
-    * The 
-    * Please see code below -
-      ```
-      ```
-    * The screenshot below:
-      ![Create ](../images/002-011-create.png)
-      ---------------------------------------------------------------------------------
- 
-### Testing the project:
+### Testing the project (The Heroku End Point - https://restfulapiinheroku.herokuapp.com/):
   * Now the project is ready for testing, you can repeat all the operations you tested in previous exercise like register, login, add a product, update a product, delete a product, get one product, get all products. 
   * Since we did not change the existing functionality and just injected the ORM functionality to the app, it should work.
   * The screenshot for register user below:
