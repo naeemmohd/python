@@ -119,6 +119,21 @@
     ![Install and access Heroku CLI and logs](../images/002-011-installherokucliandaccesslogs.png)
     ![Install and access Heroku CLI and logs](../images/002-011-installherokucliandaccesslogs02.png)
 
+### (Optional) Configure Postgres database instead of SQLite:
+  * SQLAlchemy has a seamless integration for not only SQLite but any other database
+  * Heroku also allows seamless integration with Postgres
+  * First of all add Postgres as an addon - Go to "***Resources***" tab and then to "***Add-Ons***" section to search and add Postgres
+    * Please seee the snapshot below:
+    ![Install and confgiure Postgres](../images/002-011-installandconfigurepostgres.png)
+  * Also see the new '***DATABASE_URL***' defined in the "***Settings***" --> "***Config Vars***"
+    * Please seee the snapshot below:
+    ![DATABASE_URL_CONFIG](../images/002-011-databaseurlconfig.png)
+  * We have to use this '***DATABASE_URL***' in our application to connect to Postgres
+    * ***flaskApp.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///dbdata.db')*** - this command will use the '***DATABASE_URL***' if available else will use ***'sqlite:///dbdata.db'***
+    * Please seee the snapshot below:
+    ![change in app for Postgres](../images/002-011-changesinappforpostgres.png)
+  * Once done you can test your application.
+
 ### Testing the project (The Heroku End Point - https://restfulapiinheroku.herokuapp.com/):
   * Now the project is ready for testing, you can repeat all the operations you tested in previous exercise like register, login, add a product, update a product, delete a product, get one product, get all products. 
   * Since we did not change the existing functionality and just injected the ORM functionality to the app, it should work.

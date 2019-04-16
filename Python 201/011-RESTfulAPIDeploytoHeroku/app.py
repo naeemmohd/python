@@ -1,3 +1,4 @@
+import os
 from flask import Flask, jsonify
 from flask_restful import Api
 from flask_jwt  import JWT, current_identity
@@ -13,7 +14,10 @@ flaskApp.config['PROPAGATE_EXCEPTIONS'] = True # to enforce propagate an excepti
 flaskApp.config['JWT_AUTH_URL_RULE'] = '/login'  # to enforce /login as the auth page rather then /auth
 flaskApp.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=1800) # to enforce JSON web token expiration to a custom value in seconds. Defaults to 300 seconds(5 minutes)
 flaskApp.config['JWT_AUTH_USERNAME_KEY'] = 'email' # to enforce AUTH key as email rather than default username
-flaskApp.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///dbdata.db' # path of the databse - root of project
+
+# path of the databse - root of project - DATABASE_URL is a os level variable in Heroku after you have connected to Postgres
+flaskApp.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///dbdata.db')
+
 flaskApp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # enforce using SQLAlchemy session tracking rather than Flask-SQLAlchemy
 flaskApp.secret_key = "%!!#@#^*&^%$^#%@"
 restApi = Api(flaskApp)
