@@ -13,3 +13,4 @@ Topic | Link
 009-How to use SQLAlchemy in RESTful APIs | [009-Use SQLAlchemy in RESTful APIs](https://github.com/naeemmohd/python/tree/master/Python%20201/009-RESTfulAPIUsingSQLAlchemy)
 010-How to use SQLAlchemy with Relationships in RESTful APIs | [010-Use SQLAlchemy with Relationships in RESTful APIs](https://github.com/naeemmohd/python/tree/master/Python%20201/010-RESTfulAPIUsingSQLAlchemywithRelationships)
 011-How to deploy RESTful APIs to Heroku | [011-RESTful API Deploy to Heroku](https://github.com/naeemmohd/python/tree/master/Python%20201/011-RESTfulAPIDeploytoHeroku)
+012-How to deploy RESTful APIs to Own Server | [012-RESTful API Deploy to Own Serve](https://github.com/naeemmohd/python/tree/master/Python%20201/012-RESTfulAPIDeploytoOwnServer)
