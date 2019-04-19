@@ -12,6 +12,7 @@
       * Install and configure ***Nginx Proxy*** server( a web server, reverse proxy, load balancer, HTTP cache handler etc)
       * Install and configure ***uWSGI***(Web Service Gateway Interface)
 
+
 ### Setting up the server with ***users, security, firewall*** settings
   * Provisioning a server -
     * I am setting up a server on my labserver account in LinuxAcademy, but you can use AWS, Azure, Google, DigitalOcean clouds or any other public cloud provider.
@@ -22,14 +23,32 @@
     * Please follow the steps below for provisioning the server:
 
     * Step 1: ***Setup thes server***
-      * Once the server is provisioned then ***SSH to the server***,  ***set privileges to root user***,  ***update the server***, ***install git, tree, nano packages*** - 
-      ```
-      # ssh <user_name>@<the server ip> - for me the server is 'mnaeemsiddiqui1c.mylabserver.com' and the user is 'cloud_user'
-      ssh cloud_user@mnaeemsiddiqui1c.mylabserver.com   # This line will prompt you for entering password and login you to the server as 'cloud_user'
-      sudo su  # This line will set root privileges
-      yum -y update   # this updates the server with latest packages - in Ubuntu based system you  may use apt-get -y update 
-      yum -y install git tree nano   # installs git, tree, nano packages
-      ```
+      * Once the server is provisioned then - 
+        * ***SSH to the server***,  
+        * ***set privileges to root user***,  
+        * ***update the server***, ***install git tree nano curl nginx python3 python3-pip python3-dev libpq-dev packages*** 
+        ```
+        # ssh <user_name>@<the server ip> - for me the server is 'mnaeemsiddiqui1c.mylabserver.com' and the user is 'cloud_user'
+        ssh cloud_user@mnaeemsiddiqui1c.mylabserver.com   # This line will prompt you for entering password and login you to the server as 'cloud_user'
+        sudo su  # This line will set root privileges
+        yum -y update   # this updates the server with latest packages - in Ubuntu based system you  may use apt-get -y update 
+        yum -y install git tree nano curl nginx wget # installs packages 
+        # install python 3.7 and related packages using Anaconda
+        ```
+        cd /tmp
+        curl -O https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
+        sudo bash ./Anaconda3-2019.03-Linux-x86_64.sh
+        conda --version
+        ```
+        * Reboot after installation and then verify 
+        ```
+        conda -V
+        Python -V
+        pip -V
+        ```
+        * Here is the snapshot:
+        ![Update and Insatll packages](../images/002-012-updateandinstallpackages.png)
+        ![Update and Insatll packages](../images/002-012-updateandinstallpackages02.png)
 
     * Step 2: ***Create a new Linux user other that root***
       * Root user(***root***) is the admin level super user and if hacked can create havoc.
@@ -55,8 +74,8 @@
       * Since default text editor is "vi" you have to click ***"i"*** key to start editing,  ***"Esc"*** key to stop editing  and ***":wq"*** to save and quit the file.
       * Here is the snapshot:
         ![Assign Root permissions to the Linux User](../images/002-012-rootpermissionforlinuxuser.png)  
-
-    * Step 3: ***Enabling SSH permissions for the Linux user***
+    
+    * Step 4: ***Enabling SSH permissions for the Linux user***
       * Execute the code - ***nano /etc/ssh/sshd_config*** - this will open the sudoers file - add the line below at the end of the file
         ```
         AllowUsers cloud_user
@@ -64,6 +83,8 @@
       * Here is the snapshot:
         ![Enable SSH permission to the Linux User](../images/002-012-enablesshpermissionforlinuxuser.png)  
       * Reload the SSH service due to this new change - execute - ***service sshd reload*** 
+
+
 
 ### Install and configure ***Postgres*** SQL Database:
   * Please follow the steps below for setting up the database:
@@ -75,6 +96,7 @@
         postgresql-setup initdb
         systemctl start postgresql
         systemctl enable postgresql
+        systemctl status postgresql
         ```
       * Here is the snapshot:
         ![Installing Postgres](../images/002-012-installpostgres.png)
@@ -103,7 +125,7 @@
         ![Create a Postgres User by the name cloud_user](../images/002-012-loginandverifythenewuseranddatabase.png)
 
     * Step 3: ***Secure connection to Postgres***
-      * Please use the following command - Please update the following line in the Postgres configuration file at location - ***/var/lib/pgsql/data/pg_hba.conf** 
+      * Please use the following command - Please update the following line in the Postgres configuration file at location - ***sudo nano /var/lib/pgsql/data/pg_hba.conf** 
       * In Ubuntu based systems it might be at location -  /etc/postgresql/9.5/main/pg_hba.conf Otherwise find the file bby issuing a command - ***locate pg_hba.conf***
       * So change the line from 
         ```
@@ -120,11 +142,140 @@
       * Here is the snapshot:
         ![Installing Postgres](../images/002-012-securesocketforpostgres.png)
 
-### Install and configure ***Nginx Proxy*** server:
-  * Upcoming 
 
-### Install and configure ***uWSGI**:
-  * Upcoming
+
+### Install and configure ***Nginx Proxy*** server:
+  * Step 1: ***Setting up nginx and starting it***
+    * Execute the commands as below to install and run ***nginx***
+      ```
+      sudo yum -y install nginx  # installs nginx
+      sudo systemctl start nginx # starts the nginx 
+      sudo systemctl enable nginx # enables the nginx 
+      sudo systemctl status nginx # status of the nginx 
+      ```
+  * Step 2: ***Setting up app folder***
+    * Create the app folder where the flask application files will reside.
+      * make a directory first - ***sudo mkdir /usr/share/nginx/html/products-restful***
+      * assign 'cloud_user' as owner of this folder(it can be something else in your case like mnaeem etc) - ***sudo chown cloud_user:cloud_user /usr/share/nginx/html/products-restful***
+      * change the folder to the app folder - cd /usr/share/nginx/html/products-restful
+      * clone the RESTful API reporsitory you used to setup and deploy your app in Heroku - ***sudo git clone https://github.com/naeemmohd/RESTfulAPIDeploytoHeroku.git .***
+      * make a directory got logs - ***sudo mkdir log***
+    * Please execute the below commands - 
+      ```
+      sudo mkdir /usr/share/nginx/html/products-restful
+      sudo chown cloud_user:cloud_user /usr/share/nginx/html/products-restful
+      cd /usr/share/nginx/html/products-restful
+      sudo git clone https://github.com/naeemmohd/RESTfulAPIDeploytoHeroku.git .
+      mkdir log
+      ```
+    * Here is the snapshot:
+      ![Setup app folder](../images/002-012-setupappfolder.png)
+  
+  * Step 3: ***Setting up virtual environment***
+    * Virtual environment helps in setting up a seperate enviroment on a specific folder and installs the required software only for that environment.
+    * This it can help setting up multiple environments for multiple versions of Python 
+    * To install virtualenv packages - ***pip install virtualenv*** or ***pip3 install virtualenv*** if pip3 is installed
+    * To create a virtual environment named 'myappenv' - ***virtualenv -p python3 <env_name>***
+    * To activate the virtual environment - ***source <env_name>/bin/activate***
+    * To install all the packages defines in the file requirements.txt - ***pip install -r requirements.txt***
+    * To check what all got install in the virtual environment - ***pip freeze***
+    * To deactivate the virtual environment - ***deactivate***
+    * Please execute the below commands - 
+      ```
+      # yum groupinstall 'Development Tools' # installs development tools
+      # pip install --upgrade pip # upgrades pip 
+      sudo yum -y install epel-release
+      sudo yum -y install python36 python36-pip python36-devel
+      sudo pip3 install --upgrade pip3
+      sudo pip3 install -U virtualenv
+      # pip3 install virtualenv  # installs virtualenv
+      virtualenv -p python3 myappenv # creates a virtual environment named 'myappenv' and install some default python and pip packages
+      source myappenv/bin/activate  # activates the virtual environment
+      pip install -r requirements.txt # installs all the packages defines in the file requirements.txt in the current folder
+      pip freeze # check what all got install in the virtual environment
+      ```
+    * Here is the snapshot:
+      ![Setup virtual environment](../images/002-012-setupvirtualenvironment01.png)
+      ![Setup virtual environment](../images/002-012-setupvirtualenvironment02.png)
+      ![Setup virtual environment](../images/002-012-setupvirtualenvironment03.png)
+
+### Install and configure ***uWSGI***:
+  * uWSGI is a web service gateway interface.
+  * Please do the following to install and configure ***uWSGI**:
+    * Step 1: ***Install uWSGI**:
+      * execute -  ***pip install uwsgi*** or ***pip install https://projects.unbit.it/downloads/uwsgi-lts.tar.gz***
+
+    * Step 2: ***Setup uWSGI service for our app**:
+      * Create a file  -  ***sudo nano /etc/systemd/system/uwsgi_products_restful.service***   
+      * This is a uWSGI configuration file which states the name and location of the Postgres databse, error logs, uWSGI conf files etc
+      * The ***DATABASE_URL*** is as - ***DATABASE_URL=postgres://cloud_user:cloudpassword@localhost:5432/cloud_user***
+        * ***postgres://*** - specifies that its a Postgres database
+        * ***cloud_user:cloudpassword*** - specifies the Postgres user name and password
+        * ***@localhost:5432/cloud_user*** - specifies the server as ***localhost***, port as default ***5432*** and ***cloud_user*** as the databse name
+      * Copy the following content in the file and save -
+        ```
+        [Unit]
+        Description=uWSGI products restful
+        [Service]
+        Environment=DATABASE_URL=postgres://cloud_user:cloudpassword@localhost:5432/cloud_user
+        ExecStart=/usr/share/nginx/html/products-restful/myappenv/bin/uwsgi --master --emperor /usr/share/nginx/html/products-restful/uwsgi.ini --die-on-term --uid cloud_user --gid cloud_user --logto /usr/share/nginx/html/products-restful/log/emperor.log
+        Restart=always
+        KillSignal=SIGQUIT
+        Type=notify
+        NotifyAccess=all
+        [Install]
+        WantedBy=multi-user.target
+        ```
+      * Here is the snapshot:
+        ![Install and configure uWSGI](../images/002-012-InstallandconfigureuWSGI01.png)
+
+    * Step 3: ***Setup uWSGI uswgi.ini for our app**:
+      * Create/Update a file(delete all Heroku uwsgi content, if already exisiting)  -  ***sudo nano uwsgi.ini***   
+      * Explanation of the commands in the file:
+        * ***/usr/share/nginx/html/products-restful*** - is set as base app folder
+        * ***app =run*** - it means that the 'app' to run is 'run.py'
+        * ***module = %(app)*** - the module variable also refrences the app variable
+        * ***home = %(base)/myappenv*** - it means that the home directory for the app is the virtual environment folder - myappenv
+        * ***pythonpath = %(base)*** - it means that pythonpath is same as base path
+        * ***socket = %(base)/socket.sock*** - it means that socket or connector file is socket.sock in base folder
+        * ***chmod-socket = 777*** - it means that uWSGI has full permission of 777
+        * ***processes = 8*** - it means that 8 process will be spawned to support multi processing
+        * ***threads = 8*** - it means that 8 threads per process will be created 
+        * ***harakiri = 15*** - it means that in 15 secs it will kill a thread which is error prone and create another thread
+        * ***callable = flaskApp*** - it means that flaskApp is the callable app
+        * ***logto = /usr/share/nginx/html/products-restful/log/%n.log*** - it means that the log will be written in a file nwsgi.log
+      * Copy the following content in the file and save -
+        ```
+        [uwsgi]
+        base = /usr/share/nginx/html/products-restful
+        app = run
+        module = %(app)
+        home = %(base)/myappenv
+        pythonpath = %(base)
+        socket = %(base)/socket.sock
+        chmod-socket = 777
+        processes = 8
+        threads = 8
+        harakiri = 15
+        callable = flaskApp
+        logto = /usr/share/nginx/html/products-restful/log/%n.log
+        ```
+      * Here is the snapshot:
+        ![Install and configure uWSGI.ini](../images/002-012-InstallandconfigureuWSGIini01.png)
+
+    * Step 4: ***Start and enable uwsgi service**:
+      * execute -  ***sudo systemctl start  uwsgi_products_restful*** and then ***sudo systemctl enable uwsgi_products_restful***
+      * Here is the code - 
+        ```
+        sudo systemctl start  uwsgi_products_restful
+        sudo systemctl enable  uwsgi_products_restful
+        sudo systemctl status  uwsgi_products_restful
+        
+        ```
+      * Here is the snapshot:
+        ![Start and enable uwsgi_products_restfu service](../images/002-012-startandenable_uwsgi_products_restful.png)
+
+
 
 ### Testing the project (The Own Server End Point - http://mnaeemsiddiqui1c.mylabserver.com/):
   * Now the project is ready for testing, you can repeat all the operations you tested in previous Heroku related exercise like register, login, add a product, update a product, delete a product, get one product, get all products. 
