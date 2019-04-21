@@ -347,5 +347,5 @@
   ---------------------------------------------------------------------------------
   
   * Once having done all tests, login to postgres database to verify the data.
-    [Verify data](../images/002-12-verifydata.png)
+  ![Verify data](../images/002-12-verifydata.png)
     ---------------------------------------------------------------------------------
