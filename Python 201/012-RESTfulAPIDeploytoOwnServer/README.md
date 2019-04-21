@@ -33,17 +33,9 @@
         sudo su  # This line will set root privileges
         apt-get -y update   # this updates the server with latest packages - in Ubuntu based system you  may use apt-get -y update 
         apt-get -y install git tree nano curl nginx wget # installs packages 
-        # install python 3.7 and related packages using Anaconda
-        ```
-        cd /tmp
-        curl -O https://repo.anaconda.com/archive/Anaconda3-2019.03-Linux-x86_64.sh
-        sudo bash ./Anaconda3-2019.03-Linux-x86_64.sh
-        conda --version
-        ```
         * Reboot after installation and then verify 
         ```
-        conda -V
-        Python -V
+        ython -V
         pip -V
         ```
         * Here is the snapshot:
@@ -82,7 +74,7 @@
         ```
       * Here is the snapshot:
         ![Enable SSH permission to the Linux User](../images/002-012-enablesshpermissionforlinuxuser.png)  
-      * Reload the SSH service due to this new change - execute - ***service sshd reload*** 
+      * Reload the SSH service due to this new change - execute - ***systemctl sshd reload*** 
 
 
 
@@ -92,11 +84,10 @@
     * Step 1: ***Install Postgres***
       * Please use the following command - (for Ubuntu based system , use apt-get instead of apt-get)
         ```
-        apt-get -y install postgresql postgresql-server postgresql-contrib
-        postgresql-setup initdb
-        service start postgresql
-        service enable postgresql
-        service status postgresql
+        apt-get -y install postgresql  postgresql-contrib
+        systemctl start postgresql
+        systemctl enable postgresql
+        systemctl status postgresql
         ```
       * Here is the snapshot:
         ![Installing Postgres](../images/002-012-installpostgres.png)
@@ -149,22 +140,23 @@
     * Execute the commands as below to install and run ***nginx***
       ```
       sudo apt-get -y install nginx  # installs nginx
-      sudo service start nginx # starts the nginx 
-      sudo service enable nginx # enables the nginx 
-      sudo service status nginx # status of the nginx 
+      sudo systemctl start nginx # starts the nginx 
+      sudo systemctl enable nginx # enables the nginx 
+      sudo systemctl status nginx # status of the nginx 
       ```
   * Step 2: ***Setting up app folder***
     * Create the app folder where the flask application files will reside.
-      * make a directory first - ***sudo mkdir /usr/share/nginx/html/products-restful***
-      * assign 'cloud_user' as owner of this folder(it can be something else in your case like mnaeem etc) - ***sudo chown cloud_user:cloud_user /usr/share/nginx/html/products-restful***
-      * change the folder to the app folder - cd /usr/share/nginx/html/products-restful
+      * make a directory first - ***sudo mkdir /var/www/html/products-restful***
+      * assign 'cloud_user' as owner of this folder(it can be something else in your case like mnaeem etc) - ***sudo chown cloud_user:cloud_user /var/www/html/products-restful***
+      * change the folder to the app folder - cd /var/www/html/products-restful
       * clone the RESTful API reporsitory you used to setup and deploy your app in Heroku - ***sudo git clone https://github.com/naeemmohd/RESTfulAPIDeploytoHeroku.git .***
       * make a directory got logs - ***sudo mkdir log***
     * Please execute the below commands - 
       ```
-      sudo mkdir /usr/share/nginx/html/products-restful
-      sudo chown cloud_user:cloud_user /usr/share/nginx/html/products-restful
-      cd /usr/share/nginx/html/products-restful
+      sudo mkdir /var/www/html/products-restful
+      sudo chown cloud_user:cloud_user /var/www/html/products-restful
+      sudo chmod ugo+rwx /var/www/html/products-restful
+      cd /var/www/html/products-restful
       sudo git clone https://github.com/naeemmohd/RESTfulAPIDeploytoHeroku.git .
       mkdir log
       ```
@@ -206,7 +198,7 @@
       * execute -  ***pip install uwsgi*** or ***pip install https://projects.unbit.it/downloads/uwsgi-lts.tar.gz***
 
     * Step 2: ***Setup uWSGI service for our app**:
-      * Create a file  -  ***sudo nano /etc/systemd/system/uwsgi_items_rest.service***   
+      * Create a file  -  ***sudo nano /etc/systemd/system/uwsgi_products_restful.service***   
       * This is a uWSGI configuration file which states the name and location of the Postgres databse, error logs, uWSGI conf files etc
       * The ***DATABASE_URL*** is as - ***DATABASE_URL=postgres://cloud_user:cloudpassword@localhost:5432/cloud_user***
         * ***postgres://*** - specifies that its a Postgres database
@@ -218,7 +210,7 @@
         Description=uWSGI products restful
         [Service]
         Environment=DATABASE_URL=postgres://cloud_user:cloudpassword@localhost:5432/cloud_user
-        ExecStart=/usr/share/nginx/html/products-restful/myappenv/bin/uwsgi --master --emperor /usr/share/nginx/html/products-restful/uwsgi.ini --die-on-term --uid cloud_user --gid cloud_user --logto /usr/share/nginx/html/products-restful/log/emperor.log
+        ExecStart=/var/www/html/products-restful/myappenv/bin/uwsgi --master --emperor /var/www/html/products-restful/uwsgi.ini --die-on-term --uid cloud_user --gid cloud_user --logto /var/www/html/products-restful/log/emperor.log
         Restart=always
         KillSignal=SIGQUIT
         Type=notify
@@ -232,7 +224,7 @@
     * Step 3: ***Setup uWSGI uswgi.ini for our app**:
       * Create/Update a file(delete all Heroku uwsgi content, if already exisiting)  -  ***sudo nano uwsgi.ini***   
       * Explanation of the commands in the file:
-        * ***/usr/share/nginx/html/products-restful*** - is set as base app folder
+        * ***/var/www/html/products-restful*** - is set as base app folder
         * ***app =run*** - it means that the 'app' to run is 'run.py'
         * ***module = %(app)*** - the module variable also refrences the app variable
         * ***home = %(base)/myappenv*** - it means that the home directory for the app is the virtual environment folder - myappenv
@@ -243,11 +235,11 @@
         * ***threads = 8*** - it means that 8 threads per process will be created 
         * ***harakiri = 15*** - it means that in 15 secs it will kill a thread which is error prone and create another thread
         * ***callable = flaskApp*** - it means that flaskApp is the callable app
-        * ***logto = /usr/share/nginx/html/products-restful/log/%n.log*** - it means that the log will be written in a file nwsgi.log
+        * ***logto = /var/www/html/products-restful/log/%n.log*** - it means that the log will be written in a file nwsgi.log
       * Copy the following content in the file and save -
         ```
         [uwsgi]
-        base = /usr/share/nginx/html/products-restful
+        base = /var/www/html/products-restful
         app = run
         module = %(app)
         home = %(base)/myappenv
@@ -258,18 +250,18 @@
         threads = 8
         harakiri = 15
         callable = flaskApp
-        logto = /usr/share/nginx/html/products-restful/log/%n.log
+        logto = /var/www/html/products-restful/log/%n.log
         ```
       * Here is the snapshot:
         ![Install and configure uWSGI.ini](../images/002-012-InstallandconfigureuWSGIini01.png)
 
     * Step 4: ***Start and enable uwsgi service**:
-      * execute -  ***sudo service start  uwsgi_products_restful*** and then ***sudo service enable uwsgi_products_restful***
+      * execute -  ***sudo systemctl start  uwsgi_products_restful*** and then ***sudo systemctl enable uwsgi_products_restful***
       * Here is the code - 
         ```
-        sudo service start  uwsgi_products_restful
-        sudo service enable  uwsgi_products_restful
-        sudo service status  uwsgi_products_restful
+        sudo systemctl start  uwsgi_products_restful
+        sudo systemctl enable  uwsgi_products_restful
+        sudo systemctl status  uwsgi_products_restful
         
         ```
       * Here is the snapshot - on how to enable it:
@@ -282,21 +274,14 @@
   * Step 1: ***Setting up firewall and open SSH and HTTP ports***
     * Execute the commands as below to install and run ***firewalld***
       ```
-      sudo apt-get -y install firewalld  # installs firewalld
-      sudo service start firewalld # starts the firewalld 
-      sudo service enable firewalld # enables the firewalld 
-      sudo service status firewalld # status of the firewalld 
-      sudo firewall-cmd --permanent --zone=public --add-service=https
-      sudo firewall-cmd --permanent --zone=public --add-service=http
-      sudo firewall-cmd --permanent --zone=public --add-service=ssh
-      sudo firewall-cmd --reload
-      sudo firewall-cmd --list-all
-      sudo service reload nginx
-      sudo service status nginx
+      sudo ufw status
+      sudo ufw allow ‘Nginx HTTP’
+      sudo ufw allow ssh
+      sudo ufw allow https
+      sudo ufw enable
+      sudo systemctl reload nginx
+      sudo systemctl status nginx
       ```
-    * Here is the snapshot - :
-        ![start firewall and enable http and ssh](../images/002-012-startfirewallandenablehttpandssh.png)
-
   * Step 2: ***Setup Serverblocks in Nginx - Create sites-available and sites-enabled symlinks***
     * The ***Serverblocks*** in Nginx help you create multiple websites under the site root.
     * The ***sites-available*** directory keeps all server block files 
@@ -322,36 +307,36 @@
 
       location / {
       include uwsgi_params;
-      uwsgi_pass unix:/usr/share/nginx/html/products-restful/socket.sock;
+      uwsgi_pass unix:/var/www/html/products-restful/socket.sock;
       uwsgi_modifier1 30;
-      root /usr/share/nginx/html/products-restful;
+      root /var/www/html/products-restful;
       }
 
       error_page 404 /404.html;
       location = /404.html {
-      root /usr/share/nginx/html;
+      root /var/www/html;
       }
       
       error_page 500 502 503 504 /50x.html;
       location = /50x.html {
-      root /usr/share/nginx/html;
+      root /var/www/html;
       }
       }
       ```
     * Update ***/etc/nginx/nginx.conf***
-      * update the folwwoing '***/usr/share/nginx/html***' with '***/usr/share/nginx/html/products-restful**' and save
+      * update the folwwoing '***/var/www/html***' with '***/var/www/html/products-restful**' and save
     * Now setup the ***symlink*** between - /etc/nginx/sites-available/products-restful.conf /etc/nginx/sites-enabled/
       ```
       sudo rm /etc/nginx/site-enabled/default # disables default configuration
       sudo ln -s /etc/nginx/sites-available/products-restful.conf /etc/nginx/sites-enabled/ # enables our config using symlink
       ```
     * Also disable the default config in the NGinx config file - 
-    * Reload and restart Nginx - ***sudo service reload nginx*** and ***sudo service restart nginx***
+    * Reload and restart Nginx - ***sudo systemctl reload nginx*** and ***sudo systemctl restart nginx***
     * Here is the snapshot - :
         ![create symlinks](../images/002-012-createsymlinks.png)
     * Cha...cha,,, You are done, start testing....
 
-### Testing the project (The Own Server End Point - http://mnaeemsiddiqui1c.mylabserver.com/):
+### Testing the project (The Own Server End Point - http://mnaeemsiddiqui3c.mylabserver.com/):
   * Now the project is ready for testing, you can repeat all the operations you tested in previous Heroku related exercise like register, login, add a product, update a product, delete a product, get one product, get all products. 
   * Since we did not change the existing functionality and just changed the deployment server from Heroku to our own server, it should work.
   * The screenshot for register user below:
@@ -360,37 +345,7 @@
   * The screenshot for login user below:
   ![Login user](../images/002-12-loginuser.png)
   ---------------------------------------------------------------------------------
-  * The screenshot for POST category below:
-  ![POST Category](../images/002-12-postcategory.png)
-  ---------------------------------------------------------------------------------
-  * The screenshot for POST product below:
-  ![POST Product](../images/002-12-postproduct.png)
-  ---------------------------------------------------------------------------------
-  * The screenshot for PUT Category below:
-  ![PUT Category](../images/002-12-putcategory.png)
-  ---------------------------------------------------------------------------------
-  * The screenshot for PUT Product below:
-  ![PUT Product](../images/002-12-putproduct.png)
-  ---------------------------------------------------------------------------------
-  * The screenshot for GETCategory below:
-  ![GET Category](../images/002-12-getcategory.png)
-  ---------------------------------------------------------------------------------
-  * The screenshot for GETProduct below:
-  ![GET Product](../images/002-12-getproduct.png)
-  ---------------------------------------------------------------------------------
-  * The screenshot for GET All Categorys below:
-  ![GET All Categorys](../images/002-12-getallcategory.png)
-  ---------------------------------------------------------------------------------
-  * The screenshot for GET All Products below:
-  ![GET All Products](../images/002-12-getallproducts.png)
-  ---------------------------------------------------------------------------------
-  * The screenshot for DELETE Product below:
-  ![DELETE Product](../images/002-12-deleteproduct.png)
-  ---------------------------------------------------------------------------------
-  * The screenshot for DELETE Category below:
-  ![DELETE Category](../images/002-12-deletecategory.png)
-  ---------------------------------------------------------------------------------
-
-  * Once having done above test, login to postgres database to verify the data.
+  
+  * Once having done all tests, login to postgres database to verify the data.
     [Verify data](../images/002-12-verifydata.png)
     ---------------------------------------------------------------------------------
