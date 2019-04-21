@@ -6,7 +6,7 @@
       * Setting up the caching was also not in our control
   * ***Solution***
     * Deploy the RESTful API on your own server in cloud- AWS, Azure, Google, DigitalOcean cloud etc
-    * We will deploy the RESTful API on a newly provisioned Linux Server - Red Hat Liniux - RHEL 7 - where will install and configure the following:
+    * We will deploy the RESTful API on a newly provisioned Linux Server - Ubuntu 16.04  - where will install and configure the following:
       * Setting up the server with ***users, security, firewall*** settings
       * Install and configure ***Postgres*** SQL Database:
       * Install and configure ***Nginx Proxy*** server( a web server, reverse proxy, load balancer, HTTP cache handler etc)
@@ -16,7 +16,7 @@
 ### Setting up the server with ***users, security, firewall*** settings
   * Provisioning a server -
     * I am setting up a server on my labserver account in LinuxAcademy, but you can use AWS, Azure, Google, DigitalOcean clouds or any other public cloud provider.
-    * You can setup a 'Red Hat Enterprize Linux(RHEL 7)' server with a ***EC2 instance*** in ***AWS***, a ***VM instance*** in ***Azure or Cloud*** or a ***Droplet*** in ***Digital oceans***
+    * You can setup a Ubuntu server with a ***EC2 instance*** in ***AWS***, a ***VM instance*** in ***Azure or Cloud*** or a ***Droplet*** in ***Digital oceans***
     * Basically these are nothing but a Virtual Machine server on the specific cloud services provider
     * Also you can setup your RESTful API on any LINux server ( any ***Ubuntu based system*** e.g. Ubuntu, Mint, LinuxLite etc or ***CentOS based systems*** like CentOS, RHEL etc)
     * I am using a medium sized server - ***2 Virtual CPUs with 4GB memory and 8 GB hard disk space*** - you can use even a small sized server for testing - ***1 Virtual CPUs with 1GB memory and 4 GB hard disk space***
@@ -31,8 +31,8 @@
         # ssh <user_name>@<the server ip> - for me the server is 'mnaeemsiddiqui1c.mylabserver.com' and the user is 'cloud_user'
         ssh cloud_user@mnaeemsiddiqui1c.mylabserver.com   # This line will prompt you for entering password and login you to the server as 'cloud_user'
         sudo su  # This line will set root privileges
-        yum -y update   # this updates the server with latest packages - in Ubuntu based system you  may use apt-get -y update 
-        yum -y install git tree nano curl nginx wget # installs packages 
+        apt-get -y update   # this updates the server with latest packages - in Ubuntu based system you  may use apt-get -y update 
+        apt-get -y install git tree nano curl nginx wget # installs packages 
         # install python 3.7 and related packages using Anaconda
         ```
         cd /tmp
@@ -90,13 +90,13 @@
   * Please follow the steps below for setting up the database:
 
     * Step 1: ***Install Postgres***
-      * Please use the following command - (for Ubuntu based system , use apt-get instead of yum)
+      * Please use the following command - (for Ubuntu based system , use apt-get instead of apt-get)
         ```
-        yum -y install postgresql postgresql-server postgresql-contrib
+        apt-get -y install postgresql postgresql-server postgresql-contrib
         postgresql-setup initdb
-        systemctl start postgresql
-        systemctl enable postgresql
-        systemctl status postgresql
+        service start postgresql
+        service enable postgresql
+        service status postgresql
         ```
       * Here is the snapshot:
         ![Installing Postgres](../images/002-012-installpostgres.png)
@@ -143,15 +143,15 @@
         ![Installing Postgres](../images/002-012-securesocketforpostgres.png)
 
 
-
-### Install and configure ***Nginx Proxy*** server:
+### ***Note*** - ***Use cloud_user/or your users login with sudo to do these stepps from below***
+### Install and configure ***Nginx Proxy*** server Part 1:
   * Step 1: ***Setting up nginx and starting it***
     * Execute the commands as below to install and run ***nginx***
       ```
-      sudo yum -y install nginx  # installs nginx
-      sudo systemctl start nginx # starts the nginx 
-      sudo systemctl enable nginx # enables the nginx 
-      sudo systemctl status nginx # status of the nginx 
+      sudo apt-get -y install nginx  # installs nginx
+      sudo service start nginx # starts the nginx 
+      sudo service enable nginx # enables the nginx 
+      sudo service status nginx # status of the nginx 
       ```
   * Step 2: ***Setting up app folder***
     * Create the app folder where the flask application files will reside.
@@ -182,10 +182,10 @@
     * To deactivate the virtual environment - ***deactivate***
     * Please execute the below commands - 
       ```
-      # yum groupinstall 'Development Tools' # installs development tools
+      # apt-get groupinstall 'Development Tools' # installs development tools
       # pip install --upgrade pip # upgrades pip 
-      sudo yum -y install epel-release
-      sudo yum -y install python36 python36-pip python36-devel
+      sudo apt-get -y install epel-release
+      sudo apt-get -y install python36 python36-pip python36-devel
       sudo pip3 install --upgrade pip3
       sudo pip3 install -U virtualenv
       # pip3 install virtualenv  # installs virtualenv
@@ -206,7 +206,7 @@
       * execute -  ***pip install uwsgi*** or ***pip install https://projects.unbit.it/downloads/uwsgi-lts.tar.gz***
 
     * Step 2: ***Setup uWSGI service for our app**:
-      * Create a file  -  ***sudo nano /etc/systemd/system/uwsgi_products_restful.service***   
+      * Create a file  -  ***sudo nano /etc/systemd/system/uwsgi_items_rest.service***   
       * This is a uWSGI configuration file which states the name and location of the Postgres databse, error logs, uWSGI conf files etc
       * The ***DATABASE_URL*** is as - ***DATABASE_URL=postgres://cloud_user:cloudpassword@localhost:5432/cloud_user***
         * ***postgres://*** - specifies that its a Postgres database
@@ -264,18 +264,92 @@
         ![Install and configure uWSGI.ini](../images/002-012-InstallandconfigureuWSGIini01.png)
 
     * Step 4: ***Start and enable uwsgi service**:
-      * execute -  ***sudo systemctl start  uwsgi_products_restful*** and then ***sudo systemctl enable uwsgi_products_restful***
+      * execute -  ***sudo service start  uwsgi_products_restful*** and then ***sudo service enable uwsgi_products_restful***
       * Here is the code - 
         ```
-        sudo systemctl start  uwsgi_products_restful
-        sudo systemctl enable  uwsgi_products_restful
-        sudo systemctl status  uwsgi_products_restful
+        sudo service start  uwsgi_products_restful
+        sudo service enable  uwsgi_products_restful
+        sudo service status  uwsgi_products_restful
         
         ```
-      * Here is the snapshot:
+      * Here is the snapshot - on how to enable it:
         ![Start and enable uwsgi_products_restfu service](../images/002-012-startandenable_uwsgi_products_restful.png)
+      * Here is the snapshot - on what log to expect if it is a success enabling uwsgi:
+        ![sucess enabling uwsgi_products_restfu service](../images/002-012-startandenable_uwsgi_products_restful_succeeded.png)
 
 
+### Install and configure ***Nginx Proxy*** server Part 2:
+  * Step 1: ***Setting up firewall and open SSH and HTTP ports***
+    * Execute the commands as below to install and run ***firewalld***
+      ```
+      sudo apt-get -y install firewalld  # installs firewalld
+      sudo service start firewalld # starts the firewalld 
+      sudo service enable firewalld # enables the firewalld 
+      sudo service status firewalld # status of the firewalld 
+      sudo firewall-cmd --permanent --zone=public --add-service=https
+      sudo firewall-cmd --permanent --zone=public --add-service=http
+      sudo firewall-cmd --permanent --zone=public --add-service=ssh
+      sudo firewall-cmd --reload
+      sudo firewall-cmd --list-all
+      sudo service reload nginx
+      sudo service status nginx
+      ```
+    * Here is the snapshot - :
+        ![start firewall and enable http and ssh](../images/002-012-startfirewallandenablehttpandssh.png)
+
+  * Step 2: ***Setup Serverblocks in Nginx - Create sites-available and sites-enabled symlinks***
+    * The ***Serverblocks*** in Nginx help you create multiple websites under the site root.
+    * The ***sites-available*** directory keeps all server block files 
+    * The ***sites-enabled*** directory holds symbolic links to server blocks that neeeds to be published
+    * Execute the below commands:
+      ```
+      sudo mkdir /etc/nginx/sites-available
+      sudo mkdir /etc/nginx/sites-enabled
+      ```
+    * Edit nginx.conf file using command  - "sudo nano /etc/nginx/nginx.conf" and below code the end of the http {} block:
+      ```
+      include /etc/nginx/sites-enabled/*.conf;
+      server_names_hash_bucket_size 64;
+      ```
+    * Create the file - ***sudo nano /etc/nginx/sites-available/products-restful.conf***
+    * Copy and save the below content to the file - 
+      ```
+      server {
+      listen 80;
+      real_ip_header X-Forwarded-For;
+      set_real_ip_from 127.0.0.1;
+      server_name localhost;
+
+      location / {
+      include uwsgi_params;
+      uwsgi_pass unix:/usr/share/nginx/html/products-restful/socket.sock;
+      uwsgi_modifier1 30;
+      root /usr/share/nginx/html/products-restful;
+      }
+
+      error_page 404 /404.html;
+      location = /404.html {
+      root /usr/share/nginx/html;
+      }
+      
+      error_page 500 502 503 504 /50x.html;
+      location = /50x.html {
+      root /usr/share/nginx/html;
+      }
+      }
+      ```
+    * Update ***/etc/nginx/nginx.conf***
+      * update the folwwoing '***/usr/share/nginx/html***' with '***/usr/share/nginx/html/products-restful**' and save
+    * Now setup the ***symlink*** between - /etc/nginx/sites-available/products-restful.conf /etc/nginx/sites-enabled/
+      ```
+      sudo rm /etc/nginx/site-enabled/default # disables default configuration
+      sudo ln -s /etc/nginx/sites-available/products-restful.conf /etc/nginx/sites-enabled/ # enables our config using symlink
+      ```
+    * Also disable the default config in the NGinx config file - 
+    * Reload and restart Nginx - ***sudo service reload nginx*** and ***sudo service restart nginx***
+    * Here is the snapshot - :
+        ![create symlinks](../images/002-012-createsymlinks.png)
+    * Cha...cha,,, You are done, start testing....
 
 ### Testing the project (The Own Server End Point - http://mnaeemsiddiqui1c.mylabserver.com/):
   * Now the project is ready for testing, you can repeat all the operations you tested in previous Heroku related exercise like register, login, add a product, update a product, delete a product, get one product, get all products. 
@@ -316,3 +390,7 @@
   * The screenshot for DELETE Category below:
   ![DELETE Category](../images/002-12-deletecategory.png)
   ---------------------------------------------------------------------------------
+
+  * Once having done above test, login to postgres database to verify the data.
+    [Verify data](../images/002-12-verifydata.png)
+    ---------------------------------------------------------------------------------
