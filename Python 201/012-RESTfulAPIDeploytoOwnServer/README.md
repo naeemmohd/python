@@ -32,7 +32,7 @@
         ssh cloud_user@mnaeemsiddiqui1c.mylabserver.com   # This line will prompt you for entering password and login you to the server as 'cloud_user'
         sudo su  # This line will set root privileges
         apt-get -y update   # this updates the server with latest packages - in Ubuntu based system you  may use apt-get -y update 
-        apt-get -y install git tree nano curl nginx wget # installs packages 
+        apt-get -y install git tree nano curl nginx wget python3 python3-pip python3-dev libpq-dev # installs packages 
         * Reboot after installation and then verify 
         ```
         python -V
@@ -154,8 +154,8 @@
     * Please execute the below commands - 
       ```
       sudo mkdir /var/www/html/products-restful
-      sudo chown cloud_user:cloud_user /var/www/html/products-restful
-      sudo chmod ugo+rwx /var/www/html/products-restful
+      sudo chown -R cloud_user:cloud_user /var/www/html/products-restful
+      sudo chmod -R ugo+rwx /var/www/html/products-restful
       cd /var/www/html/products-restful
       sudo git clone https://github.com/naeemmohd/RESTfulAPIDeploytoHeroku.git .
       mkdir log
