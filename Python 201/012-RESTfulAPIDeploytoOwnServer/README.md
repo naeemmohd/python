@@ -35,7 +35,7 @@
         apt-get -y install git tree nano curl nginx wget # installs packages 
         * Reboot after installation and then verify 
         ```
-        ython -V
+        python -V
         pip -V
         ```
         * Here is the snapshot:
@@ -116,7 +116,7 @@
         ![Create a Postgres User by the name cloud_user](../images/002-012-loginandverifythenewuseranddatabase.png)
 
     * Step 3: ***Secure connection to Postgres***
-      * Please use the following command - Please update the following line in the Postgres configuration file at location - ***sudo nano /var/lib/pgsql/data/pg_hba.conf** 
+      * Please use the following command - Please update the following line in the Postgres configuration file at location - ***sudo nano /etc/postgresql/9.5/main/pg_hba.conf** 
       * In Ubuntu based systems it might be at location -  /etc/postgresql/9.5/main/pg_hba.conf Otherwise find the file bby issuing a command - ***locate pg_hba.conf***
       * So change the line from 
         ```
@@ -275,7 +275,7 @@
     * Execute the commands as below to install and run ***firewalld***
       ```
       sudo ufw status
-      sudo ufw allow ‘Nginx HTTP’
+      sudo ufw allow 'Nginx HTTP'
       sudo ufw allow ssh
       sudo ufw allow https
       sudo ufw enable
@@ -286,7 +286,7 @@
     * The ***Serverblocks*** in Nginx help you create multiple websites under the site root.
     * The ***sites-available*** directory keeps all server block files 
     * The ***sites-enabled*** directory holds symbolic links to server blocks that neeeds to be published
-    * Execute the below commands:
+    * Execute the below commands:(***if these folder dont exist then only***)
       ```
       sudo mkdir /etc/nginx/sites-available
       sudo mkdir /etc/nginx/sites-enabled
