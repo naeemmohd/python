@@ -327,7 +327,7 @@
       * update the folwwoing '***/var/www/html***' with '***/var/www/html/products-restful**' and save
     * Now setup the ***symlink*** between - /etc/nginx/sites-available/products-restful.conf /etc/nginx/sites-enabled/
       ```
-      sudo rm /etc/nginx/site-enabled/default # disables default configuration
+      sudo rm /etc/nginx/sites-enabled/default # disables default configuration
       sudo ln -s /etc/nginx/sites-available/products-restful.conf /etc/nginx/sites-enabled/ # enables our config using symlink
       ```
     * Also disable the default config in the NGinx config file - 
@@ -336,7 +336,7 @@
         ![create symlinks](../images/002-012-createsymlinks.png)
     * Cha...cha,,, You are done, start testing....
 
-### Testing the project (The Own Server End Point - http://mnaeemsiddiqui3c.mylabserver.com/):
+### Testing the project (The Own Server End Point - ec2-3-210-120-130.compute-1.amazonaws.com/):
   * Now the project is ready for testing, you can repeat all the operations you tested in previous Heroku related exercise like register, login, add a product, update a product, delete a product, get one product, get all products. 
   * Since we did not change the existing functionality and just changed the deployment server from Heroku to our own server, it should work.
   * The screenshot for register user below:
