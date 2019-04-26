@@ -96,7 +96,7 @@
         sudo touch /var/www/ssl/ecloudwiz.com.key
         ```
         ![the private key file in ssl folder](../images/002-13-theprivatekeyfile.png)
-      * Now update the file - ***sudo nano /etc/nginx/sites-enabled/items-rest.conf*** to enable SSL by providing the path to .pem, .key files, hostname, port etc
+      * Now update the file - ***sudo nano /etc/nginx/sites-enabled/products-restful.conf*** to enable SSL by providing the path to .pem, .key files, hostname, port etc
         ```
         # for HTTPS -  this setting is for the HTTPS
         server {
@@ -110,7 +110,7 @@
 
         location / {
         include uwsgi_params;
-        uwsgi_pass unix:/var/www/html/items-rest/socket.sock;
+        uwsgi_pass unix:/var/www/html/products-restful/socket.sock;
         uwsgi_modifier1 30;
         }
 
