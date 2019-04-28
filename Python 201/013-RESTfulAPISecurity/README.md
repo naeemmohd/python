@@ -5,11 +5,11 @@
     * On the other side, when we deployed on our own servers, we had a better control on how to deploy and what feature to enable or disable.
     * But still in both case, there are few issues, which should be resolved to make our RESTful API perform better.
       * The HTTPS is still disabled, thus there is no SSL based security - we will install and configure ***SSL certificates*** for this purpose.
-      * The RESTful API is still not effeciently cached on renowned CDN servers like ClocuFront, CloudFlare etc - we will Configure ***CloudFlare*** for this purpose.
+      * The RESTful API is still not effeciently cached on renowned CDN servers like ClocuFront, Clodflare etc - we will Configure ***Clodflare*** for this purpose.
       * It is still having a long and custom name as confifured by the cloud provider, no domain is registered - we will ***register a domain*** on GODaddy.com.
   * ***Solution***
     * Install and configure ***SSL certificates*** for security.
-    * Configure ***CloudFlare*** for caching, security, Denial of service attacks.
+    * Configure ***Clodflare*** for caching, security, Denial of service attacks.
     * ***Register a domain*** for proper nomenclature.
 
 ### How does the DNS(Domain Naming System) works?:
@@ -28,28 +28,28 @@
         * The browser then displays that page
     * ![How DNS works](../images/002-13-howdnsworks.png)
 
-### Using a ***Registered domain*** to access the RESTfulAPI(Configure GoDaddy and CloudFlare): 
+### Using a ***Registered domain*** to access the RESTfulAPI(Configure GoDaddy and Clodflare): 
   * ClodFlare is is a renowned CDN service similar like CloudFront in AWS which helps caching data, pages, images etc,
   * In a Content Delivery Network(CDN), the data is pulled from the neearest edge location and cached till the TTL is exipred,
   * TTL is Time To Live, once this is expired, the fresh data is pushed from the origin location.
   * Here are the steps to setup and configure a registered domain and a CDN like ClodFlare:
 
-    * Step 1 : ***Setup and Configure CloudFlare***:
-      * To register or login to CloudFlare, please use link - ***https://dash.cloudflare.com/sign-up*** or ***https://dash.cloudflare.com/login***
+    * Step 1 : ***Setup and Configure Clodflare***:
+      * To register or login to Clodflare, please use link - ***https://dash.cloudflare.com/sign-up*** or ***https://dash.cloudflare.com/login***
       * Once registered and logged in, you will be prompted to add the website(the IP address or DNS name of the domain we purchased - e.g ***ecloudwiz.com***)
         ![add a website to cloudflare](../images/002-13-addawebsite-1.png)
-      * CloudFlare then connects to check the details of the domain name and prompts with details about how to configure the name servers in the domain registrar(GoDaddy.com for me) to get connected to CloudFlare:
+      * Clodflare then connects to check the details of the domain name and prompts with details about how to configure the name servers in the domain registrar(GoDaddy.com for me) to get connected to Clodflare:
       * Copy the names of the two name servers CloufFlare provides to be added to your registered domain's name servers.
         ![name server settings](../images/002-13-nameserversettings.png)
 
     * Step 2 : ***Setup and Configure Domain***:  
       * Now go to the domain registrar page(For me ***www.godaddy.com***, you can try others too like ***namecheap.com*** etc) and select the domain we registered and then choose option "Manage Domain"
         ![manage domain settings](../images/002-13-managedomainsettings.png)
-      * Now update the Nameserver 1 and 2 with the nameservers provided by CloudFlare in the previous steps.
+      * Now update the Nameserver 1 and 2 with the nameservers provided by Clodflare in the previous steps.
         ![update nameserver settings](../images/002-13-updatenameserversettings.png)
 
-    * Step 3 : ***Setup DNS settings in CloudFlare***: 
-      * Now go to the CDN(CloudFlare here) dashboard and select the website and then ***"DNS" settings***:
+    * Step 3 : ***Setup DNS settings in Clodflare***: 
+      * Now go to the CDN(Clodflare here) dashboard and select the website and then ***"DNS" settings***:
       * Enter a 'A' recrod and a CNAME record as shown in the snapshot and explained below
       * The DNS Listing contains a mapping on how to reach your website using A records and CNAME records
         * ***A*** Record - maps the your domians root DNS with the IP address of the server where your app is deployed.(We have deployed it in ***mnaeemsiddiqui3c.mylabserver.com***)
@@ -63,7 +63,7 @@
   * You can add SSL certificate to enhance security. 
   * Please follow the steps below to configure SSL certificates:
 
-    * Step 1 : ***Setup and Configure SSL om CloudFlare***:
+    * Step 1 : ***Setup and Configure SSL om Clodflare***:
       * Go to the "***Crypto***"(Managea cryptography settings for your website) tab and the "***SSL***" section of the website's 
       * Select "Full" or Full(Strict)" certificate from the dropdown
         ![select a cert](../images/002-13-selectacert.png)
