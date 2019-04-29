@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from flask_jwt_extended import jwt_required
+from flask_jwt_extended import jwt_required, get_jwt_claims
 from models.categorymodel import CategoryModel
 
 #create a Product model class to represent a Product and its operations
@@ -53,6 +53,10 @@ class Category(Resource):
         
     @jwt_required
     def delete(self, name):
+        claims = get_jwt_claims()
+        if not claims['isadmin']:
+            return {'message' : 'Sorry, you need an administrator priviledge to delete a category.'}
+        
         category = CategoryModel.getCategoryByName(name)
         if category:
             category.Delete()

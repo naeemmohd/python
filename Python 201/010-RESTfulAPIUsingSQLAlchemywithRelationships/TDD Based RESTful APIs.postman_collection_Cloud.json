@@ -1,8 +1,8 @@
 {
 	"variables": [],
 	"info": {
-		"name": "TDD Based RESTful APIs - JWT Extended",
-		"_postman_id": "605f0779-93b3-9c92-9995-910be0e6992e",
+		"name": "TDD Based RESTful APIs - JWT",
+		"_postman_id": "ff77f165-d321-a7b2-8fa1-d1e444593f11",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
@@ -24,7 +24,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -49,7 +49,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -74,7 +74,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -106,7 +106,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -155,7 +155,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -204,7 +204,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -258,7 +258,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"Naeemm@futurecloud.com\",\n\t\"password\": \"PassPass\",\n\t\"username\": \"Mohd Naeem\"\n}"
+							"raw": "{\n\t\"email\": \"Naeemm@futurecloud.com\",\n\t\"password\": \"PassPass\"\n}"
 						},
 						"description": "authenticates the user and generates a JSON Web Token (JCT)"
 					},
@@ -297,7 +297,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -322,7 +322,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -347,7 +347,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -372,7 +372,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -397,7 +397,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -429,7 +429,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],

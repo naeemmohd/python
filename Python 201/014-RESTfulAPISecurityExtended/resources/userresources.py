@@ -9,6 +9,7 @@ _parser = reqparse.RequestParser()
 _parser.add_argument("email", type=str, required=True, help="Email can not be blank.")
 _parser.add_argument("username", type=str, required=True, help="UserName can not be blank.")
 _parser.add_argument("password", type=str, required=True, help="Password can not be blank.")
+_parser.add_argument("isadmin", type=int, required=True, help="Is Admin can not be blank.")
 
 class UserSignOn(Resource):
 

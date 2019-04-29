@@ -8,6 +8,7 @@ from securityutils import checkIdentity, checkAuthenticity
 from resources.userresources import User, UserSignOn, UserSignIn
 from resources.productresources import Product, Products
 from resources.categoryresources import Category, Categories
+from models.usermodel import UserModel
 
 flaskApp = Flask(__name__)
 flaskApp.config['PROPAGATE_EXCEPTIONS'] = True # to enforce propagate an exception even if debug is set to false
@@ -26,6 +27,13 @@ restApi = Api(flaskApp)
 # The JWT manager - does not create a auth end points, just lives under the app
 # jwt = JWT(flaskApp, checkAuthenticity, checkIdentity)
 jwt = JWTManager(flaskApp)
+
+@jwt.user_claims_loader
+def addClaimsToJWT(identity):
+    user = UserModel.getUserById(identity)
+    if user.isadmin == 1:
+        return {'isadmin' : True}
+    return {'isadmin' : False}
 
 @flaskApp.before_first_request
 def setupDatabase():

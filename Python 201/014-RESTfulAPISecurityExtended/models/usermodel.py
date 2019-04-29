@@ -12,17 +12,20 @@ class UserModel(db.Model):
     email = db.Column(db.String(100))
     username = db.Column(db.String(100))
     password = db.Column(db.String(100))
-
-    def __init__(self, email, username, password):
+    isadmin = db.Column(db.Integer)
+    
+    def __init__(self, email, username, password, isadmin):
         self.email= email
         self.username= username
         self.password= password
+        self.isadmin= isadmin
 
     def json(self):
         return { 
             "id" : self.id, 
             "email" : self.email, 
-            "username" : self.username 
+            "username" : self.username,
+            "isadmin" : self.isadmin
             #,"password" : self.password 
         }
 
