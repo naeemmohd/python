@@ -343,6 +343,31 @@
                 return {"categories" : categories}, 200
 
         ```
+
+### How to use JWT Optional?:
+  * ***@jwt_optional*** decorator is used to defined a method to conditionally uset the acces token
+  * First of all import these two - ***jwt_optional, get_jwt_identity***
+  * Then define the method as JWT optional.
+  * ***userid = get_jwt_identity()*** is used to check the identity of the user
+  * We are checking if the user is logged in then show full info else into productnames
+    ```
+    @jwt_optional
+        def get(self):
+            # using a map function with lambda
+            # products = list(map(lambda product: product.json(), ProductModel.query.all()))
+            userid = get_jwt_identity()
+            products = list([x.json() for x in ProductModel.getAll()])
+            if userid:
+                return {
+                    "products" : products
+                }, 200
+            products = list([x.name for x in ProductModel.getAll()])
+            return {
+                "products" : products,
+                "message" : "Detailed info only after you login."
+            }, 200
+    ```
+
 ### How does the Token Refreshing works?:
   * The 'checkIdentity' and 'checkAuthenticity' methods will go away, We will delete the file 'securityutils.py'
   * Please follow the setps below:
@@ -531,6 +556,10 @@
   ---------------------------------------------------------------------------------
    * The screenshot for deleteting a category by a non admin user below:
   ![ deleteting a categoty by non admin user](../images/002-14-deletingcategorybynonaminuser.png)
+  ---------------------------------------------------------------------------------
+   * The screenshot for usding JWT Optional(showing partial info if user not logged in):
+  ![ using JWT Optional](../images/002-14-usingjwtoptional.png)
+  ![ using JWT Optional2](../images/002-14-usingjwtoptional2.png)
   ---------------------------------------------------------------------------------
   * The screenshot for products and categories below( with error for New Authorization Header):
   ![Products and Categories](../images/002-14-productsandcategorieserror.png)

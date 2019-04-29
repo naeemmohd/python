@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from flask_jwt_extended import jwt_required, get_jwt_claims
+from flask_jwt_extended import jwt_required, get_jwt_claims, jwt_optional, get_jwt_identity
 from models.productmodel import ProductModel
 
 #create a Product model class to represent a Product and its operations
@@ -82,14 +82,21 @@ class Product(Resource):
 
 #create a Products model class to represent list of Products and its operations
 class Products(Resource):
-    @jwt_required
+    @jwt_optional
     def get(self):
         # using a map function with lambda
         # products = list(map(lambda product: product.json(), ProductModel.query.all()))
+        userid = get_jwt_identity()
         products = list([x.json() for x in ProductModel.getAll()])
-        # OR using a list comprehensions 
-        # products = [product.json() for product in ProductModel.query.all()]
-        return {"products" : products}, 200
+        if userid:
+            return {
+                "products" : products
+            }, 200
+        products = list([x.name for x in ProductModel.getAll()])
+        return {
+            "products" : products,
+            "message" : "Detailed info only after you login."
+        }, 200
 
 
 

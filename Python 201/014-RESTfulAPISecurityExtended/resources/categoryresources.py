@@ -1,5 +1,5 @@
 from flask_restful import Resource, reqparse
-from flask_jwt_extended import jwt_required, get_jwt_claims
+from flask_jwt_extended import jwt_required, get_jwt_claims, jwt_optional, get_jwt_identity
 from models.categorymodel import CategoryModel
 
 #create a Product model class to represent a Product and its operations
@@ -67,14 +67,21 @@ class Category(Resource):
 
 #create a Categories model class to represent list of Categories and its operations
 class Categories(Resource):
-    @jwt_required
+    @jwt_optional
     def get(self):
+        userid = get_jwt_identity()
         # using a map function with lambda
         # categories = list(map(lambda category: category.json(), CategoryModel.query.all()))
         categories = list([x.json() for x in CategoryModel.getAll()])
-        # OR using a list comprehensions 
-        # categories = [category.json() for category in CategoryModel.query.all()]
-        return {"categories" : categories}, 200
+        if userid:
+            return {
+                "categories" : categories
+            }, 200
+        categories = list([x.name for x in CategoryModel.getAll()])
+        return {
+            "categories" : categories,
+            "message" : "Detailed info only after you login."
+        }, 200
 
 
 

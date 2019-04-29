@@ -13,7 +13,7 @@ from models.usermodel import UserModel
 flaskApp = Flask(__name__)
 flaskApp.config['PROPAGATE_EXCEPTIONS'] = True # to enforce propagate an exception even if debug is set to false
 flaskApp.config['JWT_AUTH_URL_RULE'] = '/login'  # to enforce /login as the auth page rather then /auth
-flaskApp.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=60) # to enforce JSON web token expiration to a custom value in seconds. Defaults to 300 seconds(5 minutes)
+flaskApp.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=300) # to enforce JSON web token expiration to a custom value in seconds. Defaults to 300 seconds(5 minutes)
 flaskApp.config['JWT_AUTH_USERNAME_KEY'] = 'email' # to enforce AUTH key as email rather than default username
 
 # path of the databse - root of project - DATABASE_URL is a os level variable in Heroku after you have connected to Postgres
