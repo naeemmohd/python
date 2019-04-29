@@ -24,7 +24,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -49,7 +49,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -74,7 +74,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -106,7 +106,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -155,7 +155,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -204,7 +204,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -297,7 +297,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -322,7 +322,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -347,7 +347,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -372,7 +372,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -397,7 +397,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -429,7 +429,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "Bearer {{Access_Token}}",
+								"value": "JWT {{Access_Token}}",
 								"description": ""
 							}
 						],
