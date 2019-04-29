@@ -1,14 +1,14 @@
 {
 	"variables": [],
 	"info": {
-		"name": "TDD Based RESTful APIs",
-		"_postman_id": "ff77f165-d321-a7b2-8fa1-d1e444593f11",
+		"name": "TDD Based RESTful APIs - JWT Extended",
+		"_postman_id": "605f0779-93b3-9c92-9995-910be0e6992e",
 		"description": "",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Iteration 1",
+			"name": "For Cloud Server - https://www.ecloudwiz.com and Local Server - http://127.0.0.1:5000",
 			"description": "",
 			"item": [
 				{
@@ -24,7 +24,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "JWT {{Access_Token}}",
+								"value": "Bearer {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -49,7 +49,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "JWT {{Access_Token}}",
+								"value": "Bearer {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -74,7 +74,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "JWT {{Access_Token}}",
+								"value": "Bearer {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -106,7 +106,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "JWT {{Access_Token}}",
+								"value": "Bearer {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -155,7 +155,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "JWT {{Access_Token}}",
+								"value": "Bearer {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -204,7 +204,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "JWT {{Access_Token}}",
+								"value": "Bearer {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -258,7 +258,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"Naeemm@futurecloud.com\",\n\t\"password\": \"PassNaeem\"\n}"
+							"raw": "{\n\t\"email\": \"Naeemm@futurecloud.com\",\n\t\"password\": \"PassPass\",\n\t\"username\": \"Mohd Naeem\"\n}"
 						},
 						"description": "authenticates the user and generates a JSON Web Token (JCT)"
 					},
@@ -278,7 +278,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"email\": \"Naeemm@futurecloud.com\",\n\t\"username\": \"Mohd Naeem\",\n\t\"password\": \"PassNaeem\"\n}"
+							"raw": "{\n\t\"email\": \"Naeemm@futurecloud.com\",\n\t\"username\": \"Mohd Naeem\",\n\t\"password\": \"PassPass\"\n}"
 						},
 						"description": "registers a new user"
 					},
@@ -297,7 +297,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "JWT {{Access_Token}}",
+								"value": "Bearer {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -322,7 +322,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "JWT {{Access_Token}}",
+								"value": "Bearer {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -347,7 +347,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "JWT {{Access_Token}}",
+								"value": "Bearer {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -372,7 +372,7 @@
 							},
 							{
 								"key": "Authorization",
-								"value": "JWT {{Access_Token}}",
+								"value": "Bearer {{Access_Token}}",
 								"description": ""
 							}
 						],
@@ -381,6 +381,70 @@
 							"raw": ""
 						},
 						"description": "deletes a category"
+					},
+					"response": []
+				},
+				{
+					"name": "/user/userid",
+					"request": {
+						"url": "{{ServerURL}}/user/1",
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access_Token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "price",
+									"value": "10.00",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": "gets a single user"
+					},
+					"response": []
+				},
+				{
+					"name": "/user/userid",
+					"request": {
+						"url": "{{ServerURL}}/user/1",
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"description": ""
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{Access_Token}}",
+								"description": ""
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "price",
+									"value": "10.00",
+									"description": "",
+									"type": "text"
+								}
+							]
+						},
+						"description": "deletes a single user"
 					},
 					"response": []
 				}
