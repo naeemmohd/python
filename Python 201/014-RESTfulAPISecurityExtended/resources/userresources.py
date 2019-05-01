@@ -1,8 +1,16 @@
 from flask_restful import Resource, reqparse
 # flask_jwt_extended is imported for the two methods create_access_token and create_refresh_token
-from flask_jwt_extended import create_access_token, create_refresh_token
+from flask_jwt_extended import (
+    create_access_token, 
+    create_refresh_token, 
+    get_jwt_identity,
+    jwt_refresh_token_required,
+    jwt_required,
+    get_raw_jwt
+)
 from models.usermodel import UserModel
 from werkzeug.security import safe_str_cmp
+from blacklistdata import BLACKLISTED_JTIs
 
 # define parser
 _parser = reqparse.RequestParser()
@@ -65,10 +73,31 @@ class UserSignIn(Resource):
             refreshToken = create_refresh_token(user.id)
             return{
                 'access_token' : accessToken,
-                'refresh_token' : refreshToken
+                'refresh_token' : refreshToken,
+                'user_id': user.id
             }, 200
 
         returnInvalidCredentialsMessage = "Wrong credentials passed for user with email: {email}".format(email=emailId)
         return {
             'message' : returnInvalidCredentialsMessage
         }, 401
+        
+class UserTokenRefresh(Resource):
+    @jwt_refresh_token_required
+    def post(self):
+        currentUser = get_jwt_identity()
+        accessToken = create_access_token(identity=currentUser, fresh=False)
+        return{
+            'access_token' : accessToken,
+            'user_id': currentUser
+        }, 200
+
+class UserLogout(Resource):
+    @jwt_required
+    
+    def post(self):
+        jti = get_raw_jwt()['jti'] # the 'jti' is a unique identifier of the JWT token
+        BLACKLISTED_JTIs.add(jti)
+        return{
+            'message' : 'You have been logged out successfully!!'
+        }, 200

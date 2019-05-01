@@ -1,5 +1,11 @@
 from flask_restful import Resource, reqparse
-from flask_jwt_extended import jwt_required, get_jwt_claims, jwt_optional, get_jwt_identity
+from flask_jwt_extended import (
+    jwt_required, 
+    get_jwt_claims, 
+    jwt_optional, 
+    get_jwt_identity,
+    fresh_jwt_required
+)
 from models.productmodel import ProductModel
 
 #create a Product model class to represent a Product and its operations
@@ -19,7 +25,7 @@ class Product(Resource):
             return product.json()
         return {"message" : "Product by the name {name} not found!!!".format(name=name)}, 404
 
-    @jwt_required
+    @fresh_jwt_required
     def post(self, name):
         # check if the product exists
         if ProductModel.getProductByName(name):

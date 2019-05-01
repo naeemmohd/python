@@ -1,5 +1,11 @@
 from flask_restful import Resource, reqparse
-from flask_jwt_extended import jwt_required, get_jwt_claims, jwt_optional, get_jwt_identity
+from flask_jwt_extended import (
+    jwt_required, 
+    get_jwt_claims, 
+    jwt_optional, 
+    get_jwt_identity,
+    fresh_jwt_required
+)
 from models.categorymodel import CategoryModel
 
 #create a Product model class to represent a Product and its operations
@@ -12,7 +18,7 @@ class Category(Resource):
             return category.json()
         return {"message" : "Category by the name {name} not found!!!".format(name=name)}, 404
 
-    @jwt_required
+    @fresh_jwt_required
     def post(self, name):
         # check if the category exists
         if CategoryModel.getCategoryByName(name):

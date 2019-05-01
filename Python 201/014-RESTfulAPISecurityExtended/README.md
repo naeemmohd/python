@@ -368,31 +368,87 @@
             }, 200
     ```
 
+### How to customize the JWT error codes?:
+  * JWT-Extended support a lot of customization for the error codes
+  * ***@jwt.expired_token_loader*** - is executed when application's token is expired, E.g. after the expiry time of default 5 mts
+  * ***@jwt.invalid_token_loader*** - is executed when the JWT token is invalid. E.g. if token is blank or messed
+  * ***@jwt.revoked_token_loader*** - is executed when JWT token is revoked, E.g. to simulate a logout scenario
+  * ***@jwt.unauthorized_loader*** - is executed when JWT token is un-authorized, E.g. the token is not yours
+  * ***@jwt.needs_fresh_token_loader*** - is executed when a fresh token is needed, E.g. if you have setup some method like push or put to always have a fresh token
+  
+    ```
+    # is executed then application's token is expired and what action to do after token expiration
+    # This function replaces the out of box token expiration message
+    @jwt.expired_token_loader
+    def expiredTokenCallback():
+        return jsonify({
+            'errorcode' : 'TokenExpired',
+            'errormessage' : 'The access token has expired, Please refresh or login.'
+        }), 401
+
+    # is executed when the JWT token is invalid
+    @jwt.invalid_token_loader
+    def invalidTokenCallback(error):
+        return jsonify({
+        'errorcode' : 'TokenInvalid',
+        'errormessage' : 'The token is invalid, please check JWT Authorization header.' 
+        }), 401
+
+    # called when no JWT is send in Authorization header
+    @jwt.unauthorized_loader
+    def unauthorizedTokenCallback(error):
+        return jsonify({
+        'errorcode' : 'TokenUnAuthorized',
+        'errormessage' : 'The token is unauthorized please pass JWT token in Authorization header.' 
+        }), 401
+
+    # called whena token is revoked
+    @jwt.revoked_token_loader
+    def revokedTokenCallback():
+        return jsonify({
+        'errorcode' : 'TokenRevoked',
+        'errormessage' : 'The token is revoked, please request a new token.' 
+        }), 401
+
+    # called whena fresh token is needed but a non-fresh token is passed
+    @jwt.needs_fresh_token_loader
+    def needsFreshTokenCallback():
+        return jsonify({
+        'errorcode' : 'FreshTokenNeeded',
+        'errormessage' : 'A fresh token is needed, please refresh the token.' 
+        }), 401
+    ```
+
 ### How does the Token Refreshing works?:
   * The 'checkIdentity' and 'checkAuthenticity' methods will go away, We will delete the file 'securityutils.py'
   * Please follow the setps below:
     * Step 1 : Update 'userresources.py' to ***add another class for User Signin***
       * Instead of importing 'Flask-JWT' we will import 'Flask-JWT-Extended' like below
         * ***from flask_jwt_extended import create_access_token, create_refresh_token***
-      * The new class UserSignIn will behave like our 'login' method
+        * We will add a class for token refresh - ***UserTokenRefresh*** which will help refresh the token when ever we get a token expired message
+        * Also The new class UserSignIn will behave like our 'login' method
         * First process the parser and then search the user in the database
         * Define a post method for login to search the user in database
         * And create an access and refresh token if the user exists and the password matches
         ```
         from flask_restful import Resource, reqparse
         # flask_jwt_extended is imported for the two methods create_access_token and create_refresh_token
-        from flask_jwt_extended import create_access_token, create_refresh_token
+        from flask_jwt_extended import (
+            create_access_token, 
+            create_refresh_token, 
+            get_jwt_identity,
+            jwt_refresh_token_required
+        )
         from models.usermodel import UserModel
         from werkzeug.security import safe_str_cmp
-        from 
 
         # define parser
         _parser = reqparse.RequestParser()
         _parser.add_argument("email", type=str, required=True, help="Email can not be blank.")
         _parser.add_argument("username", type=str, required=True, help="UserName can not be blank.")
         _parser.add_argument("password", type=str, required=True, help="Password can not be blank.")
+        _parser.add_argument("isadmin", type=int, required=True, help="Is Admin can not be blank.")
 
-        # class for User Sign Ons
         class UserSignOn(Resource):
 
             def post(self):
@@ -428,7 +484,6 @@
                     return {"message" : "User by the Id {userid} DELETED!!!".format(userid=userid)}, 200
                 return {"message" : "User by the Id {userid} not found!!!".format(userid=userid)}, 404
 
-        #  class for User Sign Ins
         class UserSignIn(Resource):
 
             @classmethod
@@ -439,84 +494,157 @@
                 passwd = data['password']
                         
                 # check if the user exists in database
-                user = UserModel.getUserByEmail(emailId):
+                user = UserModel.getUserByEmail(emailId)
 
                 # check and verify the password
                 if user and safe_str_cmp(user.password, passwd):
-                    # create an access token and refresh token
+                    # create an access token
                     accessToken = create_access_token(identity=user.id, fresh=True)
                     refreshToken = create_refresh_token(user.id)
                     return{
                         'access_token' : accessToken,
-                        'refresh_token' : refreshToken
+                        'refresh_token' : refreshToken,
+                        'user_id': user.id
                     }, 200
 
                 returnInvalidCredentialsMessage = "Wrong credentials passed for user with email: {email}".format(email=emailId)
                 return {
                     'message' : returnInvalidCredentialsMessage
                 }, 401
+                
+        class UserTokenRefresh(Resource):
+            @jwt_refresh_token_required
+            def post(self):
+                currentUser = get_jwt_identity()
+                accessToken = create_access_token(identity=currentUser, fresh=False)
+                return{
+                    'access_token' : accessToken,
+                    'user_id': currentUser
+                }, 200
         ```
     * Step 2 : Update 'app.py' -
         * Update the line  'from flask_jwt  import JWT' to ***from flask_jwt_extended  import JWTManager***
         * Update the line 'jwt=JWT(flaskApp, checkIdentity, checkAuthenticity)' to '***jwt = JWTManager(flaskApp)***'
         * Add line - ***flaskApp.config['JWT_SECRET_KEY'] = '@#!~%^&*()_#$%^%'*** # secret jey for JWT seperately 
-        * Add line - ***restApi.add_resource(UserSignIn,'/login')***
+        * Add line for login - ***restApi.add_resource(UserSignIn,'/login')***
+        * Add line for token refresh - ***restApi.add_resource(UserTokenRefresh,'/tokenrefresh')***
+        * Also add JWT Token error code decorator methods
         * Please see the code of app.py -
-          ```
-          import os
-          from flask import Flask, jsonify
-          from flask_restful import Api
-          from flask_jwt_extended  import JWTManager
-          from datetime import timedelta
+            ```
+            import os
+            from flask import Flask, jsonify
+            from flask_restful import Api
+            from flask_jwt_extended  import JWTManager
+            from datetime import timedelta
 
-          from securityutils import checkIdentity, checkAuthenticity
-          from resources.userresources import User, UserSignOn, UserSignIn
-          from resources.productresources import Product, Products
-          from resources.categoryresources import Category, Categories
+            from securityutils import checkIdentity, checkAuthenticity
+            from resources.userresources import User, UserSignOn, UserSignIn, UserTokenRefresh, UserLogout
+            from resources.productresources import Product, Products
+            from resources.categoryresources import Category, Categories
+            from models.usermodel import UserModel
+            from blacklistdata import BLACKLISTED_JTIs, BLACKLISTED_USERS
 
-          flaskApp = Flask(__name__)
-          flaskApp.config['PROPAGATE_EXCEPTIONS'] = True # to enforce propagate an exception even if debug is set to false
-          flaskApp.config['JWT_AUTH_URL_RULE'] = '/login'  # to enforce /login as the auth page rather then /auth
-          flaskApp.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=60) # to enforce JSON web token expiration to a custom value in seconds. Defaults to 300 seconds(5 minutes)
-          flaskApp.config['JWT_AUTH_USERNAME_KEY'] = 'email' # to enforce AUTH key as email rather than default username
+            flaskApp = Flask(__name__)
+            flaskApp.config['PROPAGATE_EXCEPTIONS'] = True # to enforce propagate an exception even if debug is set to false
+            flaskApp.config['JWT_AUTH_URL_RULE'] = '/login'  # to enforce /login as the auth page rather then /auth
+            flaskApp.config['JWT_EXPIRATION_DELTA'] = timedelta(seconds=120) # to enforce JSON web token expiration to a custom value in seconds. Defaults to 300 seconds(5 minutes)
+            flaskApp.config['JWT_AUTH_USERNAME_KEY'] = 'email' # to enforce AUTH key as email rather than default username
 
-          # path of the databse - root of project - DATABASE_URL is a os level variable in Heroku after you have connected to Postgres
-          flaskApp.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///dbdata.db')
+            # path of the databse - root of project - DATABASE_URL is a os level variable in Heroku after you have connected to Postgres
+            flaskApp.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL', 'sqlite:///dbdata.db')
 
-          flaskApp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # enforce using SQLAlchemy session tracking rather than Flask-SQLAlchemy
-          flaskApp.config['JWT_SECRET_KEY'] = '@#!~%^&*()_#$%^%' # secret jey for JWT seperately 
-          flaskApp.secret_key = "%!!#@#^*&^%$^#%@" # secret key of the flask app
-          restApi = Api(flaskApp)
+            flaskApp.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False # enforce using SQLAlchemy session tracking rather than Flask-SQLAlchemy
+            flaskApp.config['JWT_SECRET_KEY'] = '@#!~%^&*()_#$%^%' # secret jey for JWT seperately 
+            flaskApp.secret_key = "%!!#@#^*&^%$^#%@" # secret key of the flask app
 
-          # The JWT manager - does not create a auth end points, just lives under the app
-          # jwt = JWT(flaskApp, checkAuthenticity, checkIdentity)
-          jwt = JWTManager(flaskApp)
+            # blacklisting users, IPs etc
+            flaskApp.config['JWT_BLACKLIST_ENABLED'] = True # enables blacklisting
+            flaskApp.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access','refresh'] # enables blacklisting for access as well as refresh tokens
 
-          @flaskApp.before_first_request
-          def setupDatabase():
-              db.create_all()
 
-          # to return custom resposne in addition to just the token(here user id also)
-          @jwt.auth_response_handler
-          def custom_response_handler(access_token, identity):
-              return jsonify({ 'access_token': access_token.decode('utf-8'), 'user_id': identity.id })
+            restApi = Api(flaskApp)
 
-          # add resource to Api
-          restApi.add_resource(Product,'/product/<string:name>')
-          restApi.add_resource(Products,'/products')
-          restApi.add_resource(Category,'/category/<string:name>')
-          restApi.add_resource(Categories,'/categories')
-          restApi.add_resource(UserSignOn,'/register')
-          restApi.add_resource(User,'/user/<int:userid>')
-          restApi.add_resource(UserSignIn,'/login')
+            # The JWT manager - does not create a auth end points, just lives under the app
+            # jwt = JWT(flaskApp, checkAuthenticity, checkIdentity)
+            jwt = JWTManager(flaskApp)
 
-          if __name__ == '__main__':
-              # in the main app import the db SQLAlchemy object and initialize it using init_app(flaskApp)
-              from dbutils import db
-              db.init_app(flaskApp)
-              flaskApp.run(port=5000, debug=True)
+            # called when no a blacklisted user logs in, it returns TRUE id blacklisted and automatically calls token revoke
+            @jwt.token_in_blacklist_loader
+            def blacklistedUsersCallback(decrypted_token):
+                if decrypted_token['jti']:
+                    return decrypted_token['jti'] in BLACKLISTED_JTIs
+                return decrypted_token['identity'] in BLACKLISTED_USERS
 
-          ```
+            # is executed to generated a custom claim
+            @jwt.user_claims_loader
+            def addClaimsToJWT(identity):
+                user = UserModel.getUserById(identity)
+                if user.isadmin == 1:
+                    return {'isadmin' : True}
+                return {'isadmin' : False}
+
+            # is executed then application's token is expired and what action to do after token expiration
+            # This function replaces the out of box token expiration message
+            @jwt.expired_token_loader
+            def expiredTokenCallback():
+                return jsonify({
+                    'errorcode' : 'TokenExpired',
+                    'errormessage' : 'The access token has expired, Please refresh or login.'
+                }), 401
+
+            @jwt.invalid_token_loader
+            def invalidTokenCallback(error):
+                return jsonify({
+                'errorcode' : 'TokenInvalid',
+                'errormessage' : 'The token is invalid, please check JWT Authorization header.' 
+                }), 401
+
+            # called when no JWT is send in Authorization header
+            @jwt.unauthorized_loader
+            def unauthorizedTokenCallback(error):
+                return jsonify({
+                'errorcode' : 'TokenUnAuthorized',
+                'errormessage' : 'The token is unauthorized please pass JWT token in Authorization header.' 
+                }), 401
+
+            # called whena token is revoked
+            @jwt.revoked_token_loader
+            def revokedTokenCallback():
+                return jsonify({
+                'errorcode' : 'TokenRevoked',
+                'errormessage' : 'The token is revoked, please check with web master if you are a black listed user or your token is expired, please relogin.' 
+                }), 401
+
+            # called whena fresh token is needed but a non-fresh token is passed
+            @jwt.needs_fresh_token_loader
+            def needsFreshTokenCallback():
+                return jsonify({
+                'errorcode' : 'FreshTokenNeeded',
+                'errormessage' : 'A fresh token is needed, please refresh the token by logging in(not by refreshing).' 
+                }), 401
+                
+            @flaskApp.before_first_request
+            def setupDatabase():
+                db.create_all()
+
+            # add resource to Api
+            restApi.add_resource(Product,'/product/<string:name>')
+            restApi.add_resource(Products,'/products')
+            restApi.add_resource(Category,'/category/<string:name>')
+            restApi.add_resource(Categories,'/categories')
+            restApi.add_resource(UserSignOn,'/register')
+            restApi.add_resource(User,'/user/<int:userid>')
+            restApi.add_resource(UserSignIn,'/login')
+            restApi.add_resource(UserTokenRefresh,'/tokenrefresh')
+            restApi.add_resource(UserLogout,'/logout')
+
+            if __name__ == '__main__':
+                # in the main app import the db SQLAlchemy object and initialize it using init_app(flaskApp)
+                from dbutils import db
+                db.init_app(flaskApp)
+                flaskApp.run(port=5000, debug=True)
+
+            ```
     * Step 3 :
         * Replace 'Flask-JWT' to '' in the requirements.txt
         * Also install 'Flask-JWT-Extended' and also install it on local - ***pip install Flask-JWT-Extended***
@@ -532,6 +660,70 @@
     * Step 4 : 
         * Replace 'from flask_jwt import jwt_required' with '***from flask_jwt_extended import jwt_required**' where ever it is found in the whole application
         * Also replace 'jwt_required()' with '***jwt_required***'
+    * Step 5 :
+        * First login and save the access_token as well as refresh token 
+        ![Login user with saving frefresh token too](../images/002-14-loginuserwithrefreshtoken.png)
+        * Then call '***tokenrefresh***' endpoint with the Authorization header with '***Bearer {{Refresh_Token}}***'
+        ![calling refreshtoken with to fresh the access token](../images/002-14-callingtokenrefresh.png)
+        * Since the ***post*** methods of the product as well as category resources are configured as ***@fresh_jwt_required*** , you will get the below error code.
+        * For adding a product or category , you must be freshly logged in (not by token refresh)
+        ![post method needs fresh access token](../images/002-14-postmethodneedsfreshtoken.png)
+
+### How to revoke a token and/or blacklist a user/IP):
+  * It needs a couple of config settings and a decorator method
+    * Config changes
+        * ***flaskApp.config['JWT_BLACKLIST_ENABLED'] = True*** # enables blacklisting
+        * ***flaskApp.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access','refresh']*** # enables blacklisting for access as well as refresh tokens
+        * ***BLACKLISTED_USERS = [2,3,4,5]*** # list of black listed users (if needed create a seperate .py file for blacklisted users)
+        ```
+        # blacklisting users, IPs etc
+        flaskApp.config['JWT_BLACKLIST_ENABLED'] = True # enables blacklisting
+        flaskApp.config['JWT_BLACKLIST_TOKEN_CHECKS'] = ['access','refresh'] # enables blacklisting for access as well as refresh tokens
+        BLACKLISTED_USERS = [2,3,4,5] # list of black listed users (if needed create a seperate .py file for blacklisted users)
+        ```
+    * Decorator method for blacklisting:
+        * ***@jwt.token_in_blacklist_loader*** is executed for blacklisting
+        * It will return true if the user is in list of blacklisted users/IPs etc and automatically calls token revoke decorator
+        ```
+        # called when no a blacklisted user logs in, it returns TRUE id blacklisted and automatically calls token revoke
+        @jwt.token_in_blacklist_loader
+        def blacklistedUsersCallback(decrypted_token):
+            return decrypted_token['identity'] in BLACKLISTED_USERS
+        ```
+
+### How to logout users:
+  * To logout users we will blacklist the ***JTI(JTI ID - a unique identifier of the JWT access token)*** instead of blacklisting the user
+  * It will invalidate the current token he was using, thus similating a logout
+  * Lets create a new file ***blacklistdata.py*** with the following content
+    ```
+    BLACKLISTED_USERS = [2,3,4,5] # list of black listed users (if needed create a seperate .py file for blacklisted users)
+    BLACKLISTED_JTIs = set() # list of black listed JTIs 
+    ```
+  * A new class will be added in the user resource - ***UserLogout***
+    ```
+    class UserLogout(Resource):
+    @jwt_required
+    
+    def post(self):
+        jti = get_raw_jwt()['jti'] # the 'jti' is a unique identifier of the JWT token
+        BLACKLISTED_JTIs.add(jti)
+        return{
+            'message' : 'You have been logged out successfully!!'
+        }, 200
+    ```
+    * Add an end point in app.py
+      * ***restApi.add_resource(UserLogout,'/logout')***
+    * Finally we will update the @jwt.token_in_blacklist_loader decorator method
+    * It checks for the JTI first and logs you out
+    ```
+    @jwt.token_in_blacklist_loader
+    def blacklistedUsersCallback(decrypted_token):
+        if decrypted_token['jti']:
+            return decrypted_token['jti'] in BLACKLISTED_JTIs
+        return decrypted_token['identity'] in BLACKLISTED_USERS
+    ```
+    * Please see screen shot below:
+    ![Login user](../images/002-14-logoutuser.png)
 
 ### Testing the project (The Own Server End Point - ***ecloudwiz.com***):
   * Now the project is ready for testing, you can repeat all the operations you tested in previous Heroku related exercise like register, login, add a product, update a product, delete a product, get one product, get all products. 
@@ -557,9 +749,21 @@
    * The screenshot for deleteting a category by a non admin user below:
   ![ deleteting a categoty by non admin user](../images/002-14-deletingcategorybynonaminuser.png)
   ---------------------------------------------------------------------------------
-   * The screenshot for usding JWT Optional(showing partial info if user not logged in):
+   * The screenshot for using JWT Optional(showing partial info if user not logged in):
   ![ using JWT Optional](../images/002-14-usingjwtoptional.png)
   ![ using JWT Optional2](../images/002-14-usingjwtoptional2.png)
+  ---------------------------------------------------------------------------------
+   * The screenshot for Invalid and UnAuthorized JWT token:
+  ![ Invalid JWT Token](../images/002-14-invalidJWTToken.png)
+  ![ UnAuthorized JWT Token2](../images/002-14-unauthorizedWTToken2.png)
+  ---------------------------------------------------------------------------------
+   * The screenshot for JWT token blacklisting and revoking:
+   * User registers first(but his Id - 4 in my case, is black listed)
+     ![ I am blacklisted user](../images/002-14-iamblacklisteduser.png)
+   * The blacklisted User logins now 
+    ![ I am blacklisted users login ](../images/002-14-iamblacklisteduserslogin.png)
+   * The token for the blacklisted user is revoked
+    ![ JWT Token blacklisting and revoking ](../images/002-14-blacklistingandrevoking.png)
   ---------------------------------------------------------------------------------
   * The screenshot for products and categories below( with error for New Authorization Header):
   ![Products and Categories](../images/002-14-productsandcategorieserror.png)
