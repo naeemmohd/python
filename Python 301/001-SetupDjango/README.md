@@ -32,9 +32,12 @@
     django-admin.py startproject ecommhome .
     python manage.py migrate
     python manage.py createsuperuser
+    python manage.py runserver
     ```
     ![Install Django and Configure Project 1](../images/003-01-installdjangoconfigureproject1.png)
     ![Install Django and Configure Project 2](../images/003-01-installdjangoconfigureproject2.png)
+    ![Runserver](../images/003-01-runserver.png)
+    ![First Django Running](../images/003-01-firstdjangorunning.png)
   
 
 ### Python Django Setup(On Linux - Windows using PowerShell):
