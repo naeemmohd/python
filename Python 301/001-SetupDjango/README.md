@@ -93,10 +93,41 @@
       ![Install Django and Configure Project 1](../images/003-01-installdjangoconfigureproject1Windows.png)
     
     
-### Your first Django App:
+### Testing the Django App:
   * Check the URL  of the server where it is running after you executed this - python manage.py runserver 
   * Open and execute the URL in a browser. If you get a 'Congrats' window, it means that your Django is installed, configured properly and your first app is running
   * ![Install Django and Configure Project 2](../images/003-01-firstappindjangowindows.png)
+
+### Creating your first Django App(with a custom view):
+  * Please follow the steps below to create your first Django app with a custom view 
+    * Step 1: ***Create a view*** file - myviews.py - (this file will render some the content)
+      * Import ***HttpResponse*** from django.http and ***render*** from django.shortcuts
+      * Define the ***myhome*** view and return a HttpResponse
+      ```
+      from django.http import HttpResponse
+      from django.shortcuts import render
+
+      # to render your first view
+      def myhome(request):
+          content = "<html><head><title>My First Django Home</title></head><body><h1>My First Django Home</h1></body></html>"
+          return HttpResponse(content)
+      ```
+    * Step 2: Update URL Patterns file - urls.py - (this file will have the route for myhome)
+      * Import ***myhome*** from your myviews file 
+      * Add ***url(r'^$', myhome)*** as a new pattern where pattern ***r'^$'*** refers to ***myhome***
+      ```
+      from django.conf.urls import url
+      from django.contrib import admin
+
+      from .myviews import myhome # importing myhome from myviews.py
+
+      urlpatterns = [
+          url(r'^$', myhome), # adding the myhome URL to the URL patterns
+          url(r'^admin/', admin.site.urls),
+      ])
+      ```
+    * Step 3: Execute the app - url
+      * ![My First Django app with a custom view](../images/003-01-myfirstdjangoappwithcutomview.png)
   
       
     
