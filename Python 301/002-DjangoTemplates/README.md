@@ -104,27 +104,27 @@
 
     # define the custom home page 
     def myhome(request):
-        context = {
+        pageContext = {
             'title': 'My Home Page',
             'mainheader': 'This is a Home page using Context based HTML Templates'
         }
-        return render(request, "myhomepage.html", context)
+        return render(request, "myhomepage.html", pageContext)
 
     # define the custom contacts page 
     def mycontacts(request):
-        context = {
+        pageContext = {
             'title': 'My Contacts Page',
             'mainheader': 'This is a Contacts page using Context based HTML Templates'
         }
-        return render(request, "myhomepage.html", context)
+        return render(request, "myhomepage.html", pageContext)
 
     # define the custom aboutus page 
     def myaboutus(request):
-        context = {
+        pageContext = {
             'title': 'My About Us Page',
             'mainheader': 'This is a About Us page using Context based HTML Templates'
         }
-        return render(request, "myhomepage.html", context)
+        return render(request, "myhomepage.html", pageContext)
     ```
   * Step 2 : In the  ***urls.py*** file, and create a file 
     * Import the views for contacts and about us  - ***from .myviews import myhome, mycontacts, myaboutus***
