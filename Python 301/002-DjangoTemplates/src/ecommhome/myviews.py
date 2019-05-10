@@ -3,7 +3,28 @@ from django.shortcuts import render
 
 # define the custom home page 
 def myhome(request):
-    return render(request, "myhomepage.html", {})
+    context = {
+        'title': 'My Home Page',
+        'mainheader': 'This is a Home page using Context based HTML Templates'
+    }
+    return render(request, "myhomepage.html", context)
+
+# define the custom contacts page 
+def mycontacts(request):
+    context = {
+        'title': 'My Contacts Page',
+        'mainheader': 'This is a Contacts page using Context based HTML Templates'
+    }
+    return render(request, "myhomepage.html", context)
+
+# define the custom aboutus page 
+def myaboutus(request):
+    context = {
+        'title': 'My About Us Page',
+        'mainheader': 'This is a About Us page using Context based HTML Templates'
+     }
+    return render(request, "myhomepage.html", context)
+    
 def myhome_discarded(request):
     content = """
     <!doctype html>

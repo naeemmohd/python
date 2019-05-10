@@ -17,9 +17,11 @@ from django.conf.urls import url
 from django.contrib import admin
 
 # import the custom view 
-from .myviews import myhome
+from .myviews import myhome, mycontacts, myaboutus
 
 urlpatterns = [
     url(r'^$', myhome),
+    url(r'^contacts/$', mycontacts),
+    url(r'^aboutus/$', myaboutus),
     url(r'^admin/', admin.site.urls),
 ]
