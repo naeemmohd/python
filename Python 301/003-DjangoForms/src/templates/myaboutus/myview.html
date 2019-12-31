@@ -19,12 +19,18 @@
             <div class="col">
                 <div class="col-sm-6 col-12">
                     <form method='POST'>{%csrf_token%}
+                        {{form}}
+                        <button type='submit' class='btn btn-default' class>Submit</button>
+                    </form>
+                    <!--
+                    <form method='POST'>{%csrf_token%}
                         <label>Please fill the form and submit</label>
-                        <input type='text' class='form-control' placeholder='enter contact name here on contacus' name='contactname'>
+                        <input type='text' class='form-control' placeholder='enter contact name here on aboutus' name='contactname'>
                         <input type='email' class='form-control' placeholder='enter email id here' name='emailid'>
                         <input type='text' class='form-control' placeholder='enter address here' name='address'>
                         <button type='submit' class='btn btn-default' class>Submit</button>
                     </form>
+                    -->
                 </div>
             </div>
         </div>

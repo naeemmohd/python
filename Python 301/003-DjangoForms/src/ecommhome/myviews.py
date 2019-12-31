@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
+from .myforms import ContactForm
 
 # define the custom home page 
 def myhome(request):
@@ -24,11 +25,20 @@ def mycontacts(request):
 
 # define the custom aboutus page 
 def myaboutus(request):
+    formInstance = ContactForm(request.POST or None)
     pageContext = {
         'title': 'My About Us Page',
-        'mainheader': 'This is a About Us page using Context based HTML Templates'
-     }
-    return render(request, "myhomepage.html", pageContext)
+        'mainheader': 'This is a About Us page using Context based HTML Templates',
+        'form' : formInstance
+    }
+    if formInstance.is_valid():
+        print(formInstance.cleaned_data)
+    #if request.method == "POST":
+    #    print(request.POST)
+    #    print(request.POST.get('contactname'))
+    #    print(request.POST.get('emailid'))
+    #    print(request.POST.get('address'))
+    return render(request, "myaboutus/myview.html", pageContext)
 
 def myhome_discarded(request):
     content = """
