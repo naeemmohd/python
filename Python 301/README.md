@@ -9,3 +9,4 @@ Topic | Link
 005-How to use Local CDNs in Django | [005-Local CDNs in Django](https://github.com/naeemmohd/python/tree/master/Python%20301/005-DjangoForms-LocalCDNs)
 006-How to use Django Apps(Components, Models, CRUD) in Django | [006-Django Apps(Components, Models, CRUD) in Django](https://github.com/naeemmohd/python/tree/master/Python%20301/006-DjangoApps-ComponentsnCRUDnModels)
 007-How to use ListView and DetailView in Django | [007-ListView and DetailView in Django](https://github.com/naeemmohd/python/tree/master/Python%20301/007-Django-ListnDetailsViews)
+008-How to use FileField and ImageField for file uploads in Django | [008-FileField and ImageField for file uploads in Django](https://github.com/naeemmohd/python/tree/master/Python%20301/008-Django-FileUploads)
