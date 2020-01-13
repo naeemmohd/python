@@ -65,7 +65,34 @@
         def __str__(self):
             return self.fullname
     ```
-  * Step 2 : ***Update*** views to show uploaded media:
+  
+  * Step 2 : ***Update*** views handlers:
+    * To filter objects you can try 2 ways:
+      * Use ***get*** function - ***Student.objects.get(id=pk)***  OR
+      * Use ***filter*** function - ***Student.objects.filter(id=pk)*** and use checks like ***objStud.exists()*** and ***objStud.count()***  OR
+      * Use ***get_object_or_404*** function - ***get_object_or_404(Student, pk=pk)***  OR
+      
+    ```
+    # function based view
+    def Student_DetailView(request, pk=None, *args, **kwargs):
+        #objStud = Student.objects.get(id=pk)
+        #objStud = get_object_or_404(Student, pk=pk)
+        objStud = Student.objects.filter(id=pk)
+        print(objStud.count())
+        if objStud.exists() and objStud.count() == 1:
+            objStud = objStud.first()
+            print(objStud)
+        else:
+            raise Http404("Product does not exist, please try another.")
+        context = {
+            'vw_type': "Function based detailview",
+            'object' : objStud
+        }
+        print(context)
+        return render(request, "student/student_detailview.html", context)
+    ```
+
+  * Step 3 : ***Update*** views to show uploaded media:
     ```
     {{object.fullname}}<br/>
     {{object.age}}<br/>
@@ -74,13 +101,14 @@
     <img src='{{object.imageUpload.url}}' class='img-fluid'/><br/>
     <img src='{{object.fileupload.url}}' class='img-fluid'/><br/>
     ```
-  * Step 3 : Run following commands:
+
+  * Step 4 : Run following commands:
     * To list migrations - ***python manage.py makemigrations***
     * To run migrations - ***python manage.py migrate***
     * To installPython Image library - ***pip install pillow***
       ![Install pillow and migrate for model changes](../images/003-08-Installpillowandmigrateformodelchanges.png)
 
-  * Step 4 : Now test the File Uploads at work:
+  * Step 5 : Now test the File Uploads at work:
     * Admin page - http://127.0.0.1:8000/admin - First go and update studnets with Image and file upload fields
       ![File Uploads at work](../images/003-08-fileuploadsatwork.png)
 

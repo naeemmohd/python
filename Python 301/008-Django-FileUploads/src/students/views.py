@@ -4,6 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.views.generic import ListView, DetailView
 from .models import Student
 
+from django.http import Http404
 # Create your views here.
 # Please note that this one is the first "class" based view as until now we havd been creating function based views
 
@@ -60,7 +61,14 @@ class StudentDetailView(DetailView):
 # function based view
 def Student_DetailView(request, pk=None, *args, **kwargs):
     #objStud = Student.objects.get(id=pk)
-    objStud = get_object_or_404(Student, pk=pk)
+    #objStud = get_object_or_404(Student, pk=pk)
+    objStud = Student.objects.filter(id=pk)
+    print(objStud.count())
+    if objStud.exists() and objStud.count() == 1:
+        objStud = objStud.first()
+        print(objStud)
+    else:
+        raise Http404("Product does not exist, please try another.")
     context = {
         'vw_type': "Function based detailview",
         'object' : objStud
