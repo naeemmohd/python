@@ -105,7 +105,7 @@
 
 
 
-### A lambda function which Stop running EC2 instances:
+### A lambda function which Stopa running EC2 instances:
 
   * Step 1 : Create a ***Lambda Function*** to stop running EC2 instances
       * From ***Services*** tab , select ***Lambda***:
@@ -159,7 +159,7 @@
   ![The Stopping Lambda function in action using CRON Job](../images/004-01-thelambdafunctioncreateinactionusingcronjob.png)
 
 
-### A lambda function which Start stopped EC2 instances:
+### A lambda function which Starts  stopped EC2 instances:
 
   * Step 1 : Create a ***Lambda Function*** to start stopped EC2 instances
       * From ***Services*** tab , select ***Lambda***:
