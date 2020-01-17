@@ -105,7 +105,7 @@
 
 
 
-### A lambda function which Stopa running EC2 instances:
+### A lambda function which Stops running EC2 instances:
 
   * Step 1 : Create a ***Lambda Function*** to stop running EC2 instances
       * From ***Services*** tab , select ***Lambda***:
